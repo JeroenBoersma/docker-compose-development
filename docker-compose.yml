@@ -1,9 +1,11 @@
 data:
     image: busybox
     volumes: 
-        - workspace:/data
+        - /home/jeroen/workspace:/data
 db:
     image: percona
+    volumes:
+        - percona_data
     environment:
         - MYSQL_ROOT_PASSWORD=test
 redis:
