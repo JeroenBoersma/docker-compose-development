@@ -4,7 +4,7 @@ data:
         - /home/jeroen/workspace:/data
 db:
     image: percona
-    volumes:
+    volumes_from:
         - percona_data
     environment:
         - MYSQL_ROOT_PASSWORD=test
