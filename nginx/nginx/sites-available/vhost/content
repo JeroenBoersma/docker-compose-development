@@ -37,9 +37,6 @@ location /skin {
 location /app {
    deny all;
 }
-location /lib {
-   deny all;
-}
 
 location / {
     if ( !-e $request_filename ) {
