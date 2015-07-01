@@ -1,7 +1,7 @@
 data:
     image: busybox
     volumes: 
-        - /home/jeroen/workspace:/data
+        - workspace:/data
 db:
     image: percona
     volumes_from:
