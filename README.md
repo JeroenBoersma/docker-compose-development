@@ -6,12 +6,27 @@ Quickly start developing locally with Nginx, PHP, Percona, mailcatcher and redis
 
 No mail is send externally, everything is catched by mailcatcher.
 
+
+Base images
+---
+
+Currently the next images are used. Trying to rely on official images as much as possible.
+
+- data -> busybox:latest
+- mailcatcher -> schickling/mailcatcher:latest
+- nginx -> nginx:latest
+- percona -> percona:latest
+- phpfpm -> php:5.4-fpm
+- redis -> redis:latest
+
+
 Installation
 ---
 
 - Install [docker](https://docs.docker.com/)
 - Install docker [compose](https://docs.docker.com/compose/install/)
-- Clone this project `git clone git@github.com:JeroenBoersma/docker-compose-development.git development`
+- Clone this project 
+  `git clone git@github.com:JeroenBoersma/docker-compose-development.git development`
 
 
 Before
