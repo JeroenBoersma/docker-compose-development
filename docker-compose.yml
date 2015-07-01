@@ -18,8 +18,8 @@ phpfpm:
         - data
     links:
         - db
-        - redis
         - mailcatcher
+        - redis
 web:
     build: nginx
     volumes_from:
