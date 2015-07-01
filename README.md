@@ -94,3 +94,11 @@ For instance, if you must run a Magento cronjob.
 
 You can add these to your local cron.
 
+
+Magento storecode
+---
+
+Being a Magento developer, you can extend your url by adding the storecode.
+http://magento.project.storecode.dev/ will translate to workspace/magento/project/htdocs 
+and will set the `MAGE_RUN_CODE` to storecode.
+
