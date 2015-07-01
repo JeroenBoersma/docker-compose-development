@@ -1,5 +1,5 @@
 
-Docker Compose Development
+Docker-compose development
 ===
 
 Quickly start developing locally with Nginx, PHP, Percona, mailcatcher and redis.
