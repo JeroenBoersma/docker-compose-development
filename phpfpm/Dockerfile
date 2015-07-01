@@ -4,7 +4,7 @@ MAINTAINER Jeroen Boersma <jeroen@srcode.nl>
 ENV PHP_EXTRA_CONFIGURE_ARGS --enable-fpm --with-fpm-user=app --with-fpm-group=app
 
 RUN groupadd -g 1000 app && \
-    useradd -g 1000 -u 1000 -d /data app
+    useradd -g 1000 -u 1000 -d /data -s /bin/bash app
 
 RUN apt-get update && apt-get install -y \
         libfreetype6-dev \

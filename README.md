@@ -47,6 +47,7 @@ This way the database will never be swept away after a `docker-compose rm -v`
 Start
 ---
 
+- Run `docker-compose build` from the development directory, this will build the custom repositories
 - Run `docker-compose up -d` from the development directory
 - \*.dev > 127.0.0.1 (if you use boot2docker, use that ip)
     - dnsmasq
