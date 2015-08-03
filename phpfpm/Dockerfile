@@ -12,13 +12,15 @@ RUN apt-get update && apt-get install -y \
         libmcrypt-dev \
         libpng12-dev \
         msmtp \
-    && docker-php-ext-install mcrypt mysql mysqli pdo_mysql mbstring \
+    && docker-php-ext-install mcrypt mysql mysqli pdo_mysql mbstring soap \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install gd \
     && rm -rf /var/lib/apt/lists/* \
     && pecl install xdebug \
+    && pecl install ZendOpcache \
     && rm -rf /tmp/pear \
-    && echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20100525/xdebug.so" > /usr/local/etc/php/conf.d/xdebug.ini
+    && echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20100525/xdebug.so" > /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20100525/opcache.so" > /usr/local/etc/php/conf.d/opcache.ini
 
 COPY etc/php-fpm.conf /usr/local/etc/
 COPY etc/php.ini /usr/local/etc/php/
