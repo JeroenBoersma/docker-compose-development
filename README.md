@@ -44,11 +44,11 @@ This way the database will never be swept away after a `docker-compose rm -v`
 - If you are have a running percona database which you want to re-use. (be sure to stop it)
   `docker run --name percona_data --volumes_from [current_percona_container] busybox`
 
+
 Start
 ---
 
-- Run `docker-compose build` from the development directory, this will build the custom repositories
-- Run `docker-compose up -d` from the development directory
+- Run `./bin/up` from the development directory
 - \*.dev > 127.0.0.1 (if you use boot2docker, use that ip)
     - dnsmasq
       add a file `/etc/dnsmasq.d/dev.conf` with `address=/.dev/127.0.0.1`
@@ -56,38 +56,36 @@ Start
         - add `127.0.0.1 test.project.dev` to your hosts file `/etc/hosts`
         - add `127.0.0.1 mail.dev` to your hosts file `/etc/hosts`
 - open your browser and type test.project.dev
-- add your own new project in workspace `customer/project/htdocs` (no need to restart, this will work out of the box)
-  open http://customer.project.dev/ in your browser (if you do not have dnsmasq, you have to add your hosts file).
-- find all sent mail from your app by opening http://mail.dev/
+- add your project in workspace `customer/project/htdocs` (no need to restart, this will work out of the box)
+  open http://customer.project.dev/ in your browser (if you do not have dnsmasq, you have to add your hosts file manually).
+- all mail is sent to http://mail.dev/
 
 
 Database
 ---
 
 The default user/pass for the database is root/toor.
-To manage database run `docker exec -it development_db_1 mysql -p`
+To manage database run `./bin/mysql -p`
 
-You can access the database from your app by adding `db` as hostname and your create user/pass/database.
+You can access the database in your app use `db` as hostname.
 
 
 Redis
 ---
 
-To use redis, use `redis` as hostname from your app.
-
-To flush redis ` echo flushall | docker exec development_redis_1 redis-cli`
+To use redis, use `redis` as hostname in the config of your app.
 
 
 Console
 ---
 
-If you want run a console php.
-`docker exec development_phpfpm_1 su - app`
+If you want run a console to run php commands.
+`./bin/console`
 
 Cron
 ---
 
-If you use cronjobs in your app, you can add the from your host machine.
+If you use cronjobs in your app, you can add them on your host machine.
 `docker ps | grep development_phpfpm && docker exec development_phpfpm_1 su app [YOURCOMMANDHERE]`
 
 For instance, if you must run a Magento cronjob.
