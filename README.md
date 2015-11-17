@@ -16,7 +16,7 @@ Currently the next images are used. Trying to rely on official images as much as
 - mailcatcher -> schickling/mailcatcher:latest
 - nginx -> nginx:latest
 - percona -> percona:latest
-- phpfpm -> php:5.4-fpm
+- phpfpm -> php:5.6-fpm
 - redis -> redis:latest
 
 
