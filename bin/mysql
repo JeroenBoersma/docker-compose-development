@@ -1,6 +1,4 @@
 #!/bin/bash
 
-docker ps | grep development_db > /dev/null || exit 1;
-
-docker exec -it development_db_1 mysql $@
+docker-compose run --rm dbclient mysql --host=db $@
 

@@ -1,5 +1,0 @@
-#!/bin/bash
-
-docker ps | grep development_phpfpm > /dev/null || exit 1;
-
-docker exec -it development_phpfpm_1 su - -s /bin/bash app

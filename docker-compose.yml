@@ -8,6 +8,11 @@ db:
         - percona_data
     environment:
         - MYSQL_ROOT_PASSWORD=test
+dbclient:
+    image: percona
+    command: bash
+    links:
+        - db
 redis:
     image: redis
 mailcatcher:

@@ -27,7 +27,8 @@ RUN apt-get update && apt-get install -y \
 
 COPY etc/php-fpm.conf /usr/local/etc/
 COPY etc/php.ini /usr/local/etc/php/
+RUN chmod ugo+rX -R /usr/local/etc/php
 
 WORKDIR /data
-CMD "php-fpm"
+CMD ["php-fpm"]
 
