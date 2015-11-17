@@ -11,6 +11,8 @@ db:
 dbclient:
     image: percona
     command: bash
+    volumes_from:
+        - db
     links:
         - db
 redis:
