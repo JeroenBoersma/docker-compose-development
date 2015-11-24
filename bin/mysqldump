@@ -1,0 +1,4 @@
+#!/bin/bash
+
+docker-compose run --rm dbclient mysqldump --host=db $@
+
