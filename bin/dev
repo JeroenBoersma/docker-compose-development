@@ -4,7 +4,7 @@ c=`dirname $0`;
 
 cd $c/dev_command;
 
-if [ $# -lt 1 ]; then
+if [ $# -lt 1 ] || [ ! -f $1 ]; then
     echo 'Usage '`basename $0`' ['`ls *`']';
     exit 1;
 fi
