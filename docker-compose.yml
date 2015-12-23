@@ -4,6 +4,7 @@ data:
         - workspace:/data
 db:
     image: percona
+    restart: always
     volumes_from:
         - percona_data
     environment:
@@ -17,10 +18,13 @@ dbclient:
         - db
 redis:
     image: redis
+    restart: always
 mailcatcher:
     image: schickling/mailcatcher
+    restart: always
 phpfpm:
     build: phpfpm
+    restart: always
     volumes_from:
         - data
     links:
@@ -29,6 +33,7 @@ phpfpm:
         - redis
 web:
     build: nginx
+    restart: always
     volumes_from:
         - data
     links:
