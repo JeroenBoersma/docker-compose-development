@@ -2,9 +2,9 @@
 Docker-compose development
 ===
 
-Quickly start developing locally with Nginx, PHP, Percona, mailcatcher and redis.
+Quickly start of developing locally with Nginx, PHP, Blackfire, Percona, Mailcatcher and Redis.
 
-No mail is send externally, everything is catched by mailcatcher.
+No e-mail is send externally, everything is catched by mailcatcher.
 
 
 Base images
@@ -12,6 +12,7 @@ Base images
 
 Currently the next images are used. Trying to rely on official images as much as possible.
 
+- blackfire -> blackfire/blackfire:latest
 - data -> busybox:latest
 - mailcatcher -> schickling/mailcatcher:latest
 - nginx -> nginx:latest
@@ -35,39 +36,35 @@ Before
 Tested under Linux. For Windows/Mac, take a look at the docks for boot2docker.
 Stop all other local Webservers running on port 80/443.
 
-First create a **percona\_data** container to keep your database data safe.
-This way the database will never be swept away after a `docker-compose rm -v`
+Set-up your database credentials and Blackfire profile in the conf directory
 
-- If you don't want a persistent database, remove the `volumes\_from` in the db section.
-- If you start from scratch.
-  `docker run --name percona_data -v /var/lib/mysql busybox`
-- If you are have a running percona database which you want to re-use. (be sure to stop it)
-  `docker run --name percona_data --volumes_from [current_percona_container] busybox`
-
+- conf/mysql (set MYSQL\_PASSWORD)
+- conf/blackfire (from blackfire docs select **docker installation**, grab the exports section, paste it and remove export )
 
 Start
 ---
 
-- Run `./bin/up` from the development directory
+- Run `./bin/dev up` from the development directory
 - \*.dev > 127.0.0.1 (if you use boot2docker, use that ip)
     - dnsmasq
       add a file `/etc/dnsmasq.d/dev.conf` with `address=/.dev/127.0.0.1`
     - hosts
         - add `127.0.0.1 test.project.dev` to your hosts file `/etc/hosts`
         - add `127.0.0.1 mail.dev` to your hosts file `/etc/hosts`
-- open your browser and type test.project.dev
 - add your project in workspace `customer/project/htdocs` (no need to restart, this will work out of the box)
-  open http://customer.project.dev/ in your browser (if you do not have dnsmasq, you have to add your hosts file manually).
-- all mail is sent to http://mail.dev/
+- open http://customer.project.dev/ in your browser (if you do not have dnsmasq, you have to add your hosts file manually).
+- all outgoing mail is sent to http://mail.dev/
 
 
 Database
 ---
 
 The default user/pass for the database is root/toor.
-To manage database run `./bin/mysql -p`
+To manage database run `./bin/dev mysql -p`
 
 You can access the database in your app use `db` as hostname.
+
+Files will be saved in the mysql directory so it will be saved after destroying or recreating the containers.
 
 
 Redis
@@ -80,7 +77,7 @@ Console
 ---
 
 If you want run a console to run php commands.
-`./bin/console`
+`./bin/dev console`
 
 Cron
 ---

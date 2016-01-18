@@ -1,27 +1,42 @@
 data:
     image: busybox
+    net: none
     volumes: 
         - workspace:/data
+
 db:
     image: percona
     restart: always
-    volumes_from:
-        - percona_data
-    environment:
-        - MYSQL_ROOT_PASSWORD=test
+    volumes:
+        - mysql:/var/lib/mysql
+    env_file: conf/mysql
 dbclient:
     image: percona
     command: bash
-    volumes_from:
-        - db
     links:
         - db
+
 redis:
     image: redis
     restart: always
+
 mailcatcher:
     image: schickling/mailcatcher
     restart: always
+
+blackfire:
+    image: blackfire/blackfire
+    restart: always
+    env_file: 
+        - conf/blackfire
+
+blackfireclient:
+    image: blackfire/blackfire
+    command: blackfire version
+    net: host
+    env_file: 
+        - conf/blackfire
+
 phpfpm:
     build: phpfpm
     restart: always
@@ -31,6 +46,8 @@ phpfpm:
         - db
         - mailcatcher
         - redis
+        - blackfire
+
 web:
     build: nginx
     restart: always

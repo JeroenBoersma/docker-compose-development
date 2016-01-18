@@ -1,7 +1,1 @@
-#!/bin/bash
-
-wd=`echo $(dirname $(dirname $0)) | sed -se 's/\\//\\\\\//g'`'\/workspace';
-ed='/data'`echo ${PWD} | sed -se "s/${wd}//"`;
-
-docker-compose run --rm -e $ed phpfpm su - -s /bin/bash -c "cd $ed && php $*" app
-
+dev_command/php
