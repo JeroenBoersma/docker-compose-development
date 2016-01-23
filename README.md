@@ -25,7 +25,7 @@ Installation
 ---
 
 - Install [docker](https://docs.docker.com/)
-- Install docker [compose](https://docs.docker.com/compose/install/)
+- Install docker [compose](https://docs.docker.com/compose/install/) >1.3.1
 - Clone this project 
   `git clone git@github.com:JeroenBoersma/docker-compose-development.git development`
 
