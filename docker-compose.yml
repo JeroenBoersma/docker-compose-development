@@ -2,13 +2,13 @@ data:
     image: busybox
     net: none
     volumes: 
-        - workspace:/data
+        - ./workspace:/data
 
 db:
     image: percona
     restart: always
     volumes:
-        - mysql:/var/lib/mysql
+        - ./mysql:/var/lib/mysql
     env_file: conf/mysql
 dbclient:
     image: percona
