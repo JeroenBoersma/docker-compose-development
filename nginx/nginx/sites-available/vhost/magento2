@@ -1,7 +1,3 @@
-upstream fastcgi_backend {
-  server fpm:9000;
-}
-
 server {
   listen 80;
   server_name *.magento2.dev;
@@ -9,7 +5,7 @@ server {
   set $customer "default";
   set $project "default";
 
-  if ( $host ~ "^([^\.]+)\.([^\.]+)\.(([^\.]+)\.)?dev$"  ) {
+  if ( $host ~ "^([^\.]+)\.([^\.]+)\.magento2\.dev$"  ) {
      set $customer "$1";
      set $project "$2";
   }
