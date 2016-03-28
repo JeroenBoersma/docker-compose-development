@@ -1,7 +1,11 @@
 #!/bin/bash
 
-wd=`echo $(dirname $(dirname $0)) | sed -se 's/\\//\\\\\//g'`'\/workspace';
-ed='/data'`echo ${PWD} | sed -se "s/${wd}//"`;
+if [ -z "${PWD_ORG}" ]; then 
+    PWD_ORG=${PWD}
+fi
 
-docker-compose run --rm -e $ed phpfpm su - -s /bin/bash -c "cd $ed && php $*" app
+wd=`echo $(dirname $(dirname $(dirname $(realpath $0)))) | sed -se 's/\\//\\\\\//g'`'\/workspace';
+ed='/data'`echo ${PWD_ORG} | sed -se "s/${wd}//"`;
+
+docker-compose run -u app --rm phpfpm /bin/bash -c "cd $ed && php $*"
 
