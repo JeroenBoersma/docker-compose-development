@@ -12,15 +12,19 @@ RUN apt-get update && apt-get install -y \
         libmcrypt-dev \
         libpng12-dev \
         msmtp \
+        imagemagick \
         libssl-dev \
         libxml2-dev \
         libicu-dev \
         libxslt-dev \
-        git vim \
-    && docker-php-ext-install mcrypt mysql mysqli pdo_mysql mbstring ftp soap zip opcache intl xsl \
-    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-    && docker-php-ext-install gd \
+        git vim ruby ruby-dev libcurl4-openssl-dev \
     && rm -rf /var/lib/apt/lists/*
+
+RUN docker-php-ext-install mcrypt mysql mysqli pdo_mysql mbstring ftp soap zip opcache intl xsl \
+    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+    && docker-php-ext-install gd
+
+RUN gem install -n /usr/local/bin magentify json curb colored nokogiri sshkit capistrano
 
 # Install blackfire agent
 RUN export VERSION=`php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;"` \
