@@ -1,8 +1,3 @@
-data:
-    image: busybox
-    net: none
-    volumes: 
-        - ./workspace:/data
 
 db:
     image: percona
@@ -40,8 +35,8 @@ blackfireclient:
 phpfpm:
     build: phpfpm
     restart: always
-    volumes_from:
-        - data
+    volumes:
+        - ./workspace:/data
     links:
         - db
         - mailcatcher
@@ -51,8 +46,8 @@ phpfpm:
 web:
     build: nginx
     restart: always
-    volumes_from:
-        - data
+    volumes:
+        - ./workspace:/data
     links:
         - phpfpm:fpm
         - mailcatcher
