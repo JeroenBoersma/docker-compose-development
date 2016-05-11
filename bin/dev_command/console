@@ -1,4 +1,4 @@
 #!/bin/bash
 
-docker-compose run --rm phpfpm su - -s /bin/bash app
+docker-compose run -u app --rm phpfpm /bin/bash
 
