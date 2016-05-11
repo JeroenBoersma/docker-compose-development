@@ -3,6 +3,9 @@
 wd="`echo ${dwd}/workspace | sed -se 's/\\//\\\\\//g'`";
 ed=`echo ${uwd} | sed -se "s/${wd}//"`;
 
+c="$*";
+lc=`echo "${c}" | sed -se "s/${wd}/\/data/"`;
+
 if [ "${ed}" == "${uwd}" ]; then
     # Not found
     ed='';
@@ -10,6 +13,6 @@ else
     ed="cd /data${ed} && ";
 fi
 
-docker-compose run --rm -u app phpfpm /bin/bash -c "${ed}php $*"
+docker-compose run --rm -u app phpfpm /bin/bash -c "${ed}php ${lc}"
 exit $?
 
