@@ -36,9 +36,10 @@ Before
 Tested under Linux. For Windows/Mac, take a look at the docks for boot2docker.
 Stop all other local Webservers running on port 80/443.
 
-Set-up your database credentials and Blackfire profile in the conf directory
+Set-up your database credentials, php timezone and Blackfire profile in the conf directory
 
 - conf/mysql (set MYSQL\_PASSWORD)
+- conf/php (set PHP_TIMEZONE)
 - conf/blackfire (from blackfire docs select **docker installation**, grab the exports section, paste it and remove export )
 
 Start

@@ -40,6 +40,8 @@ blackfireclient:
 phpfpm:
     build: phpfpm
     restart: always
+    env_file: 
+        - conf/php
     volumes_from:
         - data
     links:
