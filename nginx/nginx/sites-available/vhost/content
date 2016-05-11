@@ -50,7 +50,7 @@ location ~ \.php$ {
     fastcgi_param MAGE_RUN_CODE $store;
 
     if ( -f $document_root$script_name ) {
-         fastcgi_pass fpm:9000;
+         fastcgi_pass fastcgi_backend;
     }
 
     allow all;
