@@ -1,8 +1,15 @@
 #!/bin/bash
 
-c=`dirname $0`;
+c=$(dirname $0);
 
-cd $c/dev_command;
+dwd=$(dirname ${c});
+
+# Export user workdir
+export dwd=${dwd};
+export uwd=${PWD};
+
+
+cd ${c}/dev_command;
 
 if [ $# -lt 1 ] || [ ! -f $1 ]; then
     echo 'Usage '`basename $0`' ['`ls *`']';
@@ -11,4 +18,5 @@ fi
 
 # Invoke command
 ./$@;
+exit $?
 

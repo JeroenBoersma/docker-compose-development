@@ -1,1 +1,3 @@
-dev_command/php
+#!/bin/bash
+dev php $*
+exit $?

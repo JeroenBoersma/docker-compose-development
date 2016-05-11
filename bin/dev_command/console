@@ -1,4 +1,21 @@
 #!/bin/bash
 
-docker-compose run -u app --rm phpfpm /bin/bash
+if [ -z "${uwd}" ]; then
+    # Only call thru dev command
+    dev php $*;
+    exit $?;
+fi
+
+wd="`echo ${dwd}/workspace | sed -se 's/\\//\\\\\//g'`";
+ed=`echo ${uwd} | sed -se "s/${wd}//"`;
+
+if [ "${ed}" == "${uwd}" ]; then
+    # Not found
+    ed='';
+else
+    ed="cd /data${ed} && ";
+fi
+
+docker-compose run --rm -u app phpfpm /bin/bash -c "${ed}bash -il"
+exit $?
 
