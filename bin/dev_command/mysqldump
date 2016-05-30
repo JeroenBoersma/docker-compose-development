@@ -1,5 +1,3 @@
-#!/bin/bash
 
-docker-compose run --rm dbclient mysqldump --host=db $@
-exit $?
-
+DEV_SERVICE=dbclient;
+DEV_CMD="mysqldump --host=db ${DEV_COMMAND_OPTIONS}";

@@ -1,5 +1,4 @@
-#!/bin/bash
 
-docker-compose start $*
-exit $?
+docker-compose start ${DEV_COMMAND_OPTIONS};
+exit $?;
 

@@ -1,17 +1,12 @@
-#!/bin/bash
 
+# Get latest releases
 docker images | grep -vE '(REPOSITORY|<none>)' | awk '{ print $1":"$2; }' | \
     while read a; do
+        docker pull $a 2>/dev/null;
+    done
 
-    # Get latest release
-    docker pull $a 2>/dev/null;
-
-done
-
+# Delete unused old images
 docker images | grep '<none>' | awk '{ print $3; }' | \
     while read a; do
-
-    # Removed unamed images
-    docker rmi $a;
-
-done
+        docker rmi $a;
+    done

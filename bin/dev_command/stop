@@ -1,5 +1,4 @@
-#!/bin/bash
 
-docker-compose stop $*
-exit $?
+docker-compose stop ${DEV_COMMAND_OPTIONS};
+exit $?;
 

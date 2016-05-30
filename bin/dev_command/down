@@ -1,5 +1,3 @@
-#!/bin/bash
 
-docker-compose down -v
-exit $?
-
+docker-compose down -v ${DEV_COMMAND_OPTIONS};
+exit $?;

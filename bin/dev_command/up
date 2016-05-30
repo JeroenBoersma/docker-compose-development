@@ -1,5 +1,3 @@
-#!/bin/bash
 
-docker-compose up -d --no-recreate
-exit $?
-
+docker-compose up -d --no-recreate;
+exit $?;

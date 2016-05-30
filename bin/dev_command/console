@@ -1,21 +1,16 @@
-#!/bin/bash
 
-if [ -z "${uwd}" ]; then
-    # Only call thru dev command
-    dev php $*;
-    exit $?;
+DEV_USER=app;
+DEV_SERVICE=php7;
+
+DEV_CMD='';
+if [ -n "${DEV_DATADIR}" ]; then
+    DEV_CMD="cd ${DEV_DATADIR} && ";
 fi
 
-wd="`echo ${dwd}/workspace | sed -se 's/\\//\\\\\//g'`";
-ed=`echo ${uwd} | sed -se "s/${wd}//"`;
-
-if [ "${ed}" == "${uwd}" ]; then
-    # Not found
-    ed='';
-else
-    ed="cd /data${ed} && ";
+if [ -z "${DEV_COMMAND_OPTIONS}" ]; then
+    # Interactive mode
+    DEV_CMD="${DEV_CMD}bash -il"
 fi
 
-docker-compose run --rm -u app phpfpm /bin/bash -c "${ed}bash -il"
-exit $?
+DEV_CMD='/bin/bash -c "'"${DEV_CMD} ${DEV_COMMAND_OPTIONS}"'"';
 

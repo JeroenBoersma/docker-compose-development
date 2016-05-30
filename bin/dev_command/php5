@@ -1,0 +1,5 @@
+
+. ./php;
+
+# Just change service
+DEV_SERVICE=php5;

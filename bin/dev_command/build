@@ -1,5 +1,4 @@
-#!/bin/bash
 
-docker-compose build $*
-exit $?
+docker-compose build ${DEV_COMMAND_OPTIONS};
+exit $?;
 

@@ -1,18 +1,10 @@
-#!/bin/bash
 
-wd="`echo ${dwd}/workspace | sed -se 's/\\//\\\\\//g'`";
-ed=`echo ${uwd} | sed -se "s/${wd}//"`;
+DEV_USER=app;
+DEV_SERVICE=php7;
 
-c="$*";
-lc=`echo "${c}" | sed -se "s/${wd}/\/data/"`;
-
-if [ "${ed}" == "${uwd}" ]; then
-    # Not found
-    ed='';
-else
-    ed="cd /data${ed} && ";
+DEV_CMD='php';
+if [ -n "${DEV_DATADIR}" ]; then
+    DEV_CMD="cd ${DEV_DATADIR} && php";
 fi
 
-docker-compose run --rm -u app phpfpm /bin/bash -c "${ed}php ${lc}"
-exit $?
-
+DEV_CMD='/bin/bash -c "'"${DEV_CMD} ${DEV_COMMAND_OPTIONS}"'"';
