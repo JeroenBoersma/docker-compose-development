@@ -1,1 +1,3 @@
-dev_command/mysql
+#!/bin/bash
+`dirname $0`/dev `basename $0` $*
+exit $?
