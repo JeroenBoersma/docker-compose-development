@@ -49,7 +49,7 @@ exec() {
     fi
 
     # Execute command
-    docker-compose run --rm ${DEV_USER}${DEV_SERVICE} ${DEV_CMD};
+    eval docker-compose run --rm ${DEV_USER}${DEV_SERVICE} ${DEV_CMD};
     exit $?;
 }
 
