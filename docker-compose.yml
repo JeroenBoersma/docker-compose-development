@@ -22,18 +22,29 @@ mailcatcher:
 blackfire:
     image: blackfire/blackfire
     restart: always
-    env_file: 
+    env_file:
         - conf/blackfire
 
 blackfireclient:
     image: blackfire/blackfire
     command: blackfire version
     net: host
-    env_file: 
+    env_file:
         - conf/blackfire
 
-phpfpm:
-    build: phpfpm
+php5:
+    build: php5
+    restart: always
+    volumes:
+        - ./workspace:/data
+    links:
+        - db
+        - mailcatcher
+        - redis
+        - blackfire
+
+php7:
+    build: php7
     restart: always
     volumes:
         - ./workspace:/data
@@ -49,9 +60,11 @@ web:
     volumes:
         - ./workspace:/data
     links:
-        - phpfpm:fpm
+        - php5:fpm
+
+        - php5:fpm5
+        - php7:fpm7
         - mailcatcher
     ports:
         - 80:80
         - 443:433
-

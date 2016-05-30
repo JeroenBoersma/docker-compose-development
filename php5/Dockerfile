@@ -17,7 +17,7 @@ RUN apt-get update --fix-missing && apt-get install -y \
         libxml2-dev \
         libicu-dev \
         libxslt-dev \
-        git vim ruby ruby-dev libcurl4-openssl-dev \
+        wget git vim ruby ruby-dev libcurl4-openssl-dev \
     && rm -rf /var/lib/apt/lists/*
 
 RUN docker-php-ext-install mcrypt mysql mysqli pdo_mysql mbstring ftp soap zip opcache intl xsl \
