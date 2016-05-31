@@ -17,7 +17,8 @@ Currently the next images are used. Trying to rely on official images as much as
 - mailcatcher -> schickling/mailcatcher:latest
 - nginx -> nginx:latest
 - percona -> percona:latest
-- phpfpm -> php:5.6-fpm
+- php7 -> php:7.0-fpm
+- php5 -> php:5.6-fpm
 - redis -> redis:latest
 
 
@@ -55,6 +56,7 @@ Start
 - open http://customer.project.dev/ in your browser (if you do not have dnsmasq, you have to add your hosts file manually).
 - all outgoing mail is sent to http://mail.dev/
 
+Default behavior is PHP7 and http://customer.project*.php5.dev*/ will call same project in PHP5.
 
 Database
 ---
@@ -77,7 +79,12 @@ Console
 ---
 
 If you want run a console to run php commands.
-`./bin/dev console`
+
+- `./bin/dev console` - PHP7
+- `./bin/dev php` - PHP7
+
+- `./bin/dev console5` - PHP5
+- `./bin/dev php5` - PHP5
 
 Cron
 ---
