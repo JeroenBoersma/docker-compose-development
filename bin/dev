@@ -15,7 +15,7 @@ init() {
 
     DEV_COMMAND=$1;
     shift;
-    DEV_COMMAND_OPTIONS=`echo "$*" | sed -se "s/${DEV_WORKSPACE}/\/data/"`;
+    DEV_COMMAND_OPTIONS=`echo "$*" | sed -se "s/${DEV_WORKSPACE}/\/data/" -se 's/\([\$\\\(\\\)<>]\)/\\\\\1/g'`;
 
     if [ "${DEV_DATADIR}" == "${DEV_USERDIR}" ]; then
         # Not in WORKSPACE
