@@ -9,9 +9,9 @@ server {
      set $customer "$1";
      set $project "$2";
   }
- 
+
   set $MAGE_ROOT /data/$customer/$project/;
-  set $MAGE_MODE default;
- 
+  set $MAGE_MODE developer;
+
   include sites-available/vhost/magento2.content;
 }
