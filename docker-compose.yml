@@ -37,6 +37,7 @@ php5:
     restart: always
     volumes:
         - ./workspace:/data
+        - ${HOME}/.ssh/id_rsa:/data/.ssh/id_rsa:ro
     links:
         - db
         - mailcatcher
@@ -48,6 +49,7 @@ php7:
     restart: always
     volumes:
         - ./workspace:/data
+        - ${HOME}/.ssh/id_rsa:/data/.ssh/id_rsa:ro
     links:
         - db
         - mailcatcher
