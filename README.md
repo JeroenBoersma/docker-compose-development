@@ -39,8 +39,8 @@ Stop all other local Webservers running on port 80/443.
 
 Set-up your database credentials and Blackfire profile in the conf directory
 
-- conf/mysql (set MYSQL\_ROOT\_PASSWORD)
-- conf/blackfire (from blackfire docs select **docker installation**, grab the exports section, paste it and remove export )
+- conf/mysql (`MYSQL\_ROOT\_PASSWORD=something`)
+- conf/blackfire (from blackfire docs select **docker installation**, grab the exports section, paste it and remove export)
 
 Start
 ---
@@ -61,8 +61,8 @@ Default behavior is PHP7 and http://customer.project*.php5.dev*/ will call same 
 Database
 ---
 
-The default user/pass for the database is root/toor.
-To manage database run `./bin/dev mysql -p`
+Set the desired root password in the conf/mysql section.
+To manage database run `./bin/dev myroot`
 
 You can access the database in your app use `db` as hostname.
 
