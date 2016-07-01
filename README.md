@@ -34,7 +34,7 @@ Installation
 Before
 ---
 
-Tested under Linux. For Windows/Mac, take a look at the docks for boot2docker.
+Tested under Linux. For Windows/Mac, take a look at the docker beta(heard that good performances are met)
 Stop all other local Webservers running on port 80/443.
 
 Set-up your database credentials and Blackfire profile in the conf directory
