@@ -13,6 +13,9 @@ set $htdocs "htdocs";
 if ( -e /data/$customer/$project/httpdocs ) {
     set $htdocs "httpdocs";
 }
+if ( -e /data/$customer/$project/public ) {
+    set $htdocs "public";
+}
 
 root /data/$customer/$project/$htdocs;
 
