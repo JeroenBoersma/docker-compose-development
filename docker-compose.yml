@@ -60,7 +60,7 @@ web:
     build: nginx
     restart: always
     volumes:
-        - ./workspace:/data
+        - ./workspace:/data:ro
     links:
         - php5:fpm
 
