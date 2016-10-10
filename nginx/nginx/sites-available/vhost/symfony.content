@@ -1,4 +1,4 @@
-root $MAGE_ROOT/web;
+root $SYMFONY_ROOT/web;
 
 index app.php;
 autoindex off;
