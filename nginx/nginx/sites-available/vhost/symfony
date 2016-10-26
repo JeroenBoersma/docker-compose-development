@@ -10,7 +10,7 @@ server {
      set $project "$2";
   }
 
-  set $MAGE_ROOT /data/$customer/$project;
+  set $SYMFONY_ROOT /data/$customer/$project;
 
   include sites-available/vhost/symfony.content;
 }
