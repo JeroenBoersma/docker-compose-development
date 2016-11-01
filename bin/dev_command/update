@@ -11,9 +11,3 @@ for image in ${images}; do
         imagesdone=${imagesdone}' '${image};
     fi
 done
-
-# Delete unused old images
-docker images | grep '<none>' | awk '{ print $3; }' | \
-    while read a; do
-        docker rmi $a;
-    done
