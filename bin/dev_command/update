@@ -1,10 +1,16 @@
 
+# Collect images to update
+images=`docker-compose config | grep 'image:' | awk '{print $2;}'`
+images=${images}' '`docker-compose config | grep 'context:' | awk '{print $2"/Dockerfile";}' | xargs ls | xargs grep -h FROM | awk '{print $2;}'`
 
+imagesdone='';
 # Get latest releases
-docker images | grep -vE '(REPOSITORY|<none>|'${DEV_PROJECT}'_)' | awk '{ print $1":"$2; }' | \
-    while read a; do
-        docker pull $a 2>/dev/null;
-    done
+for image in ${images}; do
+    if [ -z "`echo ${imagesdone} | grep ${image}`" ]; then
+        docker pull $image;
+        imagesdone=${imagesdone}' '${image};
+    fi
+done
 
 # Delete unused old images
 docker images | grep '<none>' | awk '{ print $3; }' | \
