@@ -5,6 +5,8 @@ db:
     volumes:
         - ./mysql:/var/lib/mysql
     env_file: conf/mysql
+    ports:
+        - 3306:3306
 dbclient:
     image: percona
     command: bash
