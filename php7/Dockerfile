@@ -3,9 +3,6 @@ MAINTAINER Jeroen Boersma <jeroen@srcode.nl>
 
 ENV PHP_EXTRA_CONFIGURE_ARGS --enable-fpm --with-fpm-user=app --with-fpm-group=app
 
-RUN groupadd -g 1000 app && \
-    useradd -g 1000 -u 1000 -d /data -s /bin/bash app
-
 RUN apt-get update --fix-missing && apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
@@ -17,7 +14,7 @@ RUN apt-get update --fix-missing && apt-get install -y \
         libxml2-dev \
         libicu-dev \
         libxslt-dev \
-        wget git vim ruby ruby-dev libcurl4-openssl-dev \
+        wget git vim zsh ruby ruby-dev libcurl4-openssl-dev \
     && rm -rf /var/lib/apt/lists/*
 
 RUN docker-php-ext-install mcrypt mysqli pdo_mysql mbstring ftp soap zip intl xsl \
@@ -48,6 +45,9 @@ RUN echo ";extension=blackfire.so\nblackfire.agent_socket=\${BLACKFIRE_PORT}" > 
 COPY etc/php-fpm.conf /usr/local/etc/
 COPY etc/php.ini /usr/local/etc/php/
 RUN chmod ugo+rX -R /usr/local/etc/php
+
+RUN groupadd -g 1000 app && \
+    useradd -g 1000 -u 1000 -d /data -s /bin/bash app
 
 WORKDIR /data
 CMD ["php-fpm"]
