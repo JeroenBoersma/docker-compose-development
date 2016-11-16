@@ -1,4 +1,5 @@
 
-docker-compose restart ${DEV_COMMAND_OPTIONS};
+docker-compose stop ${DEV_COMMAND_OPTIONS};
+docker-compose start ${DEV_COMMAND_OPTIONS};
 exit $?;
 
