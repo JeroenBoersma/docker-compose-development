@@ -1,0 +1,5 @@
+#!/bin/bash
+
+php `dirname $0`'/getcomposer.org/web/download/1.2.2/composer.phar' $*;
+exit $? 
+
