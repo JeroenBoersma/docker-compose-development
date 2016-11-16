@@ -1,7 +1,6 @@
 
 db:
     image: percona
-    restart: always
     volumes:
         - ./mysql:/var/lib/mysql
     env_file: conf/mysql
@@ -15,15 +14,12 @@ dbclient:
 
 redis:
     image: redis
-    restart: always
 
 mailcatcher:
     image: schickling/mailcatcher
-    restart: always
 
 blackfire:
     image: blackfire/blackfire
-    restart: always
     env_file:
         - conf/blackfire
 
@@ -36,7 +32,6 @@ blackfireclient:
 
 php5:
     build: php5
-    restart: always
     volumes:
         - ./workspace:/data
         - ${HOME}/.ssh/id_rsa:/data/.ssh/id_rsa:ro
@@ -48,7 +43,6 @@ php5:
 
 php7:
     build: php7
-    restart: always
     volumes:
         - ./workspace:/data
         - ${HOME}/.ssh/id_rsa:/data/.ssh/id_rsa:ro
@@ -60,7 +54,6 @@ php7:
 
 web:
     build: nginx
-    restart: always
     volumes:
         - ./workspace:/data:ro
     links:
