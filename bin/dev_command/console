@@ -9,7 +9,10 @@ fi
 
 if [ -z "${DEV_COMMAND_OPTIONS}" ]; then
 
-    if [ "$SHELL" == "/usr/bin/zsh" ]; then
+    if [ "$SHELL" == "/bin/bash" ]; then
+        # Interactive mode
+        DEV_CMD="${DEV_CMD}bash -il"
+    else
 
         # Make sure Antigen is initialized
         if [ -n "`git submodule status | grep -E '^\-'`" ]; then
@@ -19,9 +22,6 @@ if [ -z "${DEV_COMMAND_OPTIONS}" ]; then
 
         # Interactive mode
         DEV_CMD="${DEV_CMD}zsh -il"
-    else
-        # Interactive mode
-        DEV_CMD="${DEV_CMD}bash -il"
     fi
 
 fi
