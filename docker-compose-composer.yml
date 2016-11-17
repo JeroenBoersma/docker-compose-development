@@ -1,0 +1,6 @@
+composer:
+    image: composer/composer
+    volumes:
+        - ./workspace:/app
+        - ${HOME}/.ssh/id_rsa:/data/.ssh/id_rsa:ro
+

@@ -24,7 +24,7 @@ init() {
         # Not in WORKSPACE
         DEV_DATADIR='';
     else
-        DEV_DATADIR="/data${DEV_DATADIR}";
+        DEV_DATADIR="${DEV_DATADIR}";
     fi
 
     # Change to command directory
