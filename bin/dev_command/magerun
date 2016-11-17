@@ -1,0 +1,10 @@
+
+DEV_USER=app;
+DEV_SERVICE=php7;
+
+DEV_CMD='magerun';
+if [ -n "${DEV_DATADIR}" ]; then
+    DEV_CMD="cd /data${DEV_DATADIR} && magerun";
+fi
+
+DEV_CMD='/bin/bash -c "'"${DEV_CMD} ${DEV_COMMAND_OPTIONS}"'"';
