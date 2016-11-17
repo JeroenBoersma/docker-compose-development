@@ -1,0 +1,5 @@
+dbclient:
+    image: percona
+    links:
+        - db
+

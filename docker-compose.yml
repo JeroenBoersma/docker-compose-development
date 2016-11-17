@@ -6,11 +6,6 @@ db:
     env_file: conf/mysql
     ports:
         - 3306:3306
-dbclient:
-    image: percona
-    command: bash
-    links:
-        - db
 
 redis:
     image: redis
@@ -20,13 +15,6 @@ mailcatcher:
 
 blackfire:
     image: blackfire/blackfire
-    env_file:
-        - conf/blackfire
-
-blackfireclient:
-    image: blackfire/blackfire
-    command: blackfire version
-    net: host
     env_file:
         - conf/blackfire
 
@@ -65,3 +53,4 @@ web:
     ports:
         - 80:80
         - 443:433
+
