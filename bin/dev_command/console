@@ -8,22 +8,8 @@ if [ -n "${DEV_DATADIR}" ]; then
 fi
 
 if [ -z "${DEV_COMMAND_OPTIONS}" ]; then
-
-    if [ "$SHELL" == "/bin/bash" ]; then
-        # Interactive mode
-        DEV_CMD="${DEV_CMD}bash -il"
-    else
-
-        # Make sure Antigen is initialized
-        if [ -n "`git submodule status | grep -E '^\-'`" ]; then
-            git submodule init
-            git submodule update -f
-        fi
-
-        # Interactive mode
-        DEV_CMD="${DEV_CMD}zsh -il"
-    fi
-
+    # Interactive mode
+    DEV_CMD="${DEV_CMD}bash -il"
 fi
 
 DEV_CMD='/bin/bash -c "'"${DEV_CMD} ${DEV_COMMAND_OPTIONS}"'"';

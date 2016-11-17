@@ -1,3 +1,0 @@
-[submodule "workspace/.antigen"]
-	path = workspace/.antigen
-	url = https://github.com/zsh-users/antigen

@@ -22,7 +22,6 @@ php5:
     build: php5
     volumes:
         - ./workspace:/data
-        - ${HOME}/.ssh/id_rsa:/data/.ssh/id_rsa:ro
     links:
         - db
         - mailcatcher
@@ -33,7 +32,6 @@ php7:
     build: php7
     volumes:
         - ./workspace:/data
-        - ${HOME}/.ssh/id_rsa:/data/.ssh/id_rsa:ro
     links:
         - db
         - mailcatcher
