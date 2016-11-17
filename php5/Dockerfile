@@ -41,8 +41,11 @@ COPY etc/php-fpm.conf /usr/local/etc/
 COPY etc/php.ini /usr/local/etc/php/
 RUN chmod ugo+rX -R /usr/local/etc/php
 
-RUN groupadd -g 1000 app && \
-    useradd -g 1000 -u 1000 -d /data -s /bin/bash app
+ARG GID=1000
+ARG UID=1000
+
+RUN groupadd -g $GID app && \
+    useradd -g $GID -u $UID -d /data -s /bin/bash app
 
 WORKDIR /data
 CMD ["php-fpm"]
