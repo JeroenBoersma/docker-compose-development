@@ -4,7 +4,7 @@ init() {
 
     DEV_SELF=$(basename $0);
 
-    DEV_DIR=$(dirname $0);
+    DEV_DIR=$(realpath $(dirname $0));
     DEV_WORKDIR=$(dirname ${DEV_DIR});
     DEV_PROJECT=$(basename ${DEV_WORKDIR});
     DEV_USERDIR=${PWD};
