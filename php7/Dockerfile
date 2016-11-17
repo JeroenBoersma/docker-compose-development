@@ -42,6 +42,9 @@ RUN gem install -n /usr/local/bin magentify json curb colored nokogiri sshkit ca
 RUN echo ";extension=blackfire.so\nblackfire.agent_socket=\${BLACKFIRE_PORT}" > $PHP_INI_DIR/conf.d/blackfire.ini \
     && echo "zend_extension=`ls /usr/local/lib/php/extensions/no-debug-non-zts-*/xdebug.so`" > /usr/local/etc/php/conf.d/xdebug.ini
 
+RUN wget https://getcomposer.org/composer.phar -O /usr/local/bin/composer \
+    && chmod +x /usr/bin/composer
+
 COPY etc/php-fpm.conf /usr/local/etc/
 COPY etc/php.ini /usr/local/etc/php/
 RUN chmod ugo+rX -R /usr/local/etc/php
