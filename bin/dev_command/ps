@@ -1,3 +1,5 @@
 
-docker-compose ps ${DEV_COMMAND_OPTIONS};
-exit $?;
+dc yml_all;
+dc mode ps;
+dc cmd "$*";
+

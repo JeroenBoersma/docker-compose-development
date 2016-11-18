@@ -11,3 +11,5 @@ for image in ${images}; do
         imagesdone=${imagesdone}' '${image};
     fi
 done
+exit 0;
+

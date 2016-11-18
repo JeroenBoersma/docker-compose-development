@@ -1,4 +1,5 @@
 
-docker-compose build ${DEV_COMMAND_OPTIONS};
-exit $?;
+dc yml_all
+dc mode build
+dc cmd "$*";
 

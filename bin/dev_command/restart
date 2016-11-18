@@ -1,5 +1,8 @@
 
-docker-compose stop ${DEV_COMMAND_OPTIONS};
-docker-compose start ${DEV_COMMAND_OPTIONS};
-exit $?;
+dc cmd "$*";
+
+dc mode stop;
+dc run;
+
+dc mode start;
 

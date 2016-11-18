@@ -1,3 +1,4 @@
 
-docker-compose logs ${DEV_COMMAND_OPTIONS};
-exit $?;
+dc mode logs;
+dc cmd "$*";
+

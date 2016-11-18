@@ -2,4 +2,5 @@
 . ./php;
 
 # Just force service
-DEV_SERVICE=php5;
+dc service php5;
+

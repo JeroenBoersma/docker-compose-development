@@ -1,4 +1,4 @@
 
-docker-compose stop ${DEV_COMMAND_OPTIONS};
-exit $?;
+dc mode stop;
+dc cmd "$*";
 

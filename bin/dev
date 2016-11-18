@@ -12,19 +12,17 @@ init() {
     DEV_COMMANDDIR=${DEV_DIR}/dev_command;
 
     DEV_WORKSPACE="`echo ${DEV_WORKDIR}/workspace | sed -se 's/\\//\\\\\//g'`";
-    DEV_DATADIR=`echo ${DEV_USERDIR} | sed -se "s/${DEV_WORKSPACE}//"`;
+    DEV_PROJECTDIR=`echo ${DEV_USERDIR} | sed -se "s/${DEV_WORKSPACE}\///"`;
 
-    DEV_COMPOSE_YML='-f docker-compose.yml';
+    dc yml 'docker-compose.yml';
+    dc mode 'run --rm';
 
+    DEV_DOCKEROPTS='';
     DEV_COMMAND=$1;
-    shift;
-    DEV_COMMAND_OPTIONS=`echo "$*" | sed -se "s/${DEV_WORKSPACE}/\/data/" -se 's/\([\$\\\(\\\)<>]\)/\\\\\1/g'`;
 
-    if [ "${DEV_DATADIR}" == "${DEV_USERDIR}" ]; then
+    if [ "${DEV_PROJECTDIR=}" == "${DEV_USERDIR}" ]; then
         # Not in WORKSPACE
-        DEV_DATADIR='';
-    else
-        DEV_DATADIR="${DEV_DATADIR}";
+        DEV_PROJECTDIR='';
     fi
 
     # Change to command directory
@@ -38,22 +36,62 @@ init() {
     fi
 }
 
+dc() {
+
+    show() {
+         echo docker-compose ${DEV_YML} ${DEV_MODE} \
+            ${DEV_DOCKEROPTS} \
+            ${DEV_SERVICE} \
+            "${DEV_CMD}"
+    }
+
+    run() {
+        cmd=`show`;
+        ${cmd};
+        return $?
+    }
+
+    opt() {
+        DEV_DOCKEROPTS=${DEV_DOCKEROPTS}' '$*;
+    }
+
+    service() {
+        DEV_SERVICE=$*;
+    }
+
+    yml_all() {
+        cwd=${PWD};
+
+        cd ${DEV_WORKDIR};
+        for f in `ls docker-compose-*.yml`; do
+            dc yml ${f};
+        done
+        cd ${cwd};
+    }
+
+    yml() {
+        DEV_YML=${DEV_YML}' -f '${DEV_WORKDIR}'/'$1;
+    }
+
+    mode() {
+        DEV_MODE=$*;
+    }
+
+    cmd() {
+        DEV_CMD="$*";
+    }
+
+    $*;
+    return $?
+}
+
 exec() {
     # Load command
     # Can exit if implemented itself
-    . ./${DEV_COMMAND};
-
-    if [ -z "${DEV_SERVICE}" ]; then
-        exit 1;
-    fi
-
-    if [ -n "${DEV_USER}" ]; then
-        DEV_USER="-u ${DEV_USER} ";
-    fi
+    . ./${DEV_COMMAND} $*;
 
     # Execute command
-    cd ${DEV_WORKDIR};
-    eval docker-compose $DEV_COMPOSE_YML run --rm ${DEV_USER}${DEV_SERVICE} ${DEV_CMD};
+    dc run;
     exit $?;
 }
 
@@ -64,8 +102,9 @@ usage() {
 
 main() {
     init $@;
+    shift;
 
-    ${DEV_EXISTS} && exec || usage;
+    ${DEV_EXISTS} && exec $@ || usage;
 }
 
 main $@;

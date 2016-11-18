@@ -1,4 +1,4 @@
 
-docker-compose start ${DEV_COMMAND_OPTIONS};
-exit $?;
+dc mode start;
+dc cmd "$*";
 

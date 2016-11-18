@@ -1,3 +1,5 @@
 
-docker-compose down -v ${DEV_COMMAND_OPTIONS};
-exit $?;
+dc mode 'down -v';
+dc yml_all;
+dc cmd "$*";
+

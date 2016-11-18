@@ -1,4 +1,6 @@
 
-docker-compose exec ${DEV_COMMAND_OPTIONS};
-exit $?;
+dc mode exec;
+dc service $1;
+shift;
+dc cmd "$*";
 

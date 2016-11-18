@@ -1,4 +1,5 @@
 
-DEV_COMPOSE_YML=${DEV_COMPOSE_YML}' -f docker-compose-mysql.yml';
-DEV_SERVICE=dbclient;
-DEV_CMD="mysqldump --host=db -u${USER} ${DEV_COMMAND_OPTIONS}";
+dc yml docker-compose-db.yml;
+dc service dbclient;
+dc cmd mysqldump "-h db -u ${USER} $*";
+

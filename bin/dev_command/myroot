@@ -1,3 +1,8 @@
 
-docker-compose exec db bash -c 'mysql -p${MYSQL_ROOT_PASSWORD}'
-exit $?;
+. ${DEV_WORKDIR}/conf/mysql;
+
+dc mode exec;
+dc service db;
+
+dc cmd mysql -p$MYSQL_ROOT_PASSWORD;
+

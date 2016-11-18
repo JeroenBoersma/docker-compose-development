@@ -1,11 +1,11 @@
 
-DEV_COMPOSE_YML=${DEV_COMPOSE_YML}' -f docker-compose-composer.yml';
-DEV_SERVICE=composer;
-DEV_USER=${UID};
+dc yml 'docker-compose-composer.yml';
+dc service composer;
+dc opt "-u $(id -u):$(id -g)"
 
-if [ -n "${DEV_DATADIR}" ]; then
-    DEV_SERVICE=' -w /app'${DEV_DATADIR}' '${DEV_SERVICE};
+if [ -n "${DEV_PROJECTDIR}" ]; then
+    dc opt "-w /app/${DEV_PROJECTDIR}"
 fi
 
-DEV_CMD="${DEV_COMMAND_OPTIONS}";
+dc cmd "$*";
 
