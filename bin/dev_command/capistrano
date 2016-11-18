@@ -1,0 +1,11 @@
+
+dc yml 'docker-compose-capistrano.yml';
+dc service capistrano;
+dc opt "-u $(id -u):$(id -g)"
+
+if [ -n "${DEV_PROJECTDIR}" ]; then
+    dc opt "-w /app/${DEV_PROJECTDIR}"
+fi
+
+dc cmd cap "$*";
+
