@@ -1,0 +1,8 @@
+
+grep -hE '(image:|FROM )' ${DEV_WORKDIR}/docker-compose* ${DEV_WORKDIR}/*/Dockerfile | \
+    awk '{print $2;}' | \
+    sed -se 's/$/:latest/' -se 's/\(:[^:]*\):latest$/\1/' | \
+    sort | \
+    uniq;
+exit;
+
