@@ -5,28 +5,30 @@ Docker-compose development
 Quickly start of developing locally with Nginx, PHP, Blackfire, Percona, Mailcatcher and Redis.
 
 No e-mail is send externally, everything is catched by mailcatcher.
+Look out if you are using sendgrid, mailchimp or similar mail API's, we do not catch those.
 
 
 Base images
 ---
 
-Currently the next images are used. Trying to rely on official images as much as possible.
+Currently the next base images are used. Trying to rely on official images as much as possible.
 
 - blackfire -> blackfire/blackfire:latest
-- data -> busybox:latest
-- mailcatcher -> schickling/mailcatcher:latest
+- composer -> composer/composer:latest
 - nginx -> nginx:latest
 - percona -> percona:latest
-- php7 -> php:7.0-fpm
 - php5 -> php:5.6-fpm
+- php7 -> php:7.1-fpm
 - redis -> redis:latest
+- capistrano -> ruby:latest
+- mailcatcher -> schickling/mailcatcher:latest
 
 
 Installation
 ---
 
 - Install [docker](https://docs.docker.com/)
-- Install docker [compose](https://docs.docker.com/compose/install/) >1.3.1
+- Install docker [compose](https://docs.docker.com/compose/install/) >1.6.1
 - Clone this project 
   `git clone git@github.com:JeroenBoersma/docker-compose-development.git development`
 
@@ -40,7 +42,14 @@ Stop all other local Webservers running on port 80/443.
 Set-up your database credentials and Blackfire profile in the conf directory
 
 - conf/mysql (`MYSQL_ROOT_PASSWORD=something`)
-- conf/blackfire (from blackfire docs select **docker installation**, grab the exports section, paste it and remove export)
+
+Blackfire
+---
+
+Blackfire is optional, the library is already available in PHP, but not loaded by default.
+To load blackfire, simply add a `conf/blackfire` file with content from the [Blackfire website](https://blackfire.io/docs/integrations/docker#documentation).
+Copy/paste the contents from the first block in the configuration file and remove the `export ` from the beginning of the line.
+`./bin/dev/down` and `./bin/dev/up` to load blackfire.
 
 Start
 ---
@@ -56,7 +65,95 @@ Start
 - open http://customer.project.dev/ in your browser (if you do not have dnsmasq, you have to add your hosts file manually).
 - all outgoing mail is sent to http://mail.dev/
 
-Default behavior is PHP7 and http://customer.project*.php5.dev*/ will call same project in PHP5.
+Hosts and file structure
+---
+
+Everything is translated from `customer.project.dev` -> `workspace/project/htdocs`.
+For example; `iwant.coffee.dev` -> `workspace/iwant/coffee/htdocs`.
+
+To be compatible with various webroots, we will lookup a few defaults.
+Webroots -> `htdocs`, `httpdocs`, `public` or `pub`.
+
+Support for PHP5, PHP7 is the default, use `*.php5.dev` to run the same project in PHP5.
+
+Support for Magento 1 projects in both PHP7 and PHP5, use `*.magento.dev` and `*.magento.php5.dev` to use a Magento specific setup.
+Webroots + `magento`.
+
+Support for Symfony in both PHP7 and PHP5, use `*.symfony.dev` and `*.symfony.php5.dev` to use a Symfony specific setup.
+Webroots + web.
+
+Supports Magento 2 projects in PHP7 only, use `*.magento2.dev` to use a Magento 2 specific setup.
+Webroot is pub only.
+
+Add a file mapping in your IDE, `./workspace/customer/project` -> `/data/customer/project`
+
+Xdebug
+---
+
+Xdebug is enabled with support for remote debugging on your local machine.
+It'll try to connect to the host 172.17.0.1:9000 by default.
+
+Dev commands
+---
+
+We supply several helpful commands to get of easily. `./bin/dev COMMAND` or just `dev COMMAND` if you've added the development to your $PATH.
+
+To control your docker environment.
+
+- `build [IMAGE]`
+  re-build a image
+- `down`
+  destroy your local development environment, will not remove project/mysql files, only containers.
+- `exec [CONTAINER]`
+  execute commands in a specific container, for instance php or nginx
+- `images`
+  display used images
+- `logs [CONTAINER]`
+  show logs for a specific container
+- `profile`
+  show some useful commands to add to your SHELL
+- `ps`
+  show all running processes
+- `restart [CONTAINER]`
+  restart all or a specific container
+- `start`
+  start all exising container, will not create them if they don't exist(use `up` instead)
+- `status`
+  alias for ps
+- `stop`
+  stop all running containers
+- `up`
+  create/build/run all containers, bring your development to live
+- `update`
+  update all linked images from the web
+
+There are also useful tools.
+
+- `blackfire curl [URL]`
+  The blackfire command to curl pages. Be sure you've setup blackfire correctly
+- `cap [ACTIONS]`
+  capistrano docker implementation, runs in own container.
+- `composer [COMMANDS]`
+  composer docker implementation, also runs in own container.
+- `console` `console5`
+  open a console inside your PHP containers.
+- `magerun [COMMANDS]` `magerun5 [COMMANDS]`
+  run magerun commands on your Magento projects
+- `myroot [OPTIONS]`
+  run mysql as root.
+- `mysql [OPTIONS]`
+  run mysql as you, current user.
+- `mysqldump [OPTIONS]`
+  run mysqldump as you, current user.
+- `php [OPTIONS]` `php5 [OPTIONS]`
+  run php commands
+
+You can run these commands from within your workspace directories.
+For example: `cd workspace/test/project/htdocs` `../../../../bin/dev php info.php` (or `dev php info.php` if you've added the bin directory to your path)
+
+So you can also import data to mysql with `./bin/dev mysql database < dump.sql` or dump `./bin/mysqldump database > dump.sql`.
+
+Because PHP7 should be the default now, I've created shorthands for `./bin/php` but not for php5 use `./bin/dev php5` for that.
 
 Database
 ---
@@ -75,33 +172,16 @@ Redis
 To use redis, use `redis` as hostname in the config of your app.
 
 
-Console
----
-
-If you want run a console to run php commands.
-
-- `./bin/dev console` - PHP7
-- `./bin/dev php` - PHP7
-
-- `./bin/dev console5` - PHP5
-- `./bin/dev php5` - PHP5
-
 Cron
 ---
 
 If you use cronjobs in your app, you can add them on your host machine.
-`docker ps | grep development_phpfpm && docker exec development_phpfpm_1 su app [YOURCOMMANDHERE]`
+I would recommend to add dev to the path before you implement this.
+
+`*/5 * * * * dev ps | grep php7 | grep Up && dev console [YOURCOMMANDHERE]`
 
 For instance, if you must run a Magento cronjob.
-`docker ps | grep development_phpfpm && docker exec development_phpfpm_1 su app magento/project/htdocs/cron.sh`
+`*/5 * * * * dev ps | grep php7 | grep Up && dev console customer/project/htdocs/cron.sh`
 
 You can add these to your local cron.
-
-
-Magento storecode
----
-
-Being a Magento developer, you can extend your url by adding the storecode.
-http://magento.project.storecode.dev/ will translate to workspace/magento/project/htdocs 
-and will set the `MAGE_RUN_CODE` to storecode.
 
