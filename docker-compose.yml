@@ -40,6 +40,7 @@ web:
 
         - php5:fpm5
         - php7:fpm7
+
         - mailcatcher
     ports:
         - 80:80
