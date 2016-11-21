@@ -44,5 +44,5 @@ web:
         - mailcatcher
     ports:
         - 80:80
-        - 443:433
+        - 443:443
 
