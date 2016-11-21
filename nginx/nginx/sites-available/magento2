@@ -1,0 +1,18 @@
+server {
+    listen 80;
+    server_name *.magento2.dev;
+
+    include content/magento2;
+}
+
+server {
+    listen 443;
+    server_name *.magento2.dev;
+
+    ssl on;
+    ssl_certificate certs/server.crt;
+    ssl_certificate_key certs/server.key;
+
+    include content/magento2;
+}
+

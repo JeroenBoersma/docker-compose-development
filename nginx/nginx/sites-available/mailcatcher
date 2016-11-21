@@ -4,7 +4,21 @@ map $http_upgrade $connection_upgrade {
 }
 
 server {
+    listen 80;
     server_name mail.dev;
+
+    location / {
+        return 301 https://$host$uri;
+    }
+}
+
+server {
+    listen 443;
+    server_name mail.dev;
+
+    ssl on;
+    ssl_certificate certs/server.crt;
+    ssl_certificate_key certs/server.key;
 
     location / {
         proxy_pass http://mailcatcher:1080/;
@@ -12,5 +26,5 @@ server {
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection $connection_upgrade;
     }
-
 }
+

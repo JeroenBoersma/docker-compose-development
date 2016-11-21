@@ -17,6 +17,10 @@
 #    include /vagrant/magento2/nginx.conf.sample;
 # }
 
+include "content/vars";
+
+set $MAGE_ROOT /data/$customer/$project/;
+set $MAGE_MODE developer;
 
 root $MAGE_ROOT/pub;
 
@@ -159,3 +163,4 @@ location ~ (index|get|static|report|404|503)\.php$ {
     fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
     include        fastcgi_params;
 }
+

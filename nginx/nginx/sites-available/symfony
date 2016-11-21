@@ -1,0 +1,40 @@
+server {
+    listen 80;
+    server_name *.symfony.dev;
+
+    include "upstream/php7";
+    include "content/symfony";
+}
+
+server {
+    listen 443;
+    server_name *.symfony.dev;
+
+    ssl on;
+    ssl_certificate certs/server.crt;
+    ssl_certificate_key certs/server.key;
+
+    include "upstream/php7";
+    include "content/symfony";
+}
+
+server {
+    listen 80;
+    server_name *.symfony.php5.dev;
+
+    include "upstream/php5";
+    include "content/symfony";
+}
+
+server {
+    listen 443;
+    server_name *.symfony.php5.dev;
+
+    ssl on;
+    ssl_certificate certs/server.crt;
+    ssl_certificate_key certs/server.key;
+
+    include "upstream/php5";
+    include "content/symfony";
+}
+
