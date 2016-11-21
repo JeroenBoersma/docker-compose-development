@@ -15,6 +15,8 @@ init() {
     DEV_PROJECTDIR=`echo ${DEV_USERDIR} | sed -se "s/${DEV_WORKSPACE}\///"`;
 
     dc yml 'docker-compose.yml';
+    dc yml_if 'docker-compose-blackfire.yml' 'conf/blackfire';
+
     dc mode 'run --rm';
 
     DEV_DOCKEROPTS='';
@@ -59,17 +61,32 @@ dc() {
         DEV_SERVICE=$*;
     }
 
-    yml_all() {
-        cwd=${PWD};
+    yml_if() {
+        local yml=$1;
+        shift;
 
-        cd ${DEV_WORKDIR};
-        for f in `ls docker-compose-*.yml`; do
-            dc yml ${f};
+        while [ -n "$1" ]; do
+            if [ ! -e ${DEV_WORKDIR}/$1 ]; then
+                return 1;
+            fi
+            shift;
         done
-        cd ${cwd};
+
+        yml ${yml};
+        return 0;
+    }
+
+    yml_all() {
+        yml_if 'docker-compose-blackfireclient.yml' 'conf/blackfire';
+        yml 'docker-compose-capistrano.yml';
+        yml 'docker-compose-composer.yml';
+        yml 'docker-compose-db.yml';
     }
 
     yml() {
+        if [ -n "`echo $DEV_YML | grep $1`" ]; then
+            return;
+        fi
         DEV_YML=${DEV_YML}' -f '${DEV_WORKDIR}'/'$1;
     }
 

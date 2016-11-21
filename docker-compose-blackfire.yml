@@ -1,6 +1,13 @@
-blackfireclient:
+blackfire:
     image: blackfire/blackfire
-    net: host
     env_file:
         - conf/blackfire
+
+php5:
+    links:
+        - blackfire
+
+php7:
+    links:
+        - blackfire
 

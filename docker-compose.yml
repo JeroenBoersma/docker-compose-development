@@ -13,11 +13,6 @@ redis:
 mailcatcher:
     image: schickling/mailcatcher
 
-blackfire:
-    image: blackfire/blackfire
-    env_file:
-        - conf/blackfire
-
 php5:
     build: php5
     volumes:
@@ -26,7 +21,6 @@ php5:
         - db
         - mailcatcher
         - redis
-        - blackfire
 
 php7:
     build: php7
@@ -36,7 +30,6 @@ php7:
         - db
         - mailcatcher
         - redis
-        - blackfire
 
 web:
     build: nginx

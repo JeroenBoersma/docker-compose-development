@@ -1,0 +1,6 @@
+blackfireclient:
+    image: blackfire/blackfire
+    net: host
+    env_file:
+        - conf/blackfire
+
