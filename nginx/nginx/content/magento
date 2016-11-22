@@ -34,7 +34,7 @@ location /skin {
 }
 
 location / {
-    try_files $uri $uri/index.html $uri.html $uri.php $uri/index.php /index.php;
+    try_files $uri $uri/index.html $uri.html /index.php;
     allow all;
 }
 
