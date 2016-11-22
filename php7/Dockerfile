@@ -27,7 +27,7 @@ RUN wget https://xdebug.org/files/xdebug-2.5.0RC1.tgz \
     && phpize \
     && ./configure \
     && make \
-    && cp modules/xdebug.so /usr/local/lib/php/extensions/no-debug-non-zts-20151012 \
+    && cp modules/xdebug.so /usr/local/lib/php/extensions/no-debug-non-zts-20160303/ \
     && cd && rm -rf xdebug-2.*
 
 # Install blackfire agent
