@@ -1,6 +1,0 @@
-
-# No . locations
-location ~ (^/?\.|/\.)[^\.] {
-    deny all;
-}
-

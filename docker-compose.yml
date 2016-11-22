@@ -14,7 +14,7 @@ mailcatcher:
     image: schickling/mailcatcher
 
 php5:
-    build: php5
+    image: srcoder/development_php:5.6-fpm
     volumes:
         - ./workspace:/data
     links:
@@ -23,7 +23,7 @@ php5:
         - redis
 
 php7:
-    build: php7
+    image: srcoder/development_php:7.1-fpm
     volumes:
         - ./workspace:/data
     links:
@@ -32,7 +32,7 @@ php7:
         - redis
 
 web:
-    build: nginx
+    image: srcoder/development_web
     volumes:
         - ./workspace:/data:ro
     links:

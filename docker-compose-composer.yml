@@ -1,5 +1,5 @@
 composer:
-    build: composer
+    image: srcoder/development_composer
     volumes:
         - ./workspace:/app
         - ./workspace/.composer:/composer
