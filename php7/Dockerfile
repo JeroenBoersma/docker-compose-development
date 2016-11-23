@@ -1,4 +1,4 @@
-FROM php:7.1-fpm
+FROM php:7.0-fpm
 MAINTAINER Jeroen Boersma <jeroen@srcode.nl>
 
 ENV PHP_EXTRA_CONFIGURE_ARGS --enable-fpm --with-fpm-user=app --with-fpm-group=app
@@ -21,13 +21,13 @@ RUN docker-php-ext-install mcrypt mysqli pdo_mysql mbstring ftp soap zip intl xs
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install gd
 
-RUN wget https://xdebug.org/files/xdebug-2.5.0RC1.tgz \
+RUN wget https://xdebug.org/files/xdebug-2.5.0rc1.tgz \
     && tar -xvzf xdebug-*.tgz \
     && cd xdebug-* \
     && phpize \
     && ./configure \
     && make \
-    && cp modules/xdebug.so /usr/local/lib/php/extensions/no-debug-non-zts-20160303/ \
+    && cp modules/xdebug.so `php -r "echo ini_get('extension_dir');"`/xdebug.so \
     && cd && rm -rf xdebug-2.*
 
 # Install blackfire agent
@@ -38,7 +38,7 @@ RUN export VERSION=`php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;"` \
 
 # Enable debug extension
 RUN echo "extension=blackfire.so\nblackfire.agent_socket=\${BLACKFIRE_PORT}" > $PHP_INI_DIR/conf.d/blackfire.ini \
-    && echo "zend_extension=`ls /usr/local/lib/php/extensions/no-debug-non-zts-*/xdebug.so`" > /usr/local/etc/php/conf.d/xdebug.ini
+    && echo "zend_extension=xdebug.so" > /usr/local/etc/php/conf.d/xdebug.ini
 
 RUN wget http://files.magerun.net/n98-magerun.phar -O /usr/bin/n98-magerun \
     && chmod +x /usr/bin/n98-magerun \
