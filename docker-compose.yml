@@ -23,7 +23,7 @@ php5:
         - redis
 
 php7:
-    image: srcoder/development_php:7.1-fpm
+    image: srcoder/development_php:7.0-fpm
     volumes:
         - ./workspace:/data
     links:
