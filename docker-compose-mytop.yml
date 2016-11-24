@@ -1,0 +1,5 @@
+mytop:
+    build: mytop
+    links:
+        - db
+
