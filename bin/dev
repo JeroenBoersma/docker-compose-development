@@ -80,7 +80,7 @@ dc() {
         yml_if 'docker-compose-blackfireclient.yml' 'conf/blackfire';
         yml 'docker-compose-capistrano.yml';
         yml 'docker-compose-composer.yml';
-        yml 'docker-compose-db.yml';
+        yml 'docker-compose-dbclient.yml';
     }
 
     yml() {
