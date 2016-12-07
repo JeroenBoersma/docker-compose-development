@@ -10,8 +10,8 @@ db:
 redis:
     image: redis
 
-mailcatcher:
-    image: schickling/mailcatcher
+mailcatch:
+    image: mailhog/mailhog
 
 php5:
     build: php5
@@ -19,7 +19,7 @@ php5:
         - ./workspace:/data
     links:
         - db
-        - mailcatcher
+        - mailcatch
         - redis
 
 php7:
@@ -28,7 +28,7 @@ php7:
         - ./workspace:/data
     links:
         - db
-        - mailcatcher
+        - mailcatch
         - redis
 
 web:
@@ -41,7 +41,7 @@ web:
         - php5:fpm5
         - php7:fpm7
 
-        - mailcatcher
+        - mailcatch
     ports:
         - 80:80
         - 443:443
