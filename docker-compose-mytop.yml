@@ -1,5 +1,5 @@
 mytop:
-    build: mytop
+    image: srcoder/mytop
     links:
         - db
 
