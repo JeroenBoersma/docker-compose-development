@@ -32,7 +32,7 @@ php7:
         - redis
 
 web:
-    build: nginx
+    build: web
     volumes:
         - ./workspace:/data:ro
     links:
