@@ -4,7 +4,7 @@ Docker-compose development
 
 Quickly start of developing locally with Nginx, PHP, Blackfire, Percona, Mailcatcher and Redis.
 
-No e-mail is send externally, everything is catched by mailcatcher.
+No e-mail is send externally, everything is catched by Mailhog.
 Look out if you are using sendgrid, mailchimp or similar mail API's, we do not catch those.
 
 
@@ -15,13 +15,14 @@ Currently the next base images are used. Trying to rely on official images as mu
 
 - blackfire -> blackfire/blackfire:latest
 - composer -> composer/composer:latest
-- nginx -> nginx:latest
+- nginx -> nginx:alpine
 - percona -> percona:latest
 - php5 -> php:5.6-fpm
 - php7 -> php:7.1-fpm
 - redis -> redis:latest
 - capistrano -> ruby:latest
-- mailcatcher -> schickling/mailcatcher:latest
+- mailhog -> mailhog/mailhog:latest
+- mytop -> srcoder/mytop:latest
 
 
 Installation
@@ -68,7 +69,7 @@ Start
 Hosts and file structure
 ---
 
-Everything is translated from `customer.project.dev` -> `workspace/project/htdocs`.
+Everything is translated from `customer.project.dev` -> `workspace/customer/project/htdocs`.
 For example; `iwant.coffee.dev` -> `workspace/iwant/coffee/htdocs`.
 
 To be compatible with various webroots, we will lookup a few defaults.
