@@ -1,11 +1,11 @@
-FROM composer/composer
+FROM composer/composer:alpine
 MAINTAINER Jeroen Boersma <jeroen@srcode.nl>
 
 ARG GID=1000
 ARG UID=1000
 
-RUN groupadd -g $GID app && \
-    useradd -g $GID -u $UID -d /app -s /bin/bash app
+RUN apk add --no-cache openssh-client && \
+    adduser -u $UID -g $GID -h /app -DHs /bin/nologin app
 
 WORKDIR /app
 
