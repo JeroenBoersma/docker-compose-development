@@ -1,5 +1,5 @@
 capistrano:
-    image: srcoder/development_capistrano
+    build: capistrano
     volumes:
         - ./workspace:/app
         - ${HOME}/.ssh/id_rsa:/app/.ssh/id_rsa:ro
