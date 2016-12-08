@@ -1,0 +1,20 @@
+
+include "content/vars";
+
+root /data/$customer/$project/$htdocs;
+
+gzip_types text/css application/x-javascript image/svg+xml;
+
+include "content/security";
+
+location / {
+    index index.html;
+    try_files $uri $uri/index.html $uri.html /index.php;
+    allow all;
+}
+
+location ~ \.php$ {
+    try_files .~srcfile @php;
+    allow all;
+}
+

@@ -11,8 +11,8 @@ init() {
 
     DEV_COMMANDDIR=${DEV_DIR}/dev_command;
 
-    DEV_WORKSPACE="`echo ${DEV_WORKDIR}/workspace | sed -se 's/\\//\\\\\//g'`";
-    DEV_PROJECTDIR=`echo ${DEV_USERDIR} | sed -se "s/${DEV_WORKSPACE}\///"`;
+    DEV_WORKSPACE="`echo ${DEV_WORKDIR}/workspace | sed -e 's/\\//\\\\\//g'`";
+    DEV_PROJECTDIR=`echo ${DEV_USERDIR} | sed -e "s/${DEV_WORKSPACE}\///"`;
 
     dc yml 'docker-compose.yml';
     dc yml_if 'docker-compose-blackfire.yml' 'conf/blackfire';
@@ -80,7 +80,8 @@ dc() {
         yml_if 'docker-compose-blackfireclient.yml' 'conf/blackfire';
         yml 'docker-compose-capistrano.yml';
         yml 'docker-compose-composer.yml';
-        yml 'docker-compose-db.yml';
+        yml 'docker-compose-dbclient.yml';
+        yml 'docker-compose-mytop.yml';
     }
 
     yml() {

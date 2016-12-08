@@ -1,5 +1,5 @@
 
-dc yml docker-compose-db.yml;
+dc yml docker-compose-dbclient.yml;
 dc service dbclient;
 dc cmd mysqldump "-h db -u ${USER} $*";
 

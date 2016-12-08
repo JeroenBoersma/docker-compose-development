@@ -1,0 +1,5 @@
+mytop:
+    image: srcoder/mytop
+    links:
+        - db
+
