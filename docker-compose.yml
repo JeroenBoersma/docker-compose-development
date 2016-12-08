@@ -8,7 +8,7 @@ db:
         - 3306:3306
 
 redis:
-    image: redis
+    image: redis:alpine
 
 mailcatch:
     image: mailhog/mailhog
