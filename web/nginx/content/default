@@ -9,7 +9,7 @@ include "content/security";
 
 location / {
     index index.html;
-    try_files $uri $uri/index.html $uri.html /index.php;
+    try_files $uri $uri/index.html $uri.html /index.php$is_args$args;
     allow all;
 }
 
