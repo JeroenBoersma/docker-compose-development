@@ -8,8 +8,9 @@ location @php {
     fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
     fastcgi_param DOCUMENT_ROOT $realpath_root;
 
-    # Mage storecode
+    # Magento specific
     fastcgi_param MAGE_RUN_CODE $mageRunCode;
+    fastcgi_param MAGE_IS_DEVELOPER_MODE "1";
 
     fastcgi_pass fastcgi5_backend;
 

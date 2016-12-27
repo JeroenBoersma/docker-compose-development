@@ -10,6 +10,7 @@ location @php {
 
     # Mage storecode
     fastcgi_param MAGE_RUN_CODE $mageRunCode;
+    fastcgi_param MAGE_IS_DEVELOPER_MODE "1";
 
     fastcgi_pass fastcgi7_backend;
 
