@@ -1,6 +1,11 @@
 
 include "content/vars";
 
+set $mageRunCode "";
+if ( $host ~ "^([^\.]+)\.([^\.]+)\.([^\.]+)\..*\.magento(\.php5)?\.dev$"  ) {
+     set $mageRunCode "$3";
+}
+
 # Custom implementation for some projects
 if ( -e /data/$customer/$project/magento ) {
     set $htdocs "magento";

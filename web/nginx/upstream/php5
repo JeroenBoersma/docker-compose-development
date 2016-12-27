@@ -7,6 +7,10 @@ location @php {
 
     fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
     fastcgi_param DOCUMENT_ROOT $realpath_root;
+
+    # Mage storecode
+    fastcgi_param MAGE_RUN_CODE $mageRunCode;
+
     fastcgi_pass fastcgi5_backend;
 
     allow all;
