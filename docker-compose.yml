@@ -5,7 +5,7 @@ db:
         - ./mysql:/var/lib/mysql
     env_file: conf/mysql
     ports:
-        - 3306:3306
+        - 127.0.0.1:3306:3306
 
 redis:
     image: redis:alpine
@@ -43,6 +43,6 @@ web:
 
         - mailcatch
     ports:
-        - 80:80
-        - 443:443
+        - 127.0.0.1:80:80
+        - 127.0.0.1:443:443
 
