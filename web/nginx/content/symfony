@@ -3,7 +3,7 @@ include "content/vars";
 
 set $SYMFONY_ROOT /data/$customer/$project;
 
-root $SYMFONY_ROOT/web;
+root $SYMFONY_ROOT/$htdocs;
 
 index app.php;
 autoindex off;
