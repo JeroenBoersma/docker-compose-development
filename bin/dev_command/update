@@ -2,9 +2,13 @@
 # Collect images to update
 images=`. images`;
 
+dp() {
+    echo `dc getsudo`'docker pull '$1;
+}
+
 # Get latest releases
 for image in ${images}; do
-    docker pull $image;
+    `dp $image`;
 done
 exit 0;
 

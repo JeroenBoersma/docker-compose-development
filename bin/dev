@@ -14,6 +14,11 @@ init() {
     DEV_WORKSPACE="`echo ${DEV_WORKDIR}/workspace | sed -e 's/\\//\\\\\//g'`";
     DEV_PROJECTDIR=`echo ${DEV_USERDIR} | sed -e "s/${DEV_WORKSPACE}\///"`;
 
+    DEV_SUDO='';
+    if [ -z "`groups | grep docker`" ]; then
+        DEV_SUDO='sudo';
+    fi
+
     dc yml 'docker-compose.yml';
     dc yml_if 'docker-compose-blackfire.yml' 'conf/blackfire';
 
@@ -41,10 +46,15 @@ init() {
 dc() {
 
     show() {
-         echo docker-compose ${DEV_YML} ${DEV_MODE} \
+        echo `getsudo`docker-compose ${DEV_YML} ${DEV_MODE} \
             ${DEV_DOCKEROPTS} \
             ${DEV_SERVICE} \
-            "${DEV_CMD}"
+            "${DEV_CMD}";
+    }
+
+    getsudo() {
+        # Check if user is in docker group
+        [ -n "${DEV_SUDO}" ] && echo -n ${DEV_SUDO}' ';
     }
 
     run() {
