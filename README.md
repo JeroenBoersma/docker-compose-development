@@ -2,7 +2,7 @@
 Docker-compose development
 ===
 
-Quickly start of developing locally with Nginx, PHP, Blackfire, Percona, Mailcatcher and Redis.
+Quickly start of developing locally with Nginx, PHP, Blackfire, Percona, Mailhog and Redis.
 
 No e-mail is send externally, everything is catched by Mailhog.
 Look out if you are using sendgrid, mailchimp or similar mail API's, we do not catch those.
