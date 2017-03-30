@@ -1,3 +1,7 @@
+# Ignore this
 /workspace
 /mysql
+
+# But don't ignore this
+!/workspace/.composer/.gitkeep
 
