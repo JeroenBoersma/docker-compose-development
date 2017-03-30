@@ -1,11 +1,11 @@
 
 include "content/vars";
 
-set $SYMFONY_ROOT /data/$customer/$project;
+set $SILEX_ROOT /data/$customer/$project;
 
-root $SYMFONY_ROOT/$htdocs;
+root $SILEX_ROOT/$htdocs;
 
-index app.php;
+index index.php;
 autoindex off;
 charset off;
 
@@ -15,20 +15,20 @@ add_header 'X-XSS-Protection' '1; mode=block';
 include "content/security";
 
 location / {
-    # try to serve file directly, fallback to app.php
-    try_files $uri /app.php$is_args$args;
+    # try to serve file directly, fallback to index.php
+    try_files $uri /index.php$is_args$args;
 }
 
 # DEV
 # This rule should only be placed on your development environment
 # In production, don't include this and don't deploy app_dev.php or config.php
-location ~ ^/(app_dev|config)\.php(/|$) {
+location ~ ^/(index_dev|config)\.php(/|$) {
     try_files .~srcfile @php;
     allow all;
 }
 
 # PROD
-location ~ ^/app\.php(/|$) {
+location ~ ^/index\.php(/|$) {
     try_files .~srcfile @php;
     allow all;
 }

@@ -2,7 +2,7 @@
 Docker-compose development
 ===
 
-Quickly start of developing locally with Nginx, PHP, Blackfire, Percona, Mailcatcher and Redis.
+Quickly start of developing locally with Nginx, PHP, Blackfire, Percona, Mailhog and Redis.
 
 No e-mail is send externally, everything is catched by Mailhog.
 Look out if you are using sendgrid, mailchimp or similar mail API's, we do not catch those.
@@ -81,6 +81,9 @@ Support for Magento 1 projects in both PHP7 and PHP5, use `*.magento.dev` and `*
 Webroots + `magento`.
 
 Support for Symfony in both PHP7 and PHP5, use `*.symfony.dev` and `*.symfony.php5.dev` to use a Symfony specific setup.
+Webroots + web.
+
+Support for Silex in both PHP7 and PHP5, use `*.silex.dev` and `*.silex.php5.dev` to use a Silex specific setup.
 Webroots + web.
 
 Supports Magento 2 projects in PHP7 only, use `*.magento2.dev` to use a Magento 2 specific setup.
