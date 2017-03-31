@@ -29,6 +29,12 @@ Currently the next base images are used. Trying to rely on official images as mu
 - Clone this project
   `git clone git@github.com:JeroenBoersma/docker-compose-development.git development`
 
+## Additional installation steps for OSX
+
+- Install [Docker Sync](http://docker-sync.io/) and its dependencies.
+- You need to install coreutils using Homebrew only to have realpath command. :)
+  `brew install coreutils`
+
 ## Persistent data container
 
 For running the database you need to create a new persistent data volume `docker volume create dockerdev-mysql-volume`
@@ -38,7 +44,9 @@ If you already where using this repo before(or want a local directory), you can 
 
 ## Preparation
 
-Tested under Linux. For Windows/Mac, take a look at the docker beta.
+Tested under Linux. Also tested on OSX by a limited number of developers.
+For Windows, take a look at the docker beta(heard that good performances are met)
+
 Stop all other local Webservers running on port 80/443, stop all MySQL database servers on port 3306.
 
 Set-up your database credentials(`conf/mysql`) and Blackfire(`conf/blackfire`) profile in the conf directory
@@ -54,7 +62,8 @@ Copy/paste the contents from the first block in the configuration file and remov
 
 ## Start
 
-- Run `./bin/dev up` from the development directory
+- run `docker-sync start` from the development directory (OSX only)
+- run `./bin/dev up` from the development directory
 - \*.dev > 127.0.0.1 (if you use boot2docker, use that ip)
     - dnsmasq
       add a file `/etc/dnsmasq.d/dev.conf` with `address=/.dev/127.0.0.1`
