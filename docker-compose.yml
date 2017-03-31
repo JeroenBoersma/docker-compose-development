@@ -1,8 +1,6 @@
 
 db:
     image: percona
-    volumes:
-        - ./mysql:/var/lib/mysql
     env_file: conf/mysql
     ports:
         - 127.0.0.1:3306:3306
@@ -15,8 +13,6 @@ mailcatch:
 
 php5:
     build: php5
-    volumes:
-        - ./workspace:/data
     links:
         - db
         - mailcatch
@@ -24,8 +20,6 @@ php5:
 
 php7:
     build: php7
-    volumes:
-        - ./workspace:/data
     links:
         - db
         - mailcatch
@@ -33,8 +27,6 @@ php7:
 
 web:
     build: web
-    volumes:
-        - ./workspace:/data:ro
     links:
         - php5:fpm
 
