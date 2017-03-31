@@ -1,0 +1,12 @@
+db:
+    volumes:
+        - ./mysql:/var/lib/mysql
+php5:
+    volumes:
+        - ./workspace:/data
+php7:
+    volumes:
+        - ./workspace:/data
+web:
+    volumes:
+        - ./workspace:/data:ro

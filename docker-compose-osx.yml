@@ -1,0 +1,12 @@
+db:
+    volumes:
+        - dockerdev-mysql-volume:/var/lib/mysql:rw
+php5:
+    volumes:
+        - web-sync:/data:rw
+php7:
+    volumes:
+        - web-sync:/data:rw
+web:
+    volumes:
+        - web-sync:/data:ro
