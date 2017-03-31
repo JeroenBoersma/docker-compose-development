@@ -12,9 +12,6 @@ services:
     network_mode: bridge
     ports:
       - 127.0.0.1:3306:3306
-    volumes:
-      - ./conf.d/mysql:/etc/mysql/conf.d:ro
-      - dockerdev-mysql-volume:/var/lib/mysql:rw
 
   mailcatch:
     image: mailhog/mailhog
@@ -29,8 +26,6 @@ services:
     - mailcatch
     - redis
     network_mode: bridge
-    volumes:
-    - ./workspace:/data:rw
   php7:
     build:
       context: php7
@@ -40,8 +35,6 @@ services:
     - mailcatch
     - redis
     network_mode: bridge
-    volumes:
-    - ./workspace:/data:rw
 
   redis:
     image: redis:alpine
@@ -59,5 +52,3 @@ services:
     ports:
     - 127.0.0.1:443:443
     - 127.0.0.1:80:80
-    volumes:
-    - ./workspace:/data:ro

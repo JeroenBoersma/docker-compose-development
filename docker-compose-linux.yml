@@ -1,10 +1,16 @@
+version: '2'
 
-php5:
+services:
+  db:
+      volumes:
+      - ./conf.d/mysql:/etc/mysql/conf.d:ro
+      - dockerdev-mysql-volume:/var/lib/mysql:rw
+  php5:
     volumes:
-        - ./workspace:/data
-php7:
+      - ./workspace:/data
+  php7:
     volumes:
-        - ./workspace:/data
-web:
+      - ./workspace:/data
+  web:
     volumes:
-        - ./workspace:/data:ro
+      - ./workspace:/data:ro
