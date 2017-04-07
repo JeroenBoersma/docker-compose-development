@@ -2,6 +2,7 @@
 db:
     image: percona
     volumes:
+        - ./conf.d/mysql/:/etc/mysql/conf.d
         - ./mysql:/var/lib/mysql
     env_file: conf/mysql
     ports:
