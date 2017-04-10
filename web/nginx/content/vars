@@ -22,3 +22,6 @@ if ( -e /data/$customer/$project/pub ) {
 if ( -e /data/$customer/$project/web ) {
     set $htdocs "web";
 }
+if ( -e /data/$customer/$project/magento ) {
+    set $htdocs "magento";
+}
