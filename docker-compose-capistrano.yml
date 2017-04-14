@@ -1,6 +1,9 @@
-capistrano:
-    build: capistrano
+version: '2'
+services:
+  capistrano:
+    build:
+      context: capistrano
+    network_mode: bridge
     volumes:
         - ./workspace:/app
         - ${HOME}/.ssh/id_rsa:/app/.ssh/id_rsa:ro
-

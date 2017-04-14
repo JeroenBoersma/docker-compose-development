@@ -1,49 +1,59 @@
+version: '2'
+networks: {}
+volumes: {}
 
-db:
+services:
+  db:
     image: percona
-    volumes:
-        - ./conf.d/mysql/:/etc/mysql/conf.d
-        - ./mysql:/var/lib/mysql
-    env_file: conf/mysql
+    env_file:
+      - ./conf/mysql
+    network_mode: bridge
     ports:
-        - 127.0.0.1:3306:3306
+      - 127.0.0.1:3306:3306
+    volumes:
+      - ./conf.d/mysql:/etc/mysql/conf.d:ro
+      - ./mysql:/var/lib/mysql:rw
 
-redis:
-    image: redis:alpine
-
-mailcatch:
+  mailcatch:
     image: mailhog/mailhog
+    network_mode: bridge
 
-php5:
-    build: php5
-    volumes:
-        - ./workspace:/data
+  php5:
+    build:
+      context: php5
     links:
-        - db
-        - mailcatch
-        - redis
-
-php7:
-    build: php7
+    - blackfire
+    - db
+    - mailcatch
+    - redis
+    network_mode: bridge
     volumes:
-        - ./workspace:/data
+    - ./workspace:/data:rw
+  php7:
+    build:
+      context: php7
     links:
-        - db
-        - mailcatch
-        - redis
-
-web:
-    build: web
+    - blackfire
+    - db
+    - mailcatch
+    - redis
+    network_mode: bridge
     volumes:
-        - ./workspace:/data:ro
+    - ./workspace:/data:rw
+  redis:
+    image: redis:alpine
+    network_mode: bridge
+  web:
+    build:
+      context: web
     links:
-        - php5:fpm
-
-        - php5:fpm5
-        - php7:fpm7
-
-        - mailcatch
+    - mailcatch
+    - php5:fpm
+    - php5:fpm5
+    - php7:fpm7
+    network_mode: bridge
     ports:
-        - 127.0.0.1:80:80
-        - 127.0.0.1:443:443
-
+    - 127.0.0.1:443:443
+    - 127.0.0.1:80:80
+    volumes:
+    - ./workspace:/data:ro

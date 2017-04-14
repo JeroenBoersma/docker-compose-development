@@ -1,13 +1,14 @@
-blackfire:
-    image: blackfire/blackfire
+version: '2'
+services:
+  blackfire:
     env_file:
-        - conf/blackfire
+        - ./conf/blackfire
+    image: blackfire/blackfire
+    network_mode: bridge
 
-php5:
-    links:
-        - blackfire
-
-php7:
-    links:
-        - blackfire
-
+  php5:
+      links:
+          - blackfire
+  php7:
+      links:
+          - blackfire

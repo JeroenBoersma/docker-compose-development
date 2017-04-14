@@ -1,7 +1,10 @@
-composer:
-    build: composer
+version: '2'
+services:
+  composer:
+    build:
+      context: composer
+    network_mode: bridge
     volumes:
         - ./workspace:/app
         - ./workspace/.composer:/composer
         - ${HOME}/.ssh/id_rsa:/app/.ssh/id_rsa:ro
-
