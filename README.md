@@ -20,7 +20,6 @@ Currently the next base images are used. Trying to rely on official images as mu
 - php5 -> php:5.6-fpm
 - php7 -> php:7.1-fpm
 - redis -> redis:latest
-- capistrano -> ruby:latest
 - mailhog -> mailhog/mailhog:latest
 - mytop -> srcoder/mytop:latest
 
@@ -30,7 +29,7 @@ Installation
 
 - Install [docker](https://docs.docker.com/)
 - Install docker [compose](https://docs.docker.com/compose/install/) >1.6.1
-- Clone this project 
+- Clone this project
   `git clone git@github.com:JeroenBoersma/docker-compose-development.git development`
 
 
@@ -135,8 +134,6 @@ There are also useful tools.
 
 - `blackfire curl [URL]`
   The blackfire command to curl pages. Be sure you've setup blackfire correctly
-- `cap [ACTIONS]`
-  capistrano docker implementation, runs in own container.
 - `composer [COMMANDS]`
   composer docker implementation, also runs in own container.
 - `console` `console5`
@@ -188,4 +185,3 @@ For instance, if you must run a Magento cronjob.
 `*/5 * * * * dev ps | grep php7 | grep Up && dev console customer/project/htdocs/cron.sh`
 
 You can add these to your local cron.
-
