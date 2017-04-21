@@ -1,6 +1,5 @@
 
-Docker-compose development
-===
+# Docker-compose development
 
 Quickly start of developing locally with Nginx, PHP, Blackfire, Percona, Mailhog and Redis.
 
@@ -8,8 +7,7 @@ No e-mail is send externally, everything is catched by Mailhog.
 Look out if you are using sendgrid, mailchimp or similar mail API's, we do not catch those.
 
 
-Base images
----
+## Base images
 
 Currently the next base images are used. Trying to rely on official images as much as possible.
 
@@ -24,8 +22,7 @@ Currently the next base images are used. Trying to rely on official images as mu
 - mytop -> srcoder/mytop:latest
 
 
-Installation
----
+## Installation
 
 - Install [docker](https://docs.docker.com/)
 - Install docker [compose](https://docs.docker.com/compose/install/) >1.6.1
@@ -33,18 +30,16 @@ Installation
   `git clone git@github.com:JeroenBoersma/docker-compose-development.git development`
 
 
-Before
----
+## Preparation
 
-Tested under Linux. For Windows/Mac, take a look at the docker beta(heard that good performances are met)
-Stop all other local Webservers running on port 80/443.
+Tested under Linux. For Windows/Mac, take a look at the docker beta.
+Stop all other local Webservers running on port 80/443, stop all MySQL database servers on port 3306.
 
-Set-up your database credentials and Blackfire profile in the conf directory
+Set-up your database credentials(`conf/mysql`) and Blackfire(`conf/blackfire`) profile in the conf directory
 
 - conf/mysql (`MYSQL_ROOT_PASSWORD=something`)
 
-Blackfire
----
+## Blackfire
 
 Blackfire is optional, the library is already available in PHP, but not loaded by default.
 To load blackfire, simply add a `conf/blackfire` file with content from the [Blackfire website](https://blackfire.io/docs/integrations/docker#documentation).
@@ -65,8 +60,7 @@ Start
 - open http://customer.project.dev/ in your browser (if you do not have dnsmasq, you have to add your hosts file manually).
 - all outgoing mail is sent to http://mail.dev/
 
-Hosts and file structure
----
+## Hosts and file structure
 
 Everything is translated from `customer.project.dev` -> `workspace/customer/project/htdocs`.
 For example; `iwant.coffee.dev` -> `workspace/iwant/coffee/htdocs`.
@@ -77,27 +71,25 @@ Webroots -> `htdocs`, `httpdocs`, `public` or `pub`.
 Support for PHP5, PHP7 is the default, use `*.php5.dev` to run the same project in PHP5.
 
 Support for Magento 1 projects in both PHP7 and PHP5, use `*.magento.dev` and `*.magento.php5.dev` to use a Magento specific setup.
-Webroots + `magento`.
+Webroots + `magento`. You can also identify a MAGE_RUN_CODE, `customer.project.MAGE_RUN_CODE.magento.dev` and `customer.project.MAGE_RUN_CODE.magento.php5.dev`
 
 Support for Symfony in both PHP7 and PHP5, use `*.symfony.dev` and `*.symfony.php5.dev` to use a Symfony specific setup.
-Webroots + web.
+Webroots + `web`.
 
 Support for Silex in both PHP7 and PHP5, use `*.silex.dev` and `*.silex.php5.dev` to use a Silex specific setup.
-Webroots + web.
+Webroots + `web`.
 
 Supports Magento 2 projects in PHP7 only, use `*.magento2.dev` to use a Magento 2 specific setup.
-Webroot is pub only.
+Webroot is `pub` only.
 
 Add a file mapping in your IDE, `./workspace/customer/project` -> `/data/customer/project`
 
-Xdebug
----
+## Xdebug
 
 Xdebug is enabled with support for remote debugging on your local machine.
 It'll try to connect to the host 172.17.0.1:9000 by default.
 
-Dev commands
----
+## Dev commands
 
 We supply several helpful commands to get of easily. `./bin/dev COMMAND` or just `dev COMMAND` if you've added the development to your $PATH.
 
@@ -156,8 +148,7 @@ So you can also import data to mysql with `./bin/dev mysql database < dump.sql` 
 
 Because PHP7 should be the default now, I've created shorthands for `./bin/php` but not for php5 use `./bin/dev php5` for that.
 
-Database
----
+## Database
 
 Set the desired root password in the conf/mysql section.
 To manage database run `./bin/dev myroot`
@@ -167,14 +158,12 @@ You can access the database in your app use `db` as hostname.
 Files will be saved in the mysql directory so it will be saved after destroying or recreating the containers.
 
 
-Redis
----
+## Redis
 
 To use redis, use `redis` as hostname in the config of your app.
 
 
-Cron
----
+## Cron
 
 If you use cronjobs in your app, you can add them on your host machine.
 I would recommend to add dev to the path before you implement this.
