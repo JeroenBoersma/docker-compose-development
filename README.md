@@ -31,10 +31,10 @@ Currently the next base images are used. Trying to rely on official images as mu
 
 ## Persistent data container
 
-For running the database you need to create a new persistent data volume `docker volume create mysql`
+For running the database you need to create a new persistent data volume `docker volume create dockerdev-mysql-volume`
 
 If you already where using this repo before(or want a local directory), you can map the existing volume with:
-`docker volume create -o 'type=none' -o 'device='${PWD}'/mysql' -o 'o=bind' mysql`
+`docker volume create -o 'type=none' -o 'device='${PWD}'/mysql' -o 'o=bind' dockerdev-mysql-volume`
 
 ## Preparation
 

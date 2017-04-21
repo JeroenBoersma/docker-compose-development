@@ -1,6 +1,4 @@
-db:
-    volumes:
-        - dockerdev-mysql-volume:/var/lib/mysql:rw
+
 php5:
     volumes:
         - web-sync:/data:rw

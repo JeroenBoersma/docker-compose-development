@@ -14,7 +14,7 @@ services:
       - 127.0.0.1:3306:3306
     volumes:
       - ./conf.d/mysql:/etc/mysql/conf.d:ro
-      - mysql:/var/lib/mysql:rw
+      - dockerdev-mysql-volume:/var/lib/mysql:rw
 
   mailcatch:
     image: mailhog/mailhog

@@ -1,6 +1,4 @@
-db:
-    volumes:
-        - ./mysql:/var/lib/mysql
+
 php5:
     volumes:
         - ./workspace:/data
