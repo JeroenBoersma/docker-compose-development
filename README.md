@@ -29,6 +29,12 @@ Currently the next base images are used. Trying to rely on official images as mu
 - Clone this project
   `git clone git@github.com:JeroenBoersma/docker-compose-development.git development`
 
+## Persistent data container
+
+For running the database you need to create a new persistent data volume `docker volume create mysql`
+
+If you already where using this repo before(or want a local directory), you can map the existing volume with:
+`docker volume create -o 'type=none' -o 'device='${PWD}'/mysql' -o 'o=bind' mysql`
 
 ## Preparation
 
@@ -46,8 +52,7 @@ To load blackfire, simply add a `conf/blackfire` file with content from the [Bla
 Copy/paste the contents from the first block in the configuration file and remove the `export ` from the beginning of the line.
 `./bin/dev/down` and `./bin/dev/up` to load blackfire.
 
-Start
----
+## Start
 
 - Run `./bin/dev up` from the development directory
 - \*.dev > 127.0.0.1 (if you use boot2docker, use that ip)
