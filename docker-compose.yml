@@ -1,6 +1,8 @@
 version: '2'
 networks: {}
-volumes: {}
+volumes:
+  mysql:
+    external: true
 
 services:
   db:
@@ -12,7 +14,7 @@ services:
       - 127.0.0.1:3306:3306
     volumes:
       - ./conf.d/mysql:/etc/mysql/conf.d:ro
-      - ./mysql:/var/lib/mysql:rw
+      - mysql:/var/lib/mysql:rw
 
   mailcatch:
     image: mailhog/mailhog
@@ -40,9 +42,11 @@ services:
     network_mode: bridge
     volumes:
     - ./workspace:/data:rw
+
   redis:
     image: redis:alpine
     network_mode: bridge
+
   web:
     build:
       context: web
