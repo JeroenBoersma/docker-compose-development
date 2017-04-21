@@ -1,15 +1,12 @@
 version: '2'
 
 services:
-  db:
-    - ./conf.d/mysql:/etc/mysql/conf.d:ro
-    - dockerdev-mysql-volume:/var/lib/mysql:rw
   php5:
     volumes:
-      - web-sync:/data:rw
+    - web-sync:/data:rw
   php7:
     volumes:
-      - web-sync:/data:rw
+    - web-sync:/data:rw
   web:
     volumes:
-      - web-sync:/data:ro
+    - web-sync:/data:ro

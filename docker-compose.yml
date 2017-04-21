@@ -7,6 +7,9 @@ volumes:
 services:
   db:
     image: percona
+    volumes:
+    - ./conf.d/mysql:/etc/mysql/conf.d:ro
+    - dockerdev-mysql-volume:/var/lib/mysql:rw
     env_file:
       - ./conf/mysql
     network_mode: bridge
