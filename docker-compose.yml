@@ -28,6 +28,10 @@ services:
     - db
     - mailcatch
     - redis
+    environment:
+      SSH_AUTH_SOCK: "/ssh-socket"
+    volumes:
+      - ${SSH_AUTH_SOCK}:/ssh-socket:ro
     network_mode: bridge
   php7:
     build:
@@ -37,6 +41,10 @@ services:
     - db
     - mailcatch
     - redis
+    environment:
+      SSH_AUTH_SOCK: "/ssh-socket"
+    volumes:
+      - ${SSH_AUTH_SOCK}:/ssh-socket:ro
     network_mode: bridge
 
   redis:
