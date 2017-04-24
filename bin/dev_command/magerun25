@@ -1,0 +1,5 @@
+
+. ./magerun2;
+
+# Just force service
+dc service php5
