@@ -24,7 +24,6 @@ services:
     build:
       context: php5
     links:
-    - blackfire
     - db
     - mailcatch
     - redis
@@ -37,7 +36,6 @@ services:
     build:
       context: php7
     links:
-    - blackfire
     - db
     - mailcatch
     - redis
