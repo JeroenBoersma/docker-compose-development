@@ -14,8 +14,9 @@ Currently the next base images are used. Trying to rely on official images as mu
 - blackfire -> [blackfire/blackfire:latest](https://hub.docker.com/r/blackfire/blackfire/)
 - nginx -> [nginx:alpine](https://hub.docker.com/r/_/nginx/)
 - percona -> [percona:latest](https://hub.docker.com/r/_/percona/)
+- php -> [srcoder/development-php:7.0-fpm](https://hub.docker.com/r/srcoder/development-php/)
 - php5 -> [srcoder/development-php:5.6-fpm](https://hub.docker.com/r/srcoder/development-php/)
-- php7 -> [srcoder/development-php:7.0-fpm](https://hub.docker.com/r/srcoder/development-php/)
+- php71 -> [srcoder/development-php:7.1-fpm](https://hub.docker.com/r/srcoder/development-php/)
 - redis -> [redis:alpine](https://hub.docker.com/r/_/redis/)
 - mailhog -> [mailhog/mailhog:latest](https://hub.docker.com/r/mailhog/mailhog/)
 - mytop -> [srcoder/mytop:latest](https://hub.docker.com/r/srcoder/mytop/)
@@ -73,6 +74,13 @@ Copy/paste the contents from the first block in the configuration file and remov
 - open http://customer.project.dev/ in your browser (if you do not have dnsmasq, you have to add your hosts file manually).
 - all outgoing mail is sent to http://mail.dev/
 
+# PHP Versions
+
+We support PHP 5.6.x, PHP 7.0.x, PHP 7.1.x. PHP 7.0 is the default.
+
+To test PHP 7.1, use `*.php71.dev`. For PHP 5.6 use `*.php5.dev`
+Same for `dev [COMMAND]`, just add `5` or `71` for php commands.
+
 ## Hosts and file structure
 
 Everything is translated from `customer.project.dev` -> `workspace/customer/project/htdocs`.
@@ -81,15 +89,13 @@ For example; `iwant.coffee.dev` -> `workspace/iwant/coffee/htdocs`.
 To be compatible with various webroots, we will lookup a few defaults.
 Webroots -> `htdocs`, `httpdocs`, `public` or `pub`.
 
-Support for PHP5, PHP7 is the default, use `*.php5.dev` to run the same project in PHP5.
-
 Support for Magento 1 projects in both PHP7 and PHP5, use `*.magento.dev` and `*.magento.php5.dev` to use a Magento specific setup.
-Webroots + `magento`. You can also identify a MAGE_RUN_CODE, `customer.project.MAGE_RUN_CODE.magento.dev` and `customer.project.MAGE_RUN_CODE.magento.php5.dev`
+Webroots + `magento`. You can also identify a MAGE_RUN_CODE, `customer.project.MAGE_RUN_CODE.magento.dev`
 
-Support for Symfony in both PHP7 and PHP5, use `*.symfony.dev` and `*.symfony.php5.dev` to use a Symfony specific setup.
+Support for Symfony in both PHP7 and PHP5, use `*.symfony.dev` to use a Symfony specific setup.
 Webroots + `web`.
 
-Support for Silex in both PHP7 and PHP5, use `*.silex.dev` and `*.silex.php5.dev` to use a Silex specific setup.
+Support for Silex in both PHP7 and PHP5, use `*.silex.dev` to use a Silex specific setup.
 Webroots + `web`.
 
 Supports Magento 2 projects in PHP7 only, use `*.magento2.dev` to use a Magento 2 specific setup.
@@ -145,9 +151,9 @@ There are also useful tools.
   composer docker implementation, also runs in own container.
 - `console` `console5`
   open a console inside your PHP containers.
-- `magerun [COMMANDS]` `magerun5 [COMMANDS]`
+- `magerun [COMMANDS]`
   run magerun commands on your Magento projects
-- `magerun2 [COMMANDS]` `magerun25 [COMMANDS]`
+- `magerun2 [COMMANDS]`
   run magerun2 commands on your Magento projects
 - `myroot [OPTIONS]`
   run mysql as root.
@@ -157,15 +163,13 @@ There are also useful tools.
   run mysqldump as you, current user
 - `mytop`
   run mytop as you, current user to monitor MySQL processes
-- `php [OPTIONS]` `php5 [OPTIONS]`
+- `php [OPTIONS]`
   run php commands
 
 You can run these commands from within your workspace directories.
 For example: `cd workspace/test/project/htdocs` `../../../../bin/dev php info.php` (or `dev php info.php` if you've added the bin directory to your path)
 
 So you can also import data to mysql with `./bin/dev mysql database < dump.sql` or dump `./bin/mysqldump database > dump.sql`.
-
-Because PHP7 should be the default now, I've created shorthands for `./bin/php` but not for php5 use `./bin/dev php5` for that.
 
 ## Database
 
@@ -192,9 +196,9 @@ To use redis, use `redis` as hostname in the config of your app.
 If you use cronjobs in your app, you can add them on your host machine.
 I would recommend to add dev to the path before you implement this.
 
-`*/5 * * * * dev ps | grep php7 | grep Up && dev console [YOURCOMMANDHERE]`
+`*/5 * * * * dev ps | grep php | grep Up && dev console [YOURCOMMANDHERE]`
 
 For instance, if you must run a Magento cronjob.
-`*/5 * * * * dev ps | grep php7 | grep Up && dev console customer/project/htdocs/cron.sh`
+`*/5 * * * * dev ps | grep php | grep Up && dev console customer/project/htdocs/cron.sh`
 
 You can add these to your local cron.
