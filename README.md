@@ -16,7 +16,7 @@ Currently the next base images are used. Trying to rely on official images as mu
 - nginx -> nginx:alpine
 - percona -> percona:latest
 - php5 -> php:5.6-fpm
-- php7 -> php:7.1-fpm
+- php7 -> php:7.0-fpm
 - redis -> redis:latest
 - mailhog -> mailhog/mailhog:latest
 - mytop -> srcoder/mytop:latest
