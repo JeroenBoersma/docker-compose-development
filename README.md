@@ -1,9 +1,9 @@
 
 # Docker-compose development
 
-Quickly start of developing locally with Nginx, PHP, Blackfire, Percona, Mailhog and Redis.
+Quickly start of developing locally with Nginx, PHP, Blackfire, Percona, MailHog and Redis.
 
-No e-mail is send externally, everything is catched by Mailhog.
+No e-mail is send externally, everything is catched by MailHog.
 Look out if you are using sendgrid, mailchimp or similar mail API's, we do not catch those.
 
 
@@ -11,15 +11,14 @@ Look out if you are using sendgrid, mailchimp or similar mail API's, we do not c
 
 Currently the next base images are used. Trying to rely on official images as much as possible.
 
-- blackfire -> blackfire/blackfire:latest
-- composer -> composer/composer:latest
-- nginx -> nginx:alpine
-- percona -> percona:latest
-- php5 -> php:5.6-fpm
-- php7 -> php:7.0-fpm
-- redis -> redis:latest
-- mailhog -> mailhog/mailhog:latest
-- mytop -> srcoder/mytop:latest
+- blackfire -> [blackfire/blackfire:latest](https://hub.docker.com/r/blackfire/blackfire/)
+- nginx -> [nginx:alpine](https://hub.docker.com/r/_/nginx/)
+- percona -> [percona:latest](https://hub.docker.com/r/_/percona/)
+- php5 -> [srcoder/development-php:5.6-fpm](https://hub.docker.com/r/srcoder/development-php/)
+- php7 -> [srcoder/development-php:7.0-fpm](https://hub.docker.com/r/srcoder/development-php/)
+- redis -> [redis:alpine](https://hub.docker.com/r/_/redis/)
+- mailhog -> [mailhog/mailhog:latest](https://hub.docker.com/r/mailhog/mailhog/)
+- mytop -> [srcoder/mytop:latest](https://hub.docker.com/r/srcoder/mytop/)
 
 
 ## Installation
@@ -111,9 +110,11 @@ To control your docker environment.
 
 - `build [IMAGE]`
   re-build a image
+- `config`
+  show docker-compose configuration
 - `down`
   destroy your local development environment, will not remove project/mysql files, only containers.
-- `exec [CONTAINER]`
+- `exec [CONTAINER] [OPTIONS]`
   execute commands in a specific container, for instance php or nginx
 - `images`
   display used images
@@ -134,24 +135,28 @@ To control your docker environment.
 - `up`
   create/build/run all containers, bring your development to live
 - `update`
-  update all linked images from the web
+  update/pull all used images from the web
 
 There are also useful tools.
 
 - `blackfire curl [URL]`
   The blackfire command to curl pages. Be sure you've setup blackfire correctly
-- `composer [COMMANDS]`
+- `composer [COMMANDS]` `composer5 [COMMANDS]`
   composer docker implementation, also runs in own container.
 - `console` `console5`
   open a console inside your PHP containers.
 - `magerun [COMMANDS]` `magerun5 [COMMANDS]`
   run magerun commands on your Magento projects
+- `magerun2 [COMMANDS]` `magerun25 [COMMANDS]`
+  run magerun2 commands on your Magento projects
 - `myroot [OPTIONS]`
   run mysql as root.
 - `mysql [OPTIONS]`
-  run mysql as you, current user.
+  run mysql as you, current user
 - `mysqldump [OPTIONS]`
-  run mysqldump as you, current user.
+  run mysqldump as you, current user
+- `mytop`
+  run mytop as you, current user to monitor MySQL processes
 - `php [OPTIONS]` `php5 [OPTIONS]`
   run php commands
 
@@ -171,6 +176,11 @@ You can access the database in your app use `db` as hostname.
 
 Files will be saved in the mysql directory so it will be saved after destroying or recreating the containers.
 
+## MailHog
+
+We use [Mailhog](https://github.com/mailhog/MailHog) to catch all outgoing e-mail(if you aren't using an external API).
+You can even release the e-mail to a real mailserver, just click the release button in Mailhog you can setup and presto.
+Goto http://mail.dev/ to see all catched mail.
 
 ## Redis
 
