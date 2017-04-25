@@ -6,9 +6,12 @@ services:
     image: blackfire/blackfire
     network_mode: bridge
 
+  php:
+      links:
+          - blackfire
   php5:
       links:
           - blackfire
-  php7:
+  php71:
       links:
           - blackfire

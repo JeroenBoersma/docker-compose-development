@@ -38,3 +38,23 @@ server {
     include "content/magento";
 }
 
+
+server {
+    listen 80;
+    server_name .magento.php71.dev;
+
+    include "upstream/php71";
+    include "content/magento";
+}
+
+server {
+    listen 443;
+    server_name .magento.php71.dev;
+
+    ssl on;
+    ssl_certificate certs/server.crt;
+    ssl_certificate_key certs/server.key;
+
+    include "upstream/php71";
+    include "content/magento";
+}

@@ -20,6 +20,18 @@ services:
     image: mailhog/mailhog
     network_mode: bridge
 
+  php:
+    build:
+      context: php7
+    links:
+    - db
+    - mailcatch
+    - redis
+    environment:
+      SSH_AUTH_SOCK: "/ssh-socket"
+    volumes:
+      - ${SSH_AUTH_SOCK}:/ssh-socket:ro
+    network_mode: bridge
   php5:
     build:
       context: php5
@@ -32,9 +44,9 @@ services:
     volumes:
       - ${SSH_AUTH_SOCK}:/ssh-socket:ro
     network_mode: bridge
-  php7:
+  php71:
     build:
-      context: php7
+      context: php71
     links:
     - db
     - mailcatch
@@ -54,9 +66,10 @@ services:
       context: web
     links:
     - mailcatch
-    - php5:fpm
+    - php:fpm
+    - php:fpm7
     - php5:fpm5
-    - php7:fpm7
+    - php71:fpm71
     network_mode: bridge
     ports:
     - 127.0.0.1:443:443
