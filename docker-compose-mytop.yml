@@ -1,5 +1,7 @@
-mytop:
+version: '2'
+services:
+  mytop:
     image: srcoder/mytop
     links:
-        - db
-
+    - db
+    network_mode: bridge

@@ -1,7 +1,0 @@
-composer:
-    build: composer
-    volumes:
-        - ./workspace:/app
-        - ./workspace/.composer:/composer
-        - ${HOME}/.ssh/id_rsa:/app/.ssh/id_rsa:ro
-

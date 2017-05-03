@@ -1,48 +1,76 @@
+version: '2'
+networks: {}
+volumes:
+  dockerdev-mysql-volume:
+    external: true
 
-db:
+services:
+  db:
     image: percona
     volumes:
-        - ./mysql:/var/lib/mysql
-    env_file: conf/mysql
+    - ./conf.d/mysql:/etc/mysql/conf.d:ro
+    - dockerdev-mysql-volume:/var/lib/mysql:rw
+    env_file:
+      - ./conf/mysql
+    network_mode: bridge
     ports:
-        - 127.0.0.1:3306:3306
+      - 127.0.0.1:3306:3306
 
-redis:
-    image: redis:alpine
-
-mailcatch:
+  mailcatch:
     image: mailhog/mailhog
+    network_mode: bridge
 
-php5:
-    build: php5
-    volumes:
-        - ./workspace:/data
+  php:
+    build:
+      context: php7
     links:
-        - db
-        - mailcatch
-        - redis
-
-php7:
-    build: php7
+    - db
+    - mailcatch
+    - redis
+    environment:
+      SSH_AUTH_SOCK: "/ssh-socket"
     volumes:
-        - ./workspace:/data
+      - ${SSH_AUTH_SOCK}:/ssh-socket:ro
+    network_mode: bridge
+  php5:
+    build:
+      context: php5
     links:
-        - db
-        - mailcatch
-        - redis
-
-web:
-    build: web
+    - db
+    - mailcatch
+    - redis
+    environment:
+      SSH_AUTH_SOCK: "/ssh-socket"
     volumes:
-        - ./workspace:/data:ro
+      - ${SSH_AUTH_SOCK}:/ssh-socket:ro
+    network_mode: bridge
+  php71:
+    build:
+      context: php71
     links:
-        - php5:fpm
+    - db
+    - mailcatch
+    - redis
+    environment:
+      SSH_AUTH_SOCK: "/ssh-socket"
+    volumes:
+      - ${SSH_AUTH_SOCK}:/ssh-socket:ro
+    network_mode: bridge
 
-        - php5:fpm5
-        - php7:fpm7
+  redis:
+    image: redis:alpine
+    network_mode: bridge
 
-        - mailcatch
+  web:
+    build:
+      context: web
+    links:
+    - mailcatch
+    - php:fpm
+    - php:fpm7
+    - php5:fpm5
+    - php71:fpm71
+    network_mode: bridge
     ports:
-        - 127.0.0.1:80:80
-        - 127.0.0.1:443:443
-
+    - 127.0.0.1:443:443
+    - 127.0.0.1:80:80

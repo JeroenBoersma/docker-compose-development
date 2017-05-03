@@ -1,4 +1,4 @@
-FROM srcoder/development-php:php7-fpm
+FROM srcoder/development-php:php71-fpm
 MAINTAINER Jeroen Boersma <jeroen@srcode.nl>
 
 ARG GID=1000

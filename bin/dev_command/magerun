@@ -1,5 +1,5 @@
 
-dc service php7;
+dc service php;
 dc opt "-u $(id -u):$(id -g)"
 
 if [ -n "${DEV_PROJECTDIR}" ]; then
@@ -7,4 +7,3 @@ if [ -n "${DEV_PROJECTDIR}" ]; then
 fi
 
 dc cmd magerun "$*";
-

@@ -21,6 +21,8 @@ init() {
 
     dc yml 'docker-compose.yml';
     dc yml_if 'docker-compose-blackfire.yml' 'conf/blackfire';
+    dc yml_if 'docker-custom.yml' 'docker-custom.yml';
+    dc yml_os
 
     dc mode 'run --rm';
 
@@ -88,8 +90,6 @@ dc() {
 
     yml_all() {
         yml_if 'docker-compose-blackfireclient.yml' 'conf/blackfire';
-        yml 'docker-compose-capistrano.yml';
-        yml 'docker-compose-composer.yml';
         yml 'docker-compose-dbclient.yml';
         yml 'docker-compose-mytop.yml';
     }
@@ -99,6 +99,14 @@ dc() {
             return;
         fi
         DEV_YML=${DEV_YML}' -f '${DEV_WORKDIR}'/'$1;
+    }
+
+    yml_os() {
+        if [[ "$(uname)" == 'Darwin' ]]; then
+            DEV_YML=${DEV_YML}' -f '${DEV_WORKDIR}'/docker-compose-osx.yml';
+        else
+            DEV_YML=${DEV_YML}' -f '${DEV_WORKDIR}'/docker-compose-linux.yml';
+        fi
     }
 
     mode() {

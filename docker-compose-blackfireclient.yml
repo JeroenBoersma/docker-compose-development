@@ -1,6 +1,7 @@
-blackfireclient:
+version: '2'
+services:
+  blackfireclient:
     image: blackfire/blackfire
-    net: host
     env_file:
-        - conf/blackfire
-
+      - ./conf/blackfire
+    network_mode: host
