@@ -21,6 +21,7 @@ init() {
 
     dc yml 'docker-compose.yml';
     dc yml_if 'docker-compose-blackfire.yml' 'conf/blackfire';
+    dc yml_if 'docker-custom.yml' 'docker-custom.yml';
     dc yml_os
 
     dc mode 'run --rm';
