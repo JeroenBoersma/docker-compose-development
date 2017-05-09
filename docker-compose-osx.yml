@@ -3,13 +3,13 @@ version: '2'
 services:
   php:
     volumes:
-    - web-sync:/data:rw
+    - /web-sync:/data:rw
   php5:
     volumes:
-    - web-sync:/data:rw
+    - /web-sync:/data:rw
   php71:
     volumes:
-    - web-sync:/data:rw
+    - /web-sync:/data:rw
   web:
     volumes:
-    - web-sync:/data:ro
+    - /web-sync:/data:ro
