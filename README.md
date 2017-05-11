@@ -20,6 +20,7 @@ Currently the next base images are used. Trying to rely on official images as mu
 - redis -> [redis:alpine](https://hub.docker.com/r/_/redis/)
 - mailhog -> [mailhog/mailhog:latest](https://hub.docker.com/r/mailhog/mailhog/)
 - mytop -> [srcoder/mytop:latest](https://hub.docker.com/r/srcoder/mytop/)
+- ctop -> [wrfly/ctop](https://hub.docker.com/r/wrfly/ctop/)
 
 
 ## Installation
@@ -163,6 +164,8 @@ There are also useful tools.
   run mysqldump as you, current user
 - `mytop`
   run mytop as you, current user to monitor MySQL processes
+- `top`
+  monitor your running containers and see how much resources they are eating
 - `php [OPTIONS]`
   run php commands
 
