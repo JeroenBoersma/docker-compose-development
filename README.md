@@ -205,3 +205,26 @@ For instance, if you must run a Magento cronjob.
 `*/5 * * * * dev ps | grep php | grep Up && dev console customer/project/htdocs/cron.sh`
 
 You can add these to your local cron.
+
+## Customization
+
+Of coarse you would love day to day updates and still have room to add your own changes.
+Just add a `docker-custom.yml`, add `version: '2'` at the top and override whatever you want.
+
+`docker-custom.yml` and the `./custom` directory are excluded from git.
+
+The next example for the default php, add the next `docker-custom.yml` file:
+
+```
+version: '2'
+
+services:
+    php:
+        build: custom/php7
+```
+
+This won't build the regular php7 directory, instead it will run build in the custom directory.
+So, next up you copy the php/Dockerfile and add your own additions which will be build everytime updates are available.
+
+
+
