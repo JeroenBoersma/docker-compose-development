@@ -92,6 +92,7 @@ dc() {
         yml_if 'docker-compose-blackfireclient.yml' 'conf/blackfire';
         yml 'docker-compose-dbclient.yml';
         yml 'docker-compose-mytop.yml';
+        yml 'docker-compose-ctop.yml';
     }
 
     yml() {
