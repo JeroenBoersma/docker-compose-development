@@ -27,6 +27,7 @@ services:
     - db
     - mailcatch
     - redis
+    - rabbit
     environment:
       SSH_AUTH_SOCK: "/ssh-socket"
     volumes:
@@ -39,6 +40,7 @@ services:
     - db
     - mailcatch
     - redis
+    - rabbit
     environment:
       SSH_AUTH_SOCK: "/ssh-socket"
     volumes:
@@ -51,6 +53,7 @@ services:
     - db
     - mailcatch
     - redis
+    - rabbit
     environment:
       SSH_AUTH_SOCK: "/ssh-socket"
     volumes:
@@ -59,6 +62,14 @@ services:
 
   redis:
     image: redis:alpine
+    network_mode: bridge
+
+  rabbit:
+    restart: always
+    image: rabbitmq:3-management
+    ports:
+      - "15672"
+      - "5672"
     network_mode: bridge
 
   web:
