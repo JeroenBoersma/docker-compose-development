@@ -4,12 +4,12 @@
 Quickly start of developing locally with Nginx, PHP, Blackfire, Percona, MailHog and Redis.
 
 No e-mail is send externally, everything is catched by MailHog.
-Look out if you are using sendgrid, mailchimp or similar mail API's, we do not catch those.
+Be aware if you are using sendgrid, mailchimp or similar mail API's, we do not catch those.
 
 
 ## Base images
 
-Currently the next base images are used. Trying to rely on official images as much as possible.
+Currently the following base images are used. Trying to rely on official images as much as possible.
 
 - blackfire -> [blackfire/blackfire:latest](https://hub.docker.com/r/blackfire/blackfire/)
 - nginx -> [nginx:alpine](https://hub.docker.com/r/_/nginx/)
@@ -40,17 +40,17 @@ Currently the next base images are used. Trying to rely on official images as mu
 
 For running the database you need to create a new persistent data volume `docker volume create dockerdev-mysql-volume`
 
-If you already where using this repo before(or want a local directory), you can map the existing volume with:
+If you already were using this repo before (or want a local directory), you can map the existing volume with:
 `docker volume create -o 'type=none' -o 'device='${PWD}'/mysql' -o 'o=bind' dockerdev-mysql-volume`
 
 ## Preparation
 
 Tested under Linux. Also tested on OSX by a limited number of developers.
-For Windows, take a look at the docker beta(heard that good performances are met)
+For Windows, take a look at the docker beta (heard that good performances are met)
 
 Stop all other local Webservers running on port 80/443, stop all MySQL database servers on port 3306.
 
-Set-up your database credentials(`conf/mysql`) and Blackfire(`conf/blackfire`) profile in the conf directory
+Set-up your database credentials (`conf/mysql`) and Blackfire (`conf/blackfire`) profile in the conf directory.
 
 - conf/mysql (`MYSQL_ROOT_PASSWORD=something`)
 
@@ -185,14 +185,13 @@ Files will be saved in the mysql directory so it will be saved after destroying 
 
 ## MailHog
 
-We use [Mailhog](https://github.com/mailhog/MailHog) to catch all outgoing e-mail(if you aren't using an external API).
+We use [Mailhog](https://github.com/mailhog/MailHog) to catch all outgoing e-mail (as long as you aren't using an external API).
 You can even release the e-mail to a real mailserver, just click the release button in Mailhog you can setup and presto.
 Goto http://mail.dev/ to see all catched mail.
 
 ## Redis
 
 To use redis, use `redis` as hostname in the config of your app.
-
 
 ## Cron
 
@@ -225,6 +224,3 @@ services:
 
 This won't build the regular php7 directory, instead it will run build in the custom directory.
 So, next up you copy the php/Dockerfile and add your own additions which will be build everytime updates are available.
-
-
-
