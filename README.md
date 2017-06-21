@@ -207,12 +207,12 @@ You can add these to your local cron.
 
 ## Customization
 
-Of coarse you would love day to day updates and still have room to add your own changes.
-Just add a `docker-custom.yml`, add `version: '2'` at the top and override whatever you want.
+Of course you would love day-to-day updates and still have room to add your own changes.
+Just add a `docker-custom.yml`, add `version: '2'` to the top and override whatever you want.
 
 `docker-custom.yml` and the `./custom` directory are excluded from git.
 
-The next example for the default php, add the next `docker-custom.yml` file:
+For example: to add a custom components to the default PHP, add the following `docker-custom.yml` file:
 
 ```
 version: '2'
