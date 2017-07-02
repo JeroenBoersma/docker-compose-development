@@ -4,12 +4,12 @@
 Quickly start of developing locally with Nginx, PHP, Blackfire, Percona, MailHog and Redis.
 
 No e-mail is send externally, everything is catched by MailHog.
-Look out if you are using sendgrid, mailchimp or similar mail API's, we do not catch those.
+Be aware if you are using sendgrid, mailchimp or similar mail API's, we do not catch those.
 
 
 ## Base images
 
-Currently the next base images are used. Trying to rely on official images as much as possible.
+Currently the following base images are used. Trying to rely on official images as much as possible.
 
 - blackfire -> [blackfire/blackfire:latest](https://hub.docker.com/r/blackfire/blackfire/)
 - nginx -> [nginx:alpine](https://hub.docker.com/r/_/nginx/)
@@ -20,6 +20,7 @@ Currently the next base images are used. Trying to rely on official images as mu
 - redis -> [redis:alpine](https://hub.docker.com/r/_/redis/)
 - mailhog -> [mailhog/mailhog:latest](https://hub.docker.com/r/mailhog/mailhog/)
 - mytop -> [srcoder/mytop:latest](https://hub.docker.com/r/srcoder/mytop/)
+- ctop -> [wrfly/ctop](https://hub.docker.com/r/wrfly/ctop/)
 
 
 ## Installation
@@ -37,19 +38,19 @@ Currently the next base images are used. Trying to rely on official images as mu
 
 ## Persistent data container
 
-For running the database you need to create a new persistent data volume `docker volume create dockerdev-mysql-volume`
+For running the database you need to create a new persistent data volume `docker volume create --name dockerdev-mysql-volume`
 
-If you already where using this repo before(or want a local directory), you can map the existing volume with:
+If you already were using this repo before (or want a local directory), you can map the existing volume with:
 `docker volume create -o 'type=none' -o 'device='${PWD}'/mysql' -o 'o=bind' dockerdev-mysql-volume`
 
 ## Preparation
 
 Tested under Linux. Also tested on OSX by a limited number of developers.
-For Windows, take a look at the docker beta(heard that good performances are met)
+For Windows, take a look at the docker beta (heard that good performances are met)
 
 Stop all other local Webservers running on port 80/443, stop all MySQL database servers on port 3306.
 
-Set-up your database credentials(`conf/mysql`) and Blackfire(`conf/blackfire`) profile in the conf directory
+Set-up your database credentials (`conf/mysql`) and Blackfire (`conf/blackfire`) profile in the conf directory.
 
 - conf/mysql (`MYSQL_ROOT_PASSWORD=something`)
 
@@ -163,6 +164,8 @@ There are also useful tools.
   run mysqldump as you, current user
 - `mytop`
   run mytop as you, current user to monitor MySQL processes
+- `top`
+  monitor your running containers and see how much resources they are eating
 - `php [OPTIONS]`
   run php commands
 
@@ -182,14 +185,13 @@ Files will be saved in the mysql directory so it will be saved after destroying 
 
 ## MailHog
 
-We use [Mailhog](https://github.com/mailhog/MailHog) to catch all outgoing e-mail(if you aren't using an external API).
+We use [Mailhog](https://github.com/mailhog/MailHog) to catch all outgoing e-mail (as long as you aren't using an external API).
 You can even release the e-mail to a real mailserver, just click the release button in Mailhog you can setup and presto.
 Goto http://mail.dev/ to see all catched mail.
 
 ## Redis
 
 To use redis, use `redis` as hostname in the config of your app.
-
 
 ## Cron
 
@@ -202,3 +204,23 @@ For instance, if you must run a Magento cronjob.
 `*/5 * * * * dev ps | grep php | grep Up && dev console customer/project/htdocs/cron.sh`
 
 You can add these to your local cron.
+
+## Customization
+
+Of course you would love day-to-day updates and still have room to add your own changes.
+Just add a `docker-custom.yml`, add `version: '2'` to the top and override whatever you want.
+
+`docker-custom.yml` and the `./custom` directory are excluded from git.
+
+For example: to add a custom components to the default PHP, add the following `docker-custom.yml` file:
+
+```
+version: '2'
+
+services:
+    php:
+        build: custom/php7
+```
+
+This won't build the regular php7 directory, instead it will run build in the custom directory.
+So, next up you copy the php/Dockerfile and add your own additions which will be build everytime updates are available.

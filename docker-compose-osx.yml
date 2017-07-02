@@ -13,3 +13,6 @@ services:
   web:
     volumes:
     - web-sync:/data:ro
+volumes:
+  web-sync:
+    external: true
