@@ -4,7 +4,7 @@ Docker-compose-development aims to be a plug 'n play setup for you to quickly st
 
 Also, it contains different configurations for use with [Symfony][9], [Silex][10], [Magento 1 & 2][11], on PHP5 / PHP7 and with [XDEBUG][12] enabled.
 
-We follow a a [Code of Conduct](docs/code-of-conduct.md).
+We follow a [Code of Conduct](docs/code-of-conduct.md).
 
 ## Table of Contents
 * [Prerequisites.](#prerequisites)
