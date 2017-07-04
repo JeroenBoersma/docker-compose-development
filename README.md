@@ -7,7 +7,7 @@ Also, it contains different configurations for use with [Symfony][9], [Silex][10
 ## Table of Contents
 * [Prerequisites.](#prerequisites)
 * [How to get started.](#how-to-get-started)
-	* [1). Configure your environment.](#1-first-things-first)
+	* [1). Configure your environment.](#1-configure-your-environment)
 	* [2). Configure your hostnames...](#2-configure-your-hostnames)
 		* [By using DNSMASQ.](#by-using-dnsmaws)
 		* [Or by using the hostfile.](#or-by-using-the-hostfile)
@@ -40,14 +40,27 @@ Before continuing you must have the following installed and working correctly:
 Make sure that you have the prerequisites installed and running correctly before proceeding.
 
 ## 1). Configure your environment
- 1. Clone this repository: 
-`git clone git@github.com:JeroenBoersma/docker-compose-development.git development`
+ 1. Clone this repository:
+```
+git clone git@github.com:JeroenBoersma/docker-compose-development.git development
+```
  2. Create a new persistent data volume with:
-`docker volume create --name dockerdev-mysql-volume`
+```
+docker volume create --name dockerdev-mysql-volume
+```
 Or, if you already were using this repository before (or want a local directory), you can map the existing volume with:
-`docker volume create -o 'type=none' -o 'device='${PWD}'/mysql' -o 'o=bind' dockerdev-mysql-volume`
- 3. Configure you MySQL credentials by editing `conf/mysql`. 
- 4. Run `./bin/dev up` from the development directory, or `docker-sync start` from the development directory if you are on OSX.
+```
+docker volume create -o 'type=none' -o 'device='${PWD}'/mysql' -o 'o=bind' dockerdev-mysql-volume
+```
+ 3. Configure you MySQL credentials by editing [conf/mysql](conf/mysql). 
+ 4. Start your containers!
+ ```
+ ./bin/dev up
+ ```
+ Or, if you are on OSX:
+ ```
+ docker-sync start
+ ``` 
 
 A optional, but recommended, step to take is to add the provided `.bin/dev` command to your system so you can use its commands anywhere you like.
 
