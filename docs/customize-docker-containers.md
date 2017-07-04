@@ -1,4 +1,4 @@
-# Customization
+# Customize Docker Containers
 Of course you would love day-to-day updates and still have room to add your own changes.
 Just add a `docker-custom.yml`, add `version: '2'` to the top and override whatever you want.
 
@@ -6,7 +6,7 @@ Just add a `docker-custom.yml`, add `version: '2'` to the top and override whate
 
 For example: to add a custom components to the default PHP, add the following `docker-custom.yml` file:
 
-```
+```yaml
 version: '2'
 
 services:
