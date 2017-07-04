@@ -4,4 +4,4 @@ To load blackfire, simply add a `conf/blackfire` file with content from the [Bla
 Copy/paste the contents from the first block in the configuration file and remove the `export ` from the beginning of the line.
 `./bin/dev/down` and `./bin/dev/up` to load blackfire.
 
-[1](https://blackfire.io/docs/integrations/docker#documentation)
+[1]: https://blackfire.io/docs/integrations/docker#documentation
