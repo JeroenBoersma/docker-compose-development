@@ -1,8 +1,8 @@
 # Docker Development stack
 
-Docker-compose-development aims to be a plug 'n play setup for you to quickly start developing locally with services as NGINX, PHP, Blackfire, Percona, MailHog and more!
+Docker-compose-development aims to be a plug 'n play setup for you to quickly start developing locally with services as [NGINX][4], [PHP][5], [Blackfire][6], [Percona][7], [MailHog][8] and more!
 
-Also, it contains different configurations for use with Symfony, Silex, Magento 1 & 2, on PHP5 / PHP7 and with XDEBUG enabled.
+Also, it contains different configurations for use with [Symfony][9], [Silex][10], [Magento 1 & 2][11], on PHP5 / PHP7 and with [XDEBUG][12] enabled.
 
 ## Table of Contents
 * [Prerequisites.](#prerequisites)
@@ -113,3 +113,12 @@ MAke sure to add a file mapping in your IDE:
 [1]: https://docs.docker.com
 [2]: https://docs.docker.com/compose/install/
 [3]: http://docker-sync.io/
+[4]: https://nginx.org/en/
+[5]: https://secure.php.net/
+[6]: https://blackfire.io/
+[7]: https://www.percona.com/
+[8]: https://github.com/mailhog/MailHog
+[9]: https://symfony.com/
+[10]: https://silex.sensiolabs.org/
+[11]: https://magento.com/
+[12]: https://xdebug.org/
