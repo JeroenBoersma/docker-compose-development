@@ -67,15 +67,16 @@ docker volume create -o 'type=none' -o 'device='${PWD}'/mysql' -o 'o=bind' docke
 A optional, but recommended, step to take is to add the provided `.bin/dev` command to your system so you can use its commands anywhere you like.
 
  1. Run `./bin/dev profile` from the development folder.
- 2. Copy the output into `~/.bashrc` or `~/.bash_aliases`, on your own preference. 
+ 2. Copy the output into `~/.bashrc` `~/.bash_aliases` `~/.zshrc`, on your own preference. 
  3. Log out and log back in for this to take effect. You could also just source the new files in your current terminal `. ~/.bashrc`.
 
 If succeeded you can now use `dev <command>` from anywhere.
+You can also just type `cdw` which will take you to your workspace directory.
 
 ## 2). Configure your hostnames...
 There are several ways of configuring hostnames. 
 
-### By using DNSMASQ
+### By using DNSMASQ (preferred)
 Only applies if you have DNSMASQ installed, otherwiste continue to use the hostfile instead.
 
 Create a file `/etc/dnsmasq.d/dev.conf` and copy the following as its content:
@@ -112,7 +113,7 @@ You can read more about project webroots in the [Hosts and File structure](docs/
 ## Xdebug
 Xdebug is enabled with support for remote debugging on your local machine.
 It will try to connect to the host `172.17.0.1:9000` by default.
-MAke sure to add a file mapping in your IDE: 
+Make sure to add a file mapping in your IDE: 
 `./workspace/customer/project` => `/data/customer/project`
 
 # But wait, there is more!
