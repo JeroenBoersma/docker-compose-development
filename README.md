@@ -28,7 +28,7 @@ We follow a [Code of Conduct](docs/code-of-conduct.md).
 Before continuing you must have the following installed and working correctly:
 
  - [Docker][1]
- - [Docker-compose][2] (**1.6.1** or above)
+ - [Docker-compose][2] (**1.12.0** or above)
 
 **OSX users** should also install:
 
