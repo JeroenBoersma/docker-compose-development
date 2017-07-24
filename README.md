@@ -21,7 +21,8 @@ We follow a [Code of Conduct](docs/code-of-conduct.md).
     * [Customize Docker Containers](docs/customize-docker-containers.md)
     * [Configure Blackfire](docs/configure-blackfire.md)
     * [How to use different PHP versions](docs/how-to-use-different-php-versions.md)
-    * [Hosts and file structure](docs/hosts-and-file-structure.md)
+		* [Hosts and file structure](docs/hosts-and-file-structure.md)
+		* [Sharing with the world](docs/sharing-with-the-world-via-ngrok.md)
     * [F.A.Q.](docs/faq.md)
 
 ## Prerequisites
@@ -54,7 +55,7 @@ Or, if you already were using this repository before (or want a local directory)
 ```
 docker volume create -o 'type=none' -o 'device='${PWD}'/mysql' -o 'o=bind' dockerdev-mysql-volume
 ```
- 3. Configure you MySQL credentials by editing [conf/mysql](conf/mysql). 
+ 3. Configure you MySQL credentials by editing [conf/mysql](conf/mysql).
  4. Start your containers!
  ```
  ./bin/dev up
@@ -62,19 +63,19 @@ docker volume create -o 'type=none' -o 'device='${PWD}'/mysql' -o 'o=bind' docke
  Or, if you are on OSX:
  ```
  docker-sync start
- ``` 
+ ```
 
 A optional, but recommended, step to take is to add the provided `.bin/dev` command to your system so you can use its commands anywhere you like.
 
  1. Run `./bin/dev profile` from the development folder.
- 2. Copy the output into `~/.bashrc` `~/.bash_aliases` `~/.zshrc`, on your own preference. 
+ 2. Copy the output into `~/.bashrc` `~/.bash_aliases` `~/.zshrc`, on your own preference.
  3. Log out and log back in for this to take effect. You could also just source the new files in your current terminal `. ~/.bashrc`.
 
 If succeeded you can now use `dev <command>` from anywhere.
 You can also just type `cdw` which will take you to your workspace directory.
 
 ## 2). Configure your hostnames...
-There are several ways of configuring hostnames. 
+There are several ways of configuring hostnames.
 
 ### By using DNSMASQ (preferred)
 Only applies if you have DNSMASQ installed, otherwiste continue to use the hostfile instead.
@@ -90,7 +91,7 @@ Add a hostname entry for each of your projects manually to `/etc/hosts`, e.g.:
 You should now be able to browse to `http://test.project.dev/info.php` and get a phpinfo() output.
 
 # # 3). Now, setup your projects!
-Inside the development folder you will find a folder called `workspace`. The folders follow a certain structure, as described below: 
+Inside the development folder you will find a folder called `workspace`. The folders follow a certain structure, as described below:
 `customer/project/htdocs`
 
 You will notice that this has a 1-on-1 relation to the hostname provided in your hostfile:
@@ -113,7 +114,7 @@ You can read more about project webroots in the [Hosts and File structure](docs/
 ## Xdebug
 Xdebug is enabled with support for remote debugging on your local machine.
 It will try to connect to the host `172.17.0.1:9000` by default.
-Make sure to add a file mapping in your IDE: 
+Make sure to add a file mapping in your IDE:
 `./workspace/customer/project` => `/data/customer/project`
 
 # But wait, there is more!

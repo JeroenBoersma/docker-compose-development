@@ -14,6 +14,8 @@ To control your docker environment.
   execute commands in a specific container, for instance php or nginx
 - `images`
   display used images
+-  ngrok [HOSTNAME]
+  share your environment with the outside world via ngrok.io
 - `logs [CONTAINER]`
   show logs for a specific container
 - `profile`
