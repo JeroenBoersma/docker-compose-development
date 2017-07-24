@@ -28,10 +28,16 @@ init() {
 
     DEV_DOCKEROPTS='';
     DEV_COMMAND=$1;
+    DEV_HOSTNAME='';
 
-    if [ "${DEV_PROJECTDIR=}" == "${DEV_USERDIR}" ]; then
+    if [ "${DEV_PROJECTDIR}" == "${DEV_USERDIR}" ]; then
         # Not in WORKSPACE
         DEV_PROJECTDIR='';
+    else
+        DEV_HOSTNAME=`echo ${DEV_PROJECTDIR} | sed -e 's/\//\./g' -e 's/^\([^\.]*\.[^\.]*\)\.\{0,1\}.*$/\\1.dev/'`;
+        if [ ".." != "`echo ${DEV_HOSTNAME} | sed -e 's/[^\.]//g'`" ]; then
+            DEV_HOSTNAME='';
+        fi
     fi
 
     # Change to command directory
@@ -92,6 +98,7 @@ dc() {
         yml_if 'docker-compose-blackfireclient.yml' 'conf/blackfire';
         yml 'docker-compose-dbclient.yml';
         yml 'docker-compose-mytop.yml';
+        yml 'docker-compose-ngrok.yml';
         yml 'docker-compose-ctop.yml';
     }
 

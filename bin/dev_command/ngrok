@@ -1,0 +1,14 @@
+
+if [ -n "$1" ]; then
+    DEV_HOSTNAME="$1";
+fi
+
+if [ -z "${DEV_HOSTNAME}" ]; then
+    exit 1;
+fi
+
+dc yml docker-compose-ngrok.yml;
+
+dc service '--entrypoint=/bin/ngrok ngrok';
+dc cmd 'http --host-header='${DEV_HOSTNAME}' 172.17.0.9:80';
+
