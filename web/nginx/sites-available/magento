@@ -7,7 +7,7 @@ server {
 }
 
 server {
-    listen 443;
+    listen 443 ssl http2;
     server_name .magento.dev;
 
     ssl on;
@@ -27,7 +27,7 @@ server {
 }
 
 server {
-    listen 443;
+    listen 443 ssl http2;
     server_name .magento.php5.dev;
 
     ssl on;
@@ -48,7 +48,7 @@ server {
 }
 
 server {
-    listen 443;
+    listen 443 ssl http2;
     server_name .magento.php71.dev;
 
     ssl on;
