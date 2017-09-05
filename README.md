@@ -55,7 +55,7 @@ Or, if you already were using this repository before (or want a local directory)
 ```
 docker volume create -o 'type=none' -o 'device='${PWD}'/mysql' -o 'o=bind' dockerdev-mysql-volume
 ```
- 3. Configure you MySQL credentials by editing [conf/mysql](conf/mysql).
+ 3. Configure you MySQL credentials by copying [conf/mysql.dist](conf/mysql.dist) to `conf/mysql` and setting your strong awesome password.
  4. Start your containers!
  ```
  ./bin/dev up
