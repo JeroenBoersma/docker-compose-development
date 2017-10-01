@@ -93,97 +93,29 @@ Xdebug
 ---
 
 Xdebug is enabled with support for remote debugging on your local machine.
-It'll try to connect to the host 172.17.0.1:9000 by default.
+It will try to connect to the host `172.17.0.1:9000` by default.
+Make sure to add a file mapping in your IDE:
+`./workspace/customer/project` => `/data/customer/project`
 
-Dev commands
----
+# But wait, there is more!
+* [Development Commands](docs/development-commands.md)
+* [MySQL, MailHog, Redis, Cronjobs](docs/mysql-mailhog-redis-cronjobs.md)
+* [Used (base) images](docs/used-base-images.md)
+* [Customize Docker Containers](docs/customize-docker-containers.md)
+* [Configure Blackfire](docs/configure-blackfire.md)
+* [How to use different PHP versions](docs/how-to-use-different-php-versions.md)
+* [Hosts and file structure](docs/hosts-and-file-structure.md)
+* [F.A.Q.](docs/faq.md)
 
-We supply several helpful commands to get of easily. `./bin/dev COMMAND` or just `dev COMMAND` if you've added the development to your $PATH.
-
-To control your docker environment.
-
-- `build [IMAGE]`
-  re-build a image
-- `down`
-  destroy your local development environment, will not remove project/mysql files, only containers.
-- `exec [CONTAINER]`
-  execute commands in a specific container, for instance php or nginx
-- `images`
-  display used images
-- `logs [CONTAINER]`
-  show logs for a specific container
-- `profile`
-  show some useful commands to add to your SHELL
-- `ps`
-  show all running processes
-- `restart [CONTAINER]`
-  restart all or a specific container
-- `start`
-  start all exising container, will not create them if they don't exist(use `up` instead)
-- `status`
-  alias for ps
-- `stop`
-  stop all running containers
-- `up`
-  create/build/run all containers, bring your development to live
-- `update`
-  update all linked images from the web
-
-There are also useful tools.
-
-- `blackfire curl [URL]`
-  The blackfire command to curl pages. Be sure you've setup blackfire correctly
-- `cap [ACTIONS]`
-  capistrano docker implementation, runs in own container.
-- `composer [COMMANDS]`
-  composer docker implementation, also runs in own container.
-- `console` `console5`
-  open a console inside your PHP containers.
-- `magerun [COMMANDS]` `magerun5 [COMMANDS]`
-  run magerun commands on your Magento projects
-- `myroot [OPTIONS]`
-  run mysql as root.
-- `mysql [OPTIONS]`
-  run mysql as you, current user.
-- `mysqldump [OPTIONS]`
-  run mysqldump as you, current user.
-- `php [OPTIONS]` `php5 [OPTIONS]`
-  run php commands
-
-You can run these commands from within your workspace directories.
-For example: `cd workspace/test/project/htdocs` `../../../../bin/dev php info.php` (or `dev php info.php` if you've added the bin directory to your path)
-
-So you can also import data to mysql with `./bin/dev mysql database < dump.sql` or dump `./bin/mysqldump database > dump.sql`.
-
-Because PHP7 should be the default now, I've created shorthands for `./bin/php` but not for php5 use `./bin/dev php5` for that.
-
-Database
----
-
-Set the desired root password in the conf/mysql section.
-To manage database run `./bin/dev myroot`
-
-You can access the database in your app use `db` as hostname.
-
-Files will be saved in the mysql directory so it will be saved after destroying or recreating the containers.
-
-
-Redis
----
-
-To use redis, use `redis` as hostname in the config of your app.
-
-
-Cron
----
-
-If you use cronjobs in your app, you can add them on your host machine.
-I would recommend to add dev to the path before you implement this.
-
-`*/5 * * * * dev ps | grep php7 | grep Up && dev console [YOURCOMMANDHERE]`
-
-For instance, if you must run a Magento cronjob.
-`*/5 * * * * dev ps | grep php7 | grep Up && dev console customer/project/htdocs/cron.sh`
-
-You can add these to your local cron.
-
+[1]: https://docs.docker.com
+[2]: https://docs.docker.com/compose/install/
+[3]: http://docker-sync.io/
+[4]: https://nginx.org/en/
+[5]: https://secure.php.net/
+[6]: https://blackfire.io/
+[7]: https://www.percona.com/
+[8]: https://github.com/mailhog/MailHog
+[9]: https://symfony.com/
+[10]: https://silex.sensiolabs.org/
+[11]: https://magento.com/
+[12]: https://xdebug.org/

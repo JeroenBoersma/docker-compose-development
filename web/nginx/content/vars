@@ -19,4 +19,9 @@ if ( -e /data/$customer/$project/public ) {
 if ( -e /data/$customer/$project/pub ) {
     set $htdocs "pub";
 }
-
+if ( -e /data/$customer/$project/web ) {
+    set $htdocs "web";
+}
+if ( -e /data/$customer/$project/magento ) {
+    set $htdocs "magento";
+}

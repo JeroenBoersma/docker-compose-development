@@ -1,0 +1,5 @@
+
+. ./magerun;
+
+# Just force service
+dc service php71

@@ -2,7 +2,7 @@
 include "content/vars";
 
 set $mageRunCode "";
-if ( $host ~ "^([^\.]+)\.([^\.]+)\.([^\.]+)\..*\.magento(\.php5)?\.dev$"  ) {
+if ( $host ~ "^([^\.]+)\.([^\.]+)\.([^\.]+)(\..+)*\.magento(\.php5)?\.dev$"  ) {
      set $mageRunCode "$3";
 }
 
@@ -48,4 +48,3 @@ location ~ \.php$ {
     try_files .~srcfile @php;
     allow all;
 }
-

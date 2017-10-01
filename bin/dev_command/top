@@ -1,0 +1,6 @@
+
+dc yml docker-compose-ctop.yml
+
+dc service ctop
+dc cmd -s cpu -f ${DEV_PROJECT}
+

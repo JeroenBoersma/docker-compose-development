@@ -1,9 +1,9 @@
 
 location @php {
+    try_files $uri =404;
+
     include fastcgi_params;
     fastcgi_split_path_info ^(.+\.php)(/.*)$;
-
-    set $script_name $fastcgi_script_name;
 
     fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
     fastcgi_param DOCUMENT_ROOT $realpath_root;
@@ -16,4 +16,3 @@ location @php {
 
     allow all;
 }
-

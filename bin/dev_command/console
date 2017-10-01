@@ -1,5 +1,5 @@
 
-dc service php7;
+dc service php;
 dc opt "-u $(id -u):$(id -g)"
 
 if [ -n "${DEV_PROJECTDIR}" ]; then
@@ -12,4 +12,3 @@ if [ -z "$*" ]; then
 else
     dc cmd "$*";
 fi
-

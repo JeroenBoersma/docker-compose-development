@@ -1,0 +1,8 @@
+version: 2
+syncs:
+  web-sync:
+    notify_terminal: true
+    src: './workspace'
+    sync_strategy: 'unison'
+    sync_host_ip: '127.0.0.1'
+    sync_host_port: 10871

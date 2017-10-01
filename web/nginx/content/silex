@@ -1,0 +1,39 @@
+
+include "content/vars";
+
+set $SILEX_ROOT /data/$customer/$project;
+
+root $SILEX_ROOT/$htdocs;
+
+index index.php;
+autoindex off;
+charset off;
+
+add_header 'X-Content-Type-Options' 'nosniff';
+add_header 'X-XSS-Protection' '1; mode=block';
+
+include "content/security";
+
+location / {
+    # try to serve file directly, fallback to index.php
+    try_files $uri /index.php$is_args$args;
+}
+
+# DEV
+# This rule should only be placed on your development environment
+# In production, don't include this and don't deploy app_dev.php or config.php
+location ~ ^/(index_dev|config)\.php(/|$) {
+    try_files .~srcfile @php;
+    allow all;
+}
+
+# PROD
+location ~ ^/index\.php(/|$) {
+    try_files .~srcfile @php;
+    allow all;
+}
+
+location ~ \.php$ {
+    return 404;
+}
+
