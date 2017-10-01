@@ -1,117 +1,97 @@
-# Docker Development stack
+[![Waffle.io - Issues in progress](https://badge.waffle.io/JeroenBoersma/docker-compose-development.png?label=in%20progress&title=In%20Progress)](https://waffle.io/JeroenBoersma/docker-compose-development?utm_source=badge)
 
-Docker-compose-development aims to be a plug 'n play setup for you to quickly start developing locally with services as [NGINX][4], [PHP][5], [Blackfire][6], [Percona][7], [MailHog][8] and more!
+Docker-compose development
+===
 
-Also, it contains different configurations for use with [Symfony][9], [Silex][10], [Magento 1 & 2][11], on PHP5 / PHP7 and with [XDEBUG][12] enabled.
+Quickly start of developing locally with Nginx, PHP, Blackfire, Percona, Mailcatcher and Redis.
 
-We follow a [Code of Conduct](docs/code-of-conduct.md).
+No e-mail is send externally, everything is catched by Mailhog.
+Look out if you are using sendgrid, mailchimp or similar mail API's, we do not catch those.
 
-## Table of Contents
-* [Prerequisites.](#prerequisites)
-* [How to get started.](#how-to-get-started)
-	* [1). Configure your environment.](#1-configure-your-environment)
-	* [2). Configure your hostnames...](#2-configure-your-hostnames)
-		* [By using DNSMASQ.](#by-using-dnsmaws)
-		* [Or by using the hostfile.](#or-by-using-the-hostfile)
-	* [3). Now, setup your projects!](#3-now-setup-your-projects)
-* [But wait, there is more!](#but-wait-there-is-more)
-    * [Development Commands](docs/development-commands.md)
-    * [MySQL, MailHog, Redis, Cronjobs](docs/mysql-mailhog-redis-cronjobs.md)
-    * [Used (base) images](docs/used-base-images.md)
-    * [Customize Docker Containers](docs/customize-docker-containers.md)
-    * [Configure Blackfire](docs/configure-blackfire.md)
-    * [How to use different PHP versions](docs/how-to-use-different-php-versions.md)
-		* [Hosts and file structure](docs/hosts-and-file-structure.md)
-		* [Sharing with the world](docs/sharing-with-the-world-via-ngrok.md)
-    * [F.A.Q.](docs/faq.md)
 
-## Prerequisites
-Before continuing you must have the following installed and working correctly:
+Base images
+---
 
- - [Docker][1]
- - [Docker-compose][2] (**1.12.0** or above)
+Currently the next base images are used. Trying to rely on official images as much as possible.
 
-**OSX users** should also install:
+- blackfire -> blackfire/blackfire:latest
+- composer -> composer/composer:latest
+- nginx -> nginx:alpine
+- percona -> percona:latest
+- php5 -> php:5.6-fpm
+- php7 -> php:7.1-fpm
+- redis -> redis:latest
+- capistrano -> ruby:latest
+- mailhog -> mailhog/mailhog:latest
+- mytop -> srcoder/mytop:latest
 
- - [Docker Sync][3] and its dependencies
- - Coreutils using Homebrew `brew install coreutils`
 
- - Make sure that port 80/443 and 3306 are not being used by other services.
-`sudo netstat -tupln|egrep '80|443|3306'`
+Installation
+---
 
-# How to get started
-Make sure that you have the prerequisites installed and running correctly before proceeding.
+- Install [docker](https://docs.docker.com/)
+- Install docker [compose](https://docs.docker.com/compose/install/) >1.6.1
+- Clone this project 
+  `git clone git@github.com:JeroenBoersma/docker-compose-development.git development`
 
-## 1). Configure your environment
- 1. Clone this repository:
-```
-git clone git@github.com:JeroenBoersma/docker-compose-development.git development
-```
- 2. Create a new persistent data volume with:
-```
-docker volume create --name dockerdev-mysql-volume
-```
-Or, if you already were using this repository before (or want a local directory), you can map the existing volume with:
-```
-docker volume create -o 'type=none' -o 'device='${PWD}'/mysql' -o 'o=bind' dockerdev-mysql-volume
-```
- 3. Configure you MySQL credentials by copying [conf/mysql.dist](conf/mysql.dist) to `conf/mysql` and setting your strong awesome password.
- 4. Start your containers!
- ```
- ./bin/dev up
- ```
- Or, if you are on OSX:
- ```
- docker-sync start
- ```
 
-A optional, but recommended, step to take is to add the provided `.bin/dev` command to your system so you can use its commands anywhere you like.
+Before
+---
 
- 1. Run `./bin/dev profile` from the development folder.
- 2. Copy the output into `~/.bashrc` `~/.bash_aliases` `~/.zshrc`, on your own preference.
- 3. Log out and log back in for this to take effect. You could also just source the new files in your current terminal `. ~/.bashrc`.
+Tested under Linux. For Windows/Mac, take a look at the docker beta(heard that good performances are met)
+Stop all other local Webservers running on port 80/443.
 
-If succeeded you can now use `dev <command>` from anywhere.
-You can also just type `cdw` which will take you to your workspace directory.
+Set-up your database credentials and Blackfire profile in the conf directory
 
-## 2). Configure your hostnames...
-There are several ways of configuring hostnames.
+- conf/mysql (`MYSQL_ROOT_PASSWORD=something`)
 
-### By using DNSMASQ (preferred)
-Only applies if you have DNSMASQ installed, otherwiste continue to use the hostfile instead.
+Blackfire
+---
 
-Create a file `/etc/dnsmasq.d/dev.conf` and copy the following as its content:
-`address=/.dev/127.0.0.1`
+Blackfire is optional, the library is already available in PHP, but not loaded by default.
+To load blackfire, simply add a `conf/blackfire` file with content from the [Blackfire website](https://blackfire.io/docs/integrations/docker#documentation).
+Copy/paste the contents from the first block in the configuration file and remove the `export ` from the beginning of the line.
+`./bin/dev/down` and `./bin/dev/up` to load blackfire.
 
-### Or by using the hostfile
-Add a hostname entry for each of your projects manually to `/etc/hosts`, e.g.:
-`127.0.0.1 mail.dev`
-`127.0.0.1 test.project.dev`
+Start
+---
 
-You should now be able to browse to `http://test.project.dev/info.php` and get a phpinfo() output.
+- Run `./bin/dev up` from the development directory
+- \*.dev > 127.0.0.1 (if you use boot2docker, use that ip)
+    - dnsmasq
+      add a file `/etc/dnsmasq.d/dev.conf` with `address=/.dev/127.0.0.1`
+    - hosts
+        - add `127.0.0.1 test.project.dev` to your hosts file `/etc/hosts`
+        - add `127.0.0.1 mail.dev` to your hosts file `/etc/hosts`
+- add your project in workspace `customer/project/htdocs` (no need to restart, this will work out of the box)
+- open http://customer.project.dev/ in your browser (if you do not have dnsmasq, you have to add your hosts file manually).
+- all outgoing mail is sent to http://mail.dev/
 
-# # 3). Now, setup your projects!
-Inside the development folder you will find a folder called `workspace`. The folders follow a certain structure, as described below:
-`customer/project/htdocs`
+Hosts and file structure
+---
 
-You will notice that this has a 1-on-1 relation to the hostname provided in your hostfile:
-`workspace/test/project/htdocs` => `http://test.project.dev`
+Everything is translated from `customer.project.dev` -> `workspace/customer/project/htdocs`.
+For example; `iwant.coffee.dev` -> `workspace/iwant/coffee/htdocs`.
 
-Other examples are:
-`workspace/iwant/coffee/htdocs` => `http://iwant.coffee.dev`
-`workspace/iwant/beer/htdocs` => `http://iwant.beer.dev`
-`workspace/nomore/soup4you/htdocs` => `http://nomore.soup4you.dev`
+To be compatible with various webroots, we will lookup a few defaults.
+Webroots -> `htdocs`, `httpdocs`, `public` or `pub`.
 
-To be compatible with various projects, we have included the following definitions as webroots:
+Support for PHP5, PHP7 is the default, use `*.php5.dev` to run the same project in PHP5.
 
- - `htdocs`
- - `httpdocs`
- - `public`
- - `pub`
+Support for Magento 1 projects in both PHP7 and PHP5, use `*.magento.dev` and `*.magento.php5.dev` to use a Magento specific setup.
+Webroots + `magento`.
 
-You can read more about project webroots in the [Hosts and File structure](docs/hosts-and-file-structure.md) documentation.
+Support for Symfony in both PHP7 and PHP5, use `*.symfony.dev` and `*.symfony.php5.dev` to use a Symfony specific setup.
+Webroots + web.
 
-## Xdebug
+Supports Magento 2 projects in PHP7 only, use `*.magento2.dev` to use a Magento 2 specific setup.
+Webroot is pub only.
+
+Add a file mapping in your IDE, `./workspace/customer/project` -> `/data/customer/project`
+
+Xdebug
+---
+
 Xdebug is enabled with support for remote debugging on your local machine.
 It will try to connect to the host `172.17.0.1:9000` by default.
 Make sure to add a file mapping in your IDE:
