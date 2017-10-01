@@ -1,3 +1,4 @@
+[![Waffle.io - Issues in progress](https://badge.waffle.io/JeroenBoersma/docker-compose-development.png?label=in%20progress&title=In%20Progress)](https://waffle.io/JeroenBoersma/docker-compose-development?utm_source=badge)
 
 Docker-compose development
 ===
