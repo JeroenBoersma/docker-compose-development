@@ -5,11 +5,11 @@ Running different PHP version is as simple as changing the hostname.
 
 ## PHP 7.1.x
 
-Change the hostname from `*.dev` to `*.php71.dev`
+Change the hostname from `*.locahost` to `*.php71.locahost`
 
 ## PHP 5.6.x
 
-Change the hostname from `*.dev` to `*.php56.dev`
+Change the hostname from `*.locahost` to `*.php5.locahost`
 
 ## PHP-CLI version
 

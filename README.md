@@ -83,26 +83,26 @@ There are several ways of configuring hostnames.
 Only applies if you have DNSMASQ installed, otherwiste continue to use the hostfile instead.
 
 Create a file `/etc/dnsmasq.d/dev.conf` and copy the following as its content:
-`address=/.dev/127.0.0.1`
+`address=/.localhost/127.0.0.1`
 
 ### Or by using the hostfile
 Add a hostname entry for each of your projects manually to `/etc/hosts`, e.g.:
-`127.0.0.1 mail.dev`
-`127.0.0.1 test.project.dev`
+`127.0.0.1 mail.localhost`
+`127.0.0.1 test.project.localhost`
 
-You should now be able to browse to `http://test.project.dev/info.php` and get a phpinfo() output.
+You should now be able to browse to `http://test.project.localhost/info.php` and get a phpinfo() output.
 
-# # 3). Now, setup your projects!
+## 3). Now, setup your projects!
 Inside the development folder you will find a folder called `workspace`. The folders follow a certain structure, as described below:
 `customer/project/htdocs`
 
 You will notice that this has a 1-on-1 relation to the hostname provided in your hostfile:
-`workspace/test/project/htdocs` => `http://test.project.dev`
+`workspace/test/project/htdocs` => `https://test.project.localhost/`
 
 Other examples are:
-`workspace/iwant/coffee/htdocs` => `http://iwant.coffee.dev`
-`workspace/iwant/beer/htdocs` => `http://iwant.beer.dev`
-`workspace/nomore/soup4you/htdocs` => `http://nomore.soup4you.dev`
+`workspace/iwant/coffee/htdocs` => `https://iwant.coffee.localhost/`
+`workspace/iwant/beer/htdocs` => `https://iwant.beer.locahost/`
+`workspace/nomore/soup4you/htdocs` => `https://nomore.soup4you.locahost/`
 
 To be compatible with various projects, we have included the following definitions as webroots:
 
