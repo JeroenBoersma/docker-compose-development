@@ -100,9 +100,9 @@ You will notice that this has a 1-on-1 relation to the hostname provided in your
 `workspace/test/project/htdocs` => `https://test.project.localhost/`
 
 Other examples are:
-`workspace/iwant/coffee/htdocs` => `https://iwant.coffee.localhost/`
-`workspace/iwant/beer/htdocs` => `https://iwant.beer.locahost/`
-`workspace/nomore/soup4you/htdocs` => `https://nomore.soup4you.locahost/`
+- `workspace/iwant/coffee/htdocs` => `https://iwant.coffee.localhost/`
+- `workspace/iwant/beer/htdocs` => `https://iwant.beer.localhost/`
+- `workspace/nomore/soup4you/htdocs` => `https://nomore.soup4you.localhost/`
 
 To be compatible with various projects, we have included the following definitions as webroots:
 
