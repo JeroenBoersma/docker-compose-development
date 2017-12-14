@@ -110,6 +110,8 @@ To be compatible with various projects, we have included the following definitio
  - `httpdocs`
  - `public`
  - `pub`
+ - `web`
+ - `magento`
 
 You can read more about project webroots in the [Hosts and File structure](docs/hosts-and-file-structure.md) documentation.
 
