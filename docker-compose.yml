@@ -8,8 +8,8 @@ services:
   db:
     image: percona
     volumes:
-    - ./conf.d/mysql:/etc/mysql/conf.d:ro
-    - dockerdev-mysql-volume:/var/lib/mysql:rw
+      - ./conf.d/mysql:/etc/mysql/conf.d:ro
+      - dockerdev-mysql-volume:/var/lib/mysql:rw
     env_file:
       - ./conf/mysql
     network_mode: bridge
@@ -24,9 +24,9 @@ services:
     build:
       context: php7
     links:
-    - db
-    - mailcatch
-    - redis
+      - db
+      - mailcatch
+      - redis
     environment:
       SSH_AUTH_SOCK: "/ssh-socket"
     volumes:
@@ -36,9 +36,9 @@ services:
     build:
       context: php5
     links:
-    - db
-    - mailcatch
-    - redis
+      - db
+      - mailcatch
+      - redis
     environment:
       SSH_AUTH_SOCK: "/ssh-socket"
     volumes:
@@ -48,9 +48,9 @@ services:
     build:
       context: php71
     links:
-    - db
-    - mailcatch
-    - redis
+      - db
+      - mailcatch
+      - redis
     environment:
       SSH_AUTH_SOCK: "/ssh-socket"
     volumes:
@@ -64,13 +64,15 @@ services:
   web:
     build:
       context: web
+    environment:
+      DOMAINSUFFIX: '.localhost'
     links:
-    - mailcatch
-    - php:fpm
-    - php:fpm7
-    - php5:fpm5
-    - php71:fpm71
+      - mailcatch
+      - php:fpm
+      - php:fpm7
+      - php5:fpm5
+      - php71:fpm71
     network_mode: bridge
     ports:
-    - 127.0.0.1:443:443
-    - 127.0.0.1:80:80
+      - 127.0.0.1:443:443
+      - 127.0.0.1:80:80

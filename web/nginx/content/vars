@@ -3,7 +3,7 @@
 set $customer "default";
 set $project "default";
 
-if ( $host ~ "^([^\.]+)\.([^\.]+)\..*dev$"  ) {
+if ( $host ~ "^([^\.]+)\.([^\.]+).*[DOMAINSUFFIX]$"  ) {
      set $customer "$1";
      set $project "$2";
 }

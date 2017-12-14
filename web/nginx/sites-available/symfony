@@ -1,6 +1,6 @@
 server {
     listen 80;
-    server_name *.symfony.dev;
+    server_name *.symfony[DOMAINSUFFIX];
 
     include "upstream/php7";
     include "content/symfony";
@@ -8,7 +8,7 @@ server {
 
 server {
     listen 443 ssl http2;
-    server_name *.symfony.dev;
+    server_name *.symfony[DOMAINSUFFIX];
 
     ssl on;
     ssl_certificate certs/server.crt;
@@ -20,7 +20,7 @@ server {
 
 server {
     listen 80;
-    server_name *.symfony.php5.dev;
+    server_name *.symfony.php5[DOMAINSUFFIX];
 
     include "upstream/php5";
     include "content/symfony";
@@ -28,7 +28,7 @@ server {
 
 server {
     listen 443;
-    server_name *.symfony.php5.dev;
+    server_name *.symfony.php5[DOMAINSUFFIX];
 
     ssl on;
     ssl_certificate certs/server.crt;
@@ -41,7 +41,7 @@ server {
 
 server {
     listen 80;
-    server_name *.symfony.php71.dev;
+    server_name *.symfony.php71[DOMAINSUFFIX];
 
     include "upstream/php71";
     include "content/symfony";
@@ -49,7 +49,7 @@ server {
 
 server {
     listen 443;
-    server_name *.symfony.php71.dev;
+    server_name *.symfony.php71[DOMAINSUFFIX];
 
     ssl on;
     ssl_certificate certs/server.crt;

@@ -7,8 +7,9 @@ ARG GID=1000
 RUN adduser -u $UID -g $GID -h /data -DHs /bin/nologin app
 
 COPY nginx /etc/nginx
+COPY run-nginx.sh /run-nginx.sh
 
 WORKDIR /data
 
-CMD ["nginx"]
+CMD ["/run-nginx.sh"]
 
