@@ -22,6 +22,8 @@ To control your docker environment.
   show some useful commands to add to your SHELL
 - `ps`
   show all running processes
+- `rebuild`
+  alias for `dev update && dev build && dev down && dev up`
 - `restart [CONTAINER]`
   restart all or a specific container
 - `start`
