@@ -1,9 +1,11 @@
 
-${DEV_SELF} update && \
-    ${DEV_SELF} build && \
-    ${DEV_SELF} down && \
-    ${DEV_SELF} up && \
-    ${DEV_SELF} ps && \
+cd ${DEV_DIR};
+
+./${DEV_SELF} update && \
+    ./${DEV_SELF} build && \
+    ./${DEV_SELF} down && \
+    ./${DEV_SELF} up && \
+    ./${DEV_SELF} ps && \
     exit 0 || \
     exit 1;
 

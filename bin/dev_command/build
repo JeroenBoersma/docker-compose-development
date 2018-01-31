@@ -1,5 +1,6 @@
 
-services=`main config --services`;
+cd ${DEV_DIR};
+services=`./${DEV_SELF} config --services`;
 
 user_id=`id -u`;
 group_id=`id -g`;
