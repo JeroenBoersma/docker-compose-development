@@ -1,5 +1,6 @@
 server {
     listen 80;
+    listen 443 ssl http2;
     server_name *.magento2[DOMAINSUFFIX];
 
     include upstream/php7;
@@ -7,19 +8,8 @@ server {
 }
 
 server {
-    listen 443 ssl http2;
-    server_name *.magento2[DOMAINSUFFIX];
-
-    ssl on;
-    ssl_certificate certs/server.crt;
-    ssl_certificate_key certs/server.key;
-
-    include upstream/php7;
-    include content/magento2;
-}
-
-server {
     listen 80;
+    listen 443 ssl http2;
     server_name *.magento2.php5[DOMAINSUFFIX];
 
     include upstream/php5;
@@ -27,32 +17,9 @@ server {
 }
 
 server {
-    listen 443 ssl http2;
-    server_name *.magento2.php5[DOMAINSUFFIX];
-
-    ssl on;
-    ssl_certificate certs/server.crt;
-    ssl_certificate_key certs/server.key;
-
-    include upstream/php5;
-    include content/magento2;
-}
-
-server {
     listen 80;
-    server_name *.magento2.php71[DOMAINSUFFIX];
-
-    include upstream/php71;
-    include content/magento2;
-}
-
-server {
     listen 443 ssl http2;
     server_name *.magento2.php71[DOMAINSUFFIX];
-
-    ssl on;
-    ssl_certificate certs/server.crt;
-    ssl_certificate_key certs/server.key;
 
     include upstream/php71;
     include content/magento2;

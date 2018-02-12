@@ -1,59 +1,25 @@
 server {
     listen 80;
-    server_name *.silex[DOMAINSUFFIX];
-
-    include "upstream/php7";
-    include "content/silex";
-}
-
-server {
     listen 443 ssl http2;
     server_name *.silex[DOMAINSUFFIX];
 
-    ssl on;
-    ssl_certificate certs/server.crt;
-    ssl_certificate_key certs/server.key;
-
     include "upstream/php7";
     include "content/silex";
 }
 
 server {
     listen 80;
-    server_name *.silex.php5[DOMAINSUFFIX];
-
-    include "upstream/php5";
-    include "content/silex";
-}
-
-server {
     listen 443;
     server_name *.silex.php5[DOMAINSUFFIX];
 
-    ssl on;
-    ssl_certificate certs/server.crt;
-    ssl_certificate_key certs/server.key;
-
     include "upstream/php5";
     include "content/silex";
 }
-
 
 server {
     listen 80;
-    server_name *.silex.php71[DOMAINSUFFIX];
-
-    include "upstream/php71";
-    include "content/silex";
-}
-
-server {
     listen 443;
     server_name *.silex.php71[DOMAINSUFFIX];
-
-    ssl on;
-    ssl_certificate certs/server.crt;
-    ssl_certificate_key certs/server.key;
 
     include "upstream/php71";
     include "content/silex";
