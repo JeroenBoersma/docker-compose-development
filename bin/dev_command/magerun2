@@ -1,5 +1,6 @@
 
 dc service php;
+dc opt '-T';
 dc opt "-u $(id -u):$(id -g)"
 
 if [ -n "${DEV_PROJECTDIR}" ]; then

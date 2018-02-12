@@ -10,5 +10,6 @@ if [ -z "$*" ]; then
     # Interactive mode
     dc cmd bash -l;
 else
+    dc opt '-T';
     dc cmd "$*";
 fi
