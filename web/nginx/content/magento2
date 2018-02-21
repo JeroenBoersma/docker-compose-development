@@ -4,6 +4,10 @@ include "content/vars";
 set $MAGE_ROOT /data/$customer/$project/;
 set $MAGE_MODE developer;
 
+set $mageRunCode "";
+if ( $host ~ "^([^\.]+)\.([^\.]+)\.([^\.]+)(\..+)*\.magento2[DOMAINSUFFIX]$"  ) {
+     set $mageRunCode "$3";
+}
 
 root $MAGE_ROOT/pub;
 
