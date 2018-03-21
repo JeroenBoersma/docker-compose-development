@@ -22,7 +22,7 @@ services:
 
   php:
     build:
-      context: php7
+      context: build/dist/php7
     links:
       - db
       - mailcatch
@@ -34,7 +34,7 @@ services:
     network_mode: bridge
   php5:
     build:
-      context: php5
+      context: build/dist/php5
     links:
       - db
       - mailcatch
@@ -46,7 +46,7 @@ services:
     network_mode: bridge
   php71:
     build:
-      context: php71
+      context: build/dist/php71
     links:
       - db
       - mailcatch
@@ -63,7 +63,7 @@ services:
 
   web:
     build:
-      context: web
+      context: build/dist/web
     environment:
       DOMAINSUFFIX: '.localhost'
     links:
