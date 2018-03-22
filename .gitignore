@@ -2,6 +2,7 @@
 /workspace
 /mysql
 /custom
+/build/custom
 /docker-custom.yml
 /conf
 
