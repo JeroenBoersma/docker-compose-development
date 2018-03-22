@@ -56,6 +56,18 @@ services:
     volumes:
       - ${SSH_AUTH_SOCK}:/ssh-socket:ro
     network_mode: bridge
+  php72:
+    build:
+      context: build/dist/php72
+    links:
+      - db
+      - mailcatch
+      - redis
+    environment:
+      SSH_AUTH_SOCK: "/ssh-socket"
+    volumes:
+      - ${SSH_AUTH_SOCK}:/ssh-socket:ro
+    network_mode: bridge
 
   redis:
     image: redis:alpine
@@ -72,6 +84,7 @@ services:
       - php:fpm7
       - php5:fpm5
       - php71:fpm71
+      - php72:fpm72
     network_mode: bridge
     ports:
       - 127.0.0.1:443:443

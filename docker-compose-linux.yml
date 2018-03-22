@@ -10,6 +10,9 @@ services:
   php71:
     volumes:
     - ./workspace:/data
+  php72:
+    volumes:
+    - ./workspace:/data
   web:
     volumes:
     - ./workspace:/data:ro

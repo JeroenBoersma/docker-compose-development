@@ -24,3 +24,12 @@ server {
     include "upstream/php71";
     include "content/silex";
 }
+
+server {
+    listen 80;
+    listen 443;
+    server_name *.silex.php72[DOMAINSUFFIX];
+
+    include "upstream/php72";
+    include "content/silex";
+}
