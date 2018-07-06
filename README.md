@@ -41,6 +41,25 @@ Before continuing you must have the following installed and working correctly:
  - Make sure that port 80/443 and 3306 are not being used by other services.
 `sudo netstat -tupln|egrep '80|443|3306'`
 
+**WSL users** 
+- Setup docker using [https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly](https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly)
+- should setup the SSH_AUTH_SOCK variable
+Add the following to `~/.bashrc`:
+```
+# ssh-agent configuration
+if [ -z "$(pgrep ssh-agent)" ]; then
+    rm -rf /tmp/ssh-*
+    eval $(ssh-agent -s) > /dev/null
+else
+    export SSH_AGENT_PID=$(pgrep ssh-agent)
+    export SSH_AUTH_SOCK=$(find /tmp/ssh-* -name agent.*)
+fi
+
+if [ "$(ssh-add -l)" == "The agent has no identities." ]; then
+    ssh-add
+fi
+```
+
 # How to get started
 Make sure that you have the prerequisites installed and running correctly before proceeding.
 
@@ -84,6 +103,9 @@ Only applies if you have DNSMASQ installed, otherwiste continue to use the hostf
 
 Create a file `/etc/dnsmasq.d/dev.conf` and copy the following as its content:
 `address=/.localhost/127.0.0.1`
+
+#### For Windows
+Use Acrylic DNS Proxy. For more information check the website [http://mayakron.altervista.org/wikibase/show.php?id=AcrylicHome](http://mayakron.altervista.org/wikibase/show.php?id=AcrylicHome)
 
 ### Or by using the hostfile
 Add a hostname entry for each of your projects manually to `/etc/hosts`, e.g.:
