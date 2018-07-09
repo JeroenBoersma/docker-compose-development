@@ -112,6 +112,8 @@ dc() {
     yml_os() {
         if [[ "$(uname)" == 'Darwin' ]]; then
             DEV_YML=${DEV_YML}' -f '${DEV_WORKDIR}'/docker-compose-osx.yml';
+        elif [[ -n "`uname -r | grep Microsoft`" ]]; then
+            DEV_YML=${DEV_YML}' -f '${DEV_WORKDIR}'/docker-compose-wsl.yml';
         else
             DEV_YML=${DEV_YML}' -f '${DEV_WORKDIR}'/docker-compose-linux.yml';
         fi
