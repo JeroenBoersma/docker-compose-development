@@ -1,0 +1,18 @@
+version: '2'
+
+services:
+  php:
+    volumes:
+    - /c/workspace:/data
+  php5:
+    volumes:
+    - /c/workspace:/data
+  php71:
+    volumes:
+    - /c/workspace:/data
+  php72:
+    volumes:
+    - /c/workspace:/data
+  web:
+    volumes:
+    - /c/workspace:/data:ro
