@@ -118,6 +118,10 @@ You should now be able to browse to `http://test.project.localhost/info.php` and
 Inside the development folder you will find a folder called `workspace`. The folders follow a certain structure, as described below:
 `customer/project/htdocs`
 
+> For **WSL**
+>
+> Docker for Windows automatically mounts to `C:\workspace`. You'll find your workspace there. To change this, update `docker-compose-wsl.yml`
+
 You will notice that this has a 1-on-1 relation to the hostname provided in your hostfile:
 `workspace/test/project/htdocs` => `https://test.project.localhost/`
 
