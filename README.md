@@ -26,6 +26,7 @@ We follow a [Code of Conduct](docs/code-of-conduct.md).
 		* [Hosts and file structure](docs/hosts-and-file-structure.md)
 		* [Sharing with the world](docs/sharing-with-the-world-via-ngrok.md)
     * [F.A.Q.](docs/faq.md)
+    * [UFW firewall](docs/ufw-firewall.md)
 
 ## Prerequisites
 Before continuing you must have the following installed and working correctly:
