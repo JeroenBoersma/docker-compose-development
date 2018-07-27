@@ -137,7 +137,6 @@ dc() {
         check() {
             local base=$1;
             for a in ${available}; do
-                echo ${base}/.${a};
                 if [ -e ${base}/.${a} ]; then
                     DEV_PHP=${a};
                     return 0;
