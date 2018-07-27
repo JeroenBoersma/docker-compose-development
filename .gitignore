@@ -5,7 +5,5 @@
 /build/custom
 /docker-custom.yml
 /conf
-
-# But don't ignore this
-!/workspace/.composer/.gitkeep
+/.env
 
