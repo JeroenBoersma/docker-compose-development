@@ -80,6 +80,7 @@ services:
       DOMAINSUFFIX: '.localhost'
     links:
       - mailcatch
+      - php70:fpm
       - php70:fpm70
       - php56:fpm56
       - php71:fpm71

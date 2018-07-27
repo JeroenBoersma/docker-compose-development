@@ -1,13 +1,11 @@
 
-set $MAGE_ROOT /data/$customer/$project/;
+set $MAGE_ROOT $dev_root;
 set $MAGE_MODE developer;
 
 set $mageRunCode "";
-if ( $host ~ "^([^\.]+)\.([^\.]+)\.([^\.]+)(\..+)*\.magento2[DOMAINSUFFIX]$"  ) {
+if ( $host ~ "^([^\.]+)\.([^\.]+)\.([^\.]+).*[DOMAINSUFFIX]$"  ) {
      set $mageRunCode "$3";
 }
-
-root $MAGE_ROOT/pub;
 
 index index.php;
 autoindex off;

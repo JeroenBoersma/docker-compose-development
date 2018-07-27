@@ -1,4 +1,8 @@
 
+set $backend_pass 'fastcgi';
+set $backend_pass ${backend_pass}${php};
+set $backend_pass ${backend_pass}_backend;
+
 location @php {
     try_files $uri =404;
 
@@ -8,11 +12,11 @@ location @php {
     fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
     fastcgi_param DOCUMENT_ROOT $realpath_root;
 
-    # Magento specific
+    # Mage storecode
     fastcgi_param MAGE_RUN_CODE $mageRunCode;
     fastcgi_param MAGE_IS_DEVELOPER_MODE "1";
 
-    fastcgi_pass fastcgi5_backend;
+    fastcgi_pass $backend_pass;
 
     allow all;
 }

@@ -1,0 +1,7 @@
+include content/vars;
+
+include content/php;
+include content/upstream;
+
+root $dev_root/$htdocs;
+

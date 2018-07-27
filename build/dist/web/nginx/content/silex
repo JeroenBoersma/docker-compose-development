@@ -1,8 +1,4 @@
 
-set $SILEX_ROOT /data/$customer/$project;
-
-root $SILEX_ROOT/$htdocs;
-
 index index.php;
 autoindex off;
 charset off;

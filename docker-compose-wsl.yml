@@ -1,10 +1,10 @@
 version: '2'
 
 services:
-  php:
+  php70:
     volumes:
     - /c/workspace:/data
-  php5:
+  php56:
     volumes:
     - /c/workspace:/data
   php71:

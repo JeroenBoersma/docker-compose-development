@@ -1,10 +1,8 @@
 
 set $mageRunCode "";
-if ( $host ~ "^([^\.]+)\.([^\.]+)\.([^\.]+)(\..+)*\.magento(\.php5)?[DOMAINSUFFIX]$"  ) {
+if ( $host ~ "^([^\.]+)\.([^\.]+)\.([^\.]+).*[DOMAINSUFFIX]$"  ) {
      set $mageRunCode "$3";
 }
-
-root /data/$customer/$project/$htdocs;
 
 gzip_types text/css application/x-javascript image/svg+xml;
 

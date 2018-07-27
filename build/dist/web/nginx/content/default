@@ -1,6 +1,4 @@
 
-root /data/$customer/$project/$htdocs;
-
 gzip_types text/css application/x-javascript image/svg+xml;
 
 include "content/security";

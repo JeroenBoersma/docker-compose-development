@@ -1,0 +1,41 @@
+set $php '';
+
+if ( -f $dev_base_root/.php56 ) {
+  set $php '56';
+}
+if ( -f $dev_base_root/.php70 ) {
+  set $php '70';
+}
+if ( -f $dev_base_root/.php71 ) {
+  set $php '71';
+}
+if ( -f $dev_base_root/.php72 ) {
+  set $php '72';
+}
+
+if ( -f $dev_customer_root/.php56 ) {
+  set $php '56';
+}
+if ( -f $dev_customer_root/.php70 ) {
+  set $php '70';
+}
+if ( -f $dev_customer_root/.php71 ) {
+  set $php '71';
+}
+if ( -f $dev_customer_root/.php72 ) {
+  set $php '72';
+}
+
+if ( -f $dev_root/.php56 ) {
+  set $php '56';
+}
+if ( -f $dev_root/.php70 ) {
+  set $php '70';
+}
+if ( -f $dev_root/.php71 ) {
+  set $php '71';
+}
+if ( -f $dev_root/.php72 ) {
+  set $php '72';
+}
+
