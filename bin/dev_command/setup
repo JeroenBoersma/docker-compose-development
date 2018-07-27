@@ -1,0 +1,75 @@
+
+echo 'Development setup';
+echo '';
+
+setup() {
+
+    cd ${DEV_DIR};
+
+    mysql() {
+        if [ -e ${DEV_WORKDIR}/conf/mysql ]; then
+            echo 'Looks to me that this machine already has MySQL configuration';
+            return 1;
+        fi
+
+        local randompass="`< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32};echo;`";
+        sed 's/\[YOURPASSWORDGOESHERE\]/'${randompass}'/' ${DEV_WORKDIR}/conf/mysql.dist > ${DEV_WORKDIR}/conf/mysql;
+        echo 'Created a random root password for MySQL "'${randompass}'", to login as root use `dev myroot`';
+
+        if [ -z "`docker volume ls -q -f 'name=dockerdev-mysql-volume'`" ]; then
+            echo 'Create a persistant database volume';
+            docker volume create --name dockerdev-mysql-volume;
+        fi
+
+        echo 'Starting regular database user, waiting for db to become ready';
+        ./${DEV_SELF} up db;
+        ./${DEV_SELF} logs -f db 2>&1 | grep -m1 'mysqld: ready for connections.' >/dev/null;
+
+        local user=${USER};
+        echo 'Database user has access to databases "'${user}'_*"';
+        echo '';
+        echo "create user '${user}' | ./${DEV_SELF} myroot;
+        echo "grant all on ${user}.* to '${user}' | ./${DEV_SELF} myroot;
+        echo "update mysql.db set db = '${user}\_%' where user = '${user}';" | ./${DEV_SELF} myroot;
+        echo 'flush privileges;' | ./${DEV_SELF} myroot;
+
+        return 0;
+    }
+
+    php() {
+        dc php && echo 'PHP configured' && return 1;
+
+        local versions="`dc php_versions`" version='';
+        echo "Which default PHP version should we enable";
+        for v in ${versions}; do
+            echo "- ${v}";
+        done
+
+        read -p'?' version;
+        [ -z "${version}" ] && return 1;
+
+        touch ${DEV_WORKDIR}/workspace/.${version};
+
+        return 0;
+    }
+
+
+    start() {
+        ./${DEV_SELF} up;
+    }
+
+    shell() {
+        echo 'Add next lines to your shell to implement `cdw`(to workspace) and `dev` to PATH';
+        echo '';
+        ./${DEV_SELF} profile;
+    }
+
+    mysql;
+    php;
+    start;
+    shell;
+}
+setup;
+
+exit 0;
+

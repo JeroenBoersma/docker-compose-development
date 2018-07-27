@@ -139,8 +139,12 @@ dc() {
         DEV_CMD="$*";
     }
 
+    php_versions() {
+        grep -h '^\s*- php[0-9][0-9]:fpm' ${DEV_WORKDIR}/docker-*.yml | sed -e 's/\(\s*\|:.*$\|-\)//g' | sort -ur;
+    }
+
     php() {
-        local available="`grep -h '^\s*- php[0-9][0-9]:fpm' ${DEV_WORKDIR}/docker-*.yml | sed -e 's/\(\s*\|:.*$\|-\)//g' | sort -ur`";
+        local available="`php_versions`";
         check() {
             local base=$1;
             for a in ${available}; do
