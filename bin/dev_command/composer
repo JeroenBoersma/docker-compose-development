@@ -1,5 +1,5 @@
 
-dc service php;
+dc service ${DEV_PHP};
 dc opt '-T';
 dc opt "-u $(id -u):$(id -g)"
 

@@ -14,6 +14,8 @@ init() {
     DEV_WORKSPACE="`echo ${DEV_WORKDIR}/workspace | sed -e 's/\\//\\\\\//g'`";
     DEV_PROJECTDIR=`echo ${DEV_USERDIR} | sed -e "s/${DEV_WORKSPACE}\///"`;
 
+    DEV_PHP='php70';
+
     DEV_SUDO='';
     if [ -z "`groups | grep docker`" ]; then
         DEV_SUDO='sudo';
@@ -39,6 +41,9 @@ init() {
             DEV_HOSTNAME='';
         fi
     fi
+
+    # Check which php version to use
+    dc php;
 
     # Change to command directory
     # This is so all docker-compose commands work out of the box
@@ -125,6 +130,33 @@ dc() {
 
     cmd() {
         DEV_CMD="$*";
+    }
+
+    php() {
+        local available="`grep -h '^\s*- php[0-9][0-9]:fpm' ${DEV_WORKDIR}/docker-*.yml | sed -e 's/\(\s*\|:.*$\|-\)//g' | sort -ur`";
+        check() {
+            local base=$1;
+            for a in ${available}; do
+                echo ${base}/.${a};
+                if [ -e ${base}/.${a} ]; then
+                    DEV_PHP=${a};
+                    return 0;
+                fi
+            done
+
+            return 1;
+        }
+
+        local project=${DEV_WORKDIR}/workspace/${DEV_PROJECTDIR};
+        if [ -n "${project}" ]; then
+            while [ "${project}" != "${DEV_WORKDIR}/workspace" ]; do
+                check ${project} && return 0;
+                project=$(dirname ${project});
+            done
+        fi
+
+        check $DEV_WORKDIR/workspace && return 0;
+        return 1;
     }
 
     $*;
