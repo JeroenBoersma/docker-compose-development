@@ -22,7 +22,7 @@ init() {
     fi
 
     dc yml 'docker-compose.yml';
-    dc yml_if 'docker-compose-blackfire.yml' 'conf/blackfire';
+    dc yml_if 'build/dist/docker-compose-blackfire.yml' 'conf/blackfire';
     dc yml_if 'docker-custom.yml' 'docker-custom.yml';
     dc yml_os
 
@@ -100,11 +100,11 @@ dc() {
     }
 
     yml_all() {
-        yml_if 'docker-compose-blackfireclient.yml' 'conf/blackfire';
-        yml 'docker-compose-dbclient.yml';
-        yml 'docker-compose-mytop.yml';
-        yml 'docker-compose-ngrok.yml';
-        yml 'docker-compose-ctop.yml';
+        yml_if 'build/dist/docker-compose-blackfireclient.yml' 'conf/blackfire';
+        yml 'build/dist/docker-compose-dbclient.yml';
+        yml 'build/dist/docker-compose-mytop.yml';
+        yml 'build/dist/docker-compose-ngrok.yml';
+        yml 'build/dist/docker-compose-ctop.yml';
     }
 
     yml() {
@@ -147,7 +147,7 @@ dc() {
         }
 
         local project=${DEV_WORKDIR}/workspace/${DEV_PROJECTDIR};
-        if [ -n "${project}" ]; then
+        if [ -n "${DEV_PROJECTDIR}" ]; then
             while [ "${project}" != "${DEV_WORKDIR}/workspace" ]; do
                 check ${project} && return 0;
                 project=$(dirname ${project});

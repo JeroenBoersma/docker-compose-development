@@ -1,5 +1,5 @@
 
-dc yml docker-compose-mytop.yml;
+dc yml build/dist/docker-compose-mytop.yml;
 dc service mytop;
 
 dc cmd "-h db -u ${USER} -dinformation_schema $*";

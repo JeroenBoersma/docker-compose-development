@@ -1,5 +1,5 @@
 
-dc yml docker-compose-ctop.yml
+dc yml build/dist/docker-compose-ctop.yml
 
 dc service ctop
 dc cmd -s cpu -f ${DEV_PROJECT}

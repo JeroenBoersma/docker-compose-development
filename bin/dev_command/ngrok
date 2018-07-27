@@ -9,7 +9,7 @@ fi
 
 WEB_IP=`$0 exec web ip addr | grep 'state UP' -A2 | tail -n1 | awk '{print $2}' | cut -f1 -d'/'`;
 
-dc yml docker-compose-ngrok.yml;
+dc yml build/dist/docker-compose-ngrok.yml;
 
 dc service '--entrypoint=/bin/ngrok ngrok';
 dc cmd 'http --host-header='${DEV_HOSTNAME}' '${WEB_IP}':80';

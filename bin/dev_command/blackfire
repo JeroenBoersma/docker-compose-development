@@ -1,5 +1,5 @@
 
-dc yml_if 'docker-compose-blackfireclient.yml' 'conf/blackfire';
+dc yml_if 'build/dist/docker-compose-blackfireclient.yml' 'conf/blackfire';
 if [ $? -ne 0 ]; then
     echo 'Blackfire not initialized';
     exit 1;
