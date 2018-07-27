@@ -3,33 +3,8 @@ server {
     listen 443 ssl http2;
     server_name *.symfony[DOMAINSUFFIX];
 
-    include "upstream/php7";
+    include "content/vars";
+    include "upstream/select";
     include "content/symfony";
 }
 
-server {
-    listen 80;
-    listen 443;
-    server_name *.symfony.php5[DOMAINSUFFIX];
-
-    include "upstream/php5";
-    include "content/symfony";
-}
-
-server {
-    listen 80;
-    listen 443;
-    server_name *.symfony.php71[DOMAINSUFFIX];
-
-    include "upstream/php71";
-    include "content/symfony";
-}
-
-server {
-    listen 80;
-    listen 443;
-    server_name *.symfony.php72[DOMAINSUFFIX];
-
-    include "upstream/php72";
-    include "content/symfony";
-}

@@ -3,33 +3,8 @@ server {
     listen 443 ssl http2 default_server;
     server_name [DOMAINSUFFIX];
 
-    include "upstream/php7";
+    include "content/vars";
+    include "upstream/select";
     include "content/default";
 }
 
-server {
-    listen 80;
-    listen 443 ssl http2;
-    server_name .php5[DOMAINSUFFIX];
-
-    include "upstream/php5";
-    include "content/default";
-}
-
-server {
-    listen 80;
-    listen 443 ssl http2;
-    server_name .php71[DOMAINSUFFIX];
-
-    include "upstream/php71";
-    include "content/default";
-}
-
-server {
-    listen 80;
-    listen 443 ssl http2;
-    server_name .php72[DOMAINSUFFIX];
-
-    include "upstream/php72";
-    include "content/default";
-}

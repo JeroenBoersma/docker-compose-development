@@ -1,6 +1,4 @@
 
-include "content/vars";
-
 set $MAGE_ROOT /data/$customer/$project/;
 set $MAGE_MODE developer;
 

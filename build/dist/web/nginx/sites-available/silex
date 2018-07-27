@@ -3,33 +3,8 @@ server {
     listen 443 ssl http2;
     server_name *.silex[DOMAINSUFFIX];
 
-    include "upstream/php7";
+    include "content/vars";
+    include "upstream/select";
     include "content/silex";
 }
 
-server {
-    listen 80;
-    listen 443;
-    server_name *.silex.php5[DOMAINSUFFIX];
-
-    include "upstream/php5";
-    include "content/silex";
-}
-
-server {
-    listen 80;
-    listen 443;
-    server_name *.silex.php71[DOMAINSUFFIX];
-
-    include "upstream/php71";
-    include "content/silex";
-}
-
-server {
-    listen 80;
-    listen 443;
-    server_name *.silex.php72[DOMAINSUFFIX];
-
-    include "upstream/php72";
-    include "content/silex";
-}
