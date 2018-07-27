@@ -24,7 +24,8 @@ init() {
     dc yml 'docker-compose.yml';
     dc yml_if 'build/dist/docker-compose-blackfire.yml' 'conf/blackfire';
     dc yml_if 'docker-custom.yml' 'docker-custom.yml';
-    dc yml_os
+    dc yml_os;
+    dc yml_ssh;
 
     dc mode 'run --rm';
 
@@ -121,6 +122,12 @@ dc() {
             DEV_YML=${DEV_YML}' -f '${DEV_WORKDIR}'/docker-compose-wsl.yml';
         else
             DEV_YML=${DEV_YML}' -f '${DEV_WORKDIR}'/docker-compose-linux.yml';
+        fi
+    }
+
+    yml_ssh() {
+        if [ -n "${SSH_AUTH_SOCK}" ]; then
+            yml build/dist/docker-compose-ssh.yml;
         fi
     }
 
