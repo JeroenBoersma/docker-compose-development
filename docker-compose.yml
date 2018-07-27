@@ -20,9 +20,9 @@ services:
     image: mailhog/mailhog
     network_mode: bridge
 
-  php:
+  php70:
     build:
-      context: build/dist/php7
+      context: build/dist/php70
     links:
       - db
       - mailcatch
@@ -32,9 +32,9 @@ services:
     volumes:
       - ${SSH_AUTH_SOCK}:/ssh-socket:ro
     network_mode: bridge
-  php5:
+  php56:
     build:
-      context: build/dist/php5
+      context: build/dist/php56
     links:
       - db
       - mailcatch
@@ -80,9 +80,8 @@ services:
       DOMAINSUFFIX: '.localhost'
     links:
       - mailcatch
-      - php:fpm
-      - php:fpm7
-      - php5:fpm5
+      - php70:fpm70
+      - php56:fpm56
       - php71:fpm71
       - php72:fpm72
     network_mode: bridge
