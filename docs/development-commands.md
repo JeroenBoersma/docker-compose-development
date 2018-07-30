@@ -6,6 +6,8 @@ To control your docker environment.
 
 - `build [IMAGE]`
   re-build a image
+- `changephp`
+  change current php version
 - `config`
   show docker-compose configuration
 - `down`
@@ -26,6 +28,8 @@ To control your docker environment.
   alias for `dev update && dev build && dev down && dev up`
 - `restart [CONTAINER]`
   restart all or a specific container
+- `setup`
+  Run setup for defaults
 - `start`
   start all exising container, will not create them if they don't exist(use `up` instead)
 - `status`
