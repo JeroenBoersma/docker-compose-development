@@ -37,7 +37,7 @@ setup() {
     }
 
     php() {
-        dc php && echo 'PHP configured' && return 1;
+        dc php && echo 'PHP configured with version '${DEV_PHP} && return 1;
 
         local versions="`dc php_versions`" version='';
         echo "Which default PHP version should we enable";
