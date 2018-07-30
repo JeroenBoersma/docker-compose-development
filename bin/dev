@@ -21,6 +21,9 @@ init() {
         DEV_SUDO='sudo';
     fi
 
+    dc env conf/mysql; # fallback
+    dc env .env;
+
     dc yml 'docker-compose.yml';
     dc yml_if 'build/dist/docker-compose-blackfire.yml' 'conf/blackfire';
     dc yml_if 'docker-custom.yml' 'docker-custom.yml';
@@ -167,6 +170,20 @@ dc() {
 
         check $DEV_WORKDIR/workspace && return 0;
         return 1;
+    }
+
+    env() {
+        local envfile=${DEV_WORKDIR}/$1 a='' c='';
+        if [ ! -e ${envfile} ]; then
+           return 1;
+        fi
+        for a in `cat ${envfile}`; do
+            if [ "${a:0:1}" == "#" ]; then
+                continue;
+            fi
+            c='export '${a};
+            ${c};
+        done
     }
 
     $*;

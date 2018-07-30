@@ -7,14 +7,12 @@ setup() {
     cd ${DEV_DIR};
 
     mysql() {
-        if [ -e ${DEV_WORKDIR}/conf/mysql ]; then
-            echo 'Looks to me that this machine already has MySQL configuration';
-            return 1;
-        fi
+        if [ -z "${MYSQL_ROOT_PASSWORD}" ]; then
+            export MYSQL_ROOT_PASSWORD="`< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32};echo;`";
+            echo 'MYSQL_ROOT_PASSWORD='${MYSQL_ROOT_PASSWORD} >> ${DEV_WORKDIR}/.env;
+            echo 'Created a random root password for MySQL stored in '${DEV_WORKDIR}'/.env, to login as root use `dev myroot`';
+        fi;
 
-        local randompass="`< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32};echo;`";
-        sed 's/\[YOURPASSWORDGOESHERE\]/'${randompass}'/' ${DEV_WORKDIR}/conf/mysql.dist > ${DEV_WORKDIR}/conf/mysql;
-        echo 'Created a random root password for MySQL "'${randompass}'", to login as root use `dev myroot`';
 
         if [ -z "`docker volume ls -q -f 'name=dockerdev-mysql-volume'`" ]; then
             echo 'Create a persistant database volume';
@@ -23,13 +21,17 @@ setup() {
 
         echo 'Starting regular database user, waiting for db to become ready';
         ./${DEV_SELF} up db;
-        ./${DEV_SELF} logs -f db 2>&1 | grep -m1 'mysqld: ready for connections.' >/dev/null;
+        ./${DEV_SELF} logs -f db 2>&1 | grep -m1 'ready for connections';
 
         local user=${USER};
+
+        # Check if already exists
+        echo "select * from mysql.user where user='${user}';" | dev myroot | grep "${user}" >/dev/null && return 1;
+
         echo 'Database user has access to databases "'${user}'_*"';
         echo '';
-        echo "create user '${user}' | ./${DEV_SELF} myroot;
-        echo "grant all on ${user}.* to '${user}' | ./${DEV_SELF} myroot;
+        echo "create user '${user}'" | ./${DEV_SELF} myroot;
+        echo "grant all on ${user}.* to '${user}'" | ./${DEV_SELF} myroot;
         echo "update mysql.db set db = '${user}\_%' where user = '${user}';" | ./${DEV_SELF} myroot;
         echo 'flush privileges;' | ./${DEV_SELF} myroot;
 
@@ -45,10 +47,29 @@ setup() {
             echo "- ${v}";
         done
 
-        read -p'?' version;
+        read -p'? ' version;
         [ -z "${version}" ] && return 1;
 
         touch ${DEV_WORKDIR}/workspace/.${version};
+
+        return 0;
+    }
+
+    suffix() {
+        if [ -n "${DOMAINSUFFIX}" ]; then
+            echo 'Listening on "*'${DOMAINSUFFIX}'"';
+            return 1;
+        fi
+
+        local suffix='' default='.localhost';
+        echo 'Which domain suffix do you want to listen to - default: '${default}'';
+        read -p' ' suffix;
+        if [ -z "${suffix}" ]; then
+            suffix=${default};
+        fi
+
+        echo 'DOMAINSUFFIX='${suffix} >> ${DEV_WORKDIR}/.env;
+        export DOMAINSUFFIX=${suffix};
 
         return 0;
     }
@@ -64,8 +85,9 @@ setup() {
         ./${DEV_SELF} profile;
     }
 
-    mysql;
+    suffix;
     php;
+    mysql;
     start;
     shell;
 }

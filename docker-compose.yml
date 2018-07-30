@@ -10,8 +10,8 @@ services:
     volumes:
       - ./conf.d/mysql:/etc/mysql/conf.d:ro
       - dockerdev-mysql-volume:/var/lib/mysql:rw
-    env_file:
-      - ./conf/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD
     network_mode: bridge
     ports:
       - 127.0.0.1:3306:3306
@@ -61,7 +61,7 @@ services:
     build:
       context: build/dist/web
     environment:
-      DOMAINSUFFIX: '.localhost'
+      - DOMAINSUFFIX
     links:
       - mailcatch
       - php70:fpm
