@@ -28,6 +28,8 @@ To control your docker environment.
   alias for `dev update && dev build && dev down && dev up`
 - `restart [CONTAINER]`
   restart all or a specific container
+- `run`
+  run one-off commands in new container
 - `setup`
   Run setup for defaults
 - `start`
