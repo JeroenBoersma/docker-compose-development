@@ -21,19 +21,25 @@ setup() {
 
         echo 'Starting regular database user, waiting for db to become ready';
         ./${DEV_SELF} up db;
-        ./${DEV_SELF} logs -f db 2>&1 | grep -m1 'ready for connections';
+        while true; do
+            ./${DEV_SELF} logs db 2>&1 | grep 'port: 3306  Percona' > /dev/null && break;
+            echo -n '.';
+            sleep 1;
+        done
+        echo '';
 
         local user=${USER};
 
         # Check if already exists
-        echo "select * from mysql.user where user='${user}';" | dev myroot | grep "${user}" >/dev/null && return 1;
+        echo "select * from mysql.user where user='${user}';" | dev myroot 2>/dev/null| grep "${user}" >/dev/null && return 1;
 
         echo 'Database user has access to databases "'${user}'_*"';
         echo '';
-        echo "create user '${user}'" | ./${DEV_SELF} myroot;
-        echo "grant all on ${user}.* to '${user}'" | ./${DEV_SELF} myroot;
-        echo "update mysql.db set db = '${user}\_%' where user = '${user}';" | ./${DEV_SELF} myroot;
-        echo 'flush privileges;' | ./${DEV_SELF} myroot;
+        echo "\
+create user '${user}';\
+grant all on ${user}.* to '${user}';\
+update mysql.db set db = '${user}\_%' where user = '${user}';\
+flush privileges;" | ./${DEV_SELF} myroot 2>/dev/null;
 
         return 0;
     }

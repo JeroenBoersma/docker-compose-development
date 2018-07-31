@@ -1,8 +1,8 @@
 
 cd ${DEV_DIR};
 
-if [ -n "$@" ]; then
-    services="$@";
+if [ -n "$*" ]; then
+    services="$*";
 else
     services=`./${DEV_SELF} config --services`;
 fi
@@ -19,7 +19,7 @@ fi
 
 dc yml_all;
 dc mode build;
-dc cmd "${userarg} ${grouparg} $@";
+dc cmd "${userarg} ${grouparg}"
 
 for a in ${services}; do
     cmd="`dc show` $a";
