@@ -69,23 +69,16 @@ Make sure that you have the prerequisites installed and running correctly before
 ```
 git clone git@github.com:JeroenBoersma/docker-compose-development.git development
 ```
- 2. Create a new persistent data volume with:
-```
-docker volume create --name dockerdev-mysql-volume
-```
-Or, if you already were using this repository before (or want a local directory), you can map the existing volume with:
+ 2. Run `bin/dev setup`
+This will automaticly create a root user with a random password and adds your user with restricted rights.
+If you were already using this repository before (or want a local directory), you can map the existing volume with:
 ```
 docker volume create -o 'type=none' -o 'device='${PWD}'/mysql' -o 'o=bind' dockerdev-mysql-volume
 ```
- 3. Configure you MySQL credentials by copying [conf/mysql.dist](conf/mysql.dist) to `conf/mysql` and setting your strong awesome password.
- 4. Start your containers!
- ```
- ./bin/dev up
- ```
- Or, if you are on OSX:
- ```
- docker-sync start
- ```
+Or, if you are on OSX:
+```
+docker-sync start
+```
 
 A optional, but recommended, step to take is to add the provided `.bin/dev` command to your system so you can use its commands anywhere you like.
 
