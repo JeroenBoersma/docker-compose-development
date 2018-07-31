@@ -1,6 +1,11 @@
 
 cd ${DEV_DIR};
-services=`./${DEV_SELF} config --services`;
+
+if [ -n "$@" ]; then
+    services="$@";
+else
+    services=`./${DEV_SELF} config --services`;
+fi
 
 user_id=`id -u`;
 group_id=`id -g`;

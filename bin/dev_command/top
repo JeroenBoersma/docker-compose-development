@@ -1,5 +1,6 @@
 
 dc yml build/dist/docker-compose-ctop.yml
+dc opt '--no-deps';
 
 dc service ctop
 dc cmd -s cpu -f ${DEV_PROJECT}

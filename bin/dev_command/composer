@@ -1,6 +1,7 @@
 
 dc service ${DEV_PHP};
 dc opt '-T';
+dc opt '--no-deps';
 dc opt "-u $(id -u):$(id -g)"
 
 if [ -n "${DEV_PROJECTDIR}" ]; then

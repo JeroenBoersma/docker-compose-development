@@ -2,6 +2,7 @@
 
 dc mode run;
 dc service $1;
+dc opt '--no-deps';
 
 if [ -n "${DEV_PROJECTDIR}" ]; then
     dc opt "-w /data/${DEV_PROJECTDIR}"

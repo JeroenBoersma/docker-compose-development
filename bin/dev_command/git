@@ -1,6 +1,7 @@
 
 dc service ${DEV_PHP};
 dc opt "-u $(id -u):$(id -g)"
+dc opt '--no-deps';
 
 if [ -n "${DEV_PROJECTDIR}" ]; then
     dc opt "-w /data/${DEV_PROJECTDIR}"

@@ -1,6 +1,8 @@
 
 dc yml build/dist/docker-compose-dbclient.yml;
 dc opt '-T';
+dc opt '--no-deps';
+
 dc service 'dbclient';
 dc cmd mysqldump "-h db -u ${USER} $*";
 
