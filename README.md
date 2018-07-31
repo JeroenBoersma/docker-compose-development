@@ -71,6 +71,9 @@ git clone git@github.com:JeroenBoersma/docker-compose-development.git developmen
 ```
  2. Run `bin/dev setup`
 This will automaticly create a root user with a random password and adds your user with restricted rights.
+
+
+* persistant MySQL on a location of your choice.
 If you were already using this repository before (or want a local directory), you can map the existing volume with:
 ```
 mkdir -p mysql;
