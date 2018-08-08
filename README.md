@@ -26,6 +26,7 @@ We follow a [Code of Conduct](docs/code-of-conduct.md).
     * [How to use different PHP versions](docs/how-to-use-different-php-versions.md)
 		* [Hosts and file structure](docs/hosts-and-file-structure.md)
 		* [Sharing with the world](docs/sharing-with-the-world-via-ngrok.md)
+		* [Implement a new or old PHP version](docs/installing-unsupported-php-versions.md)
     * [F.A.Q.](docs/faq.md)
     * [UFW firewall](docs/ufw-firewall.md)
 
