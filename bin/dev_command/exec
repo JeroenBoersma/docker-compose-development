@@ -1,6 +1,13 @@
 
 dc mode exec;
-dc service $1;
+
+if [ "$1" == "php" ]; then
+    dc service ${DEV_PHP};
+else
+    dc service $1;
+fi
+
 shift;
+
 dc cmd "$*";
 

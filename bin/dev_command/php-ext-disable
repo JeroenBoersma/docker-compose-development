@@ -1,0 +1,11 @@
+
+cd ${DEV_DIR};
+
+for module in $*; do
+    ${DEV_SELF} exec ${DEV_PHP} find /usr/local/etc/php/conf.d -name "docker-php-ext-*${module}*" -print -delete;
+done
+
+${DEV_SELF} stop ${DEV_PHP};
+${DEV_SELF} start ${DEV_PHP};
+
+exit 0;
