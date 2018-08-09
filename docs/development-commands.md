@@ -67,6 +67,10 @@ There are also useful tools.
   monitor your running containers and see how much resources they are eating
 - `php [OPTIONS]`
   run php commands
+- `php-ext-enable [EXTENSION]`
+  temporarily enable module for running container, use with `dev exec php php -v`
+- `php-ext-disable [EXTENSION]`
+  temporarily diable module for running container, use with `dev exec php php -v`
 
 You can run these commands from within your workspace directories.
 For example: `cd workspace/test/project/htdocs` `../../../../bin/dev php info.php` (or `dev php info.php` if you've added the bin directory to your path)
