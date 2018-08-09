@@ -1,0 +1,13 @@
+
+dc mode exec;
+dc service ${DEV_PHP};
+
+dc cmd docker-php-ext-enable $*;
+
+dc run;
+
+cd ${DEV_DIR};
+${DEV_SELF} stop ${DEV_PHP};
+${DEV_SELF} start ${DEV_PHP};
+exit 0;
+
