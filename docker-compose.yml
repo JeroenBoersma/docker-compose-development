@@ -70,6 +70,3 @@ services:
       - php71:fpm71
       - php72:fpm72
     network_mode: bridge
-    ports:
-      - 127.0.0.1:443:443
-      - 127.0.0.1:80:80

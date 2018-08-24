@@ -27,6 +27,7 @@ init() {
     dc yml 'docker-compose.yml';
     dc yml_if 'build/dist/docker-compose-blackfire.yml' 'conf/blackfire';
     dc yml_if 'docker-custom.yml' 'docker-custom.yml';
+    dc yml_if 'build/dist/docker-compose-varnish.yml' 'conf/default.vcl' || dc yml 'build/dist/docker-compose-no-varnish.yml';
     dc yml_os;
     dc yml_ssh;
 

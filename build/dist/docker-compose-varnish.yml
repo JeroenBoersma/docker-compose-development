@@ -1,0 +1,16 @@
+version: '2'
+
+services:
+  varnish:
+    image: million12/varnish
+    network_mode: bridge
+    ports:
+      - "127.0.0.1:80:80"
+    links:
+      - "web:web"
+      - "web:backend"
+    environment:
+      - CACHE_SIZE
+    volumes:
+      - ./conf/default.vcl:/etc/varnish/default.vcl
+
