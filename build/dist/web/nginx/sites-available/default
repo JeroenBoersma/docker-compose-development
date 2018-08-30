@@ -1,6 +1,5 @@
 server {
     listen 80 default_server;
-    listen 443 ssl http2 default_server;
     server_name [DOMAINSUFFIX];
 
     include "content/base";
