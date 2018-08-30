@@ -1,7 +1,7 @@
 
 echo 'PHP configured version '${DEV_PHP};
 
-local versions="`dc php_versions`" v='' version='' dir=${DEV_WORKDIR}/workspace;
+local versions="`dc php_versions`" v='' version='' dir=${DEV_WORKSPACE_PATH};
 
 if [ -z "$1" ]; then
     exit 0;
@@ -23,8 +23,8 @@ if [ "${version}" == "${DEV_PHP}" ]; then
     exit 2;
 fi
 
-if [ -n "${DEV_PROJECTDIR}" ]; then
-    dir=${DEV_WORKDIR}/workspace/${DEV_PROJECTDIR};
+if [ -n "${DEV_PROJECTPATH}" ]; then
+    dir=${DEV_WORKSPACE_PATH}/DEV_PROJECTPATH};
 fi
 
 echo 'Update to '${version};

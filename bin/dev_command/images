@@ -1,5 +1,5 @@
 
-grep -hE '(image:|FROM )' ${DEV_WORKDIR}/docker-compose* ${DEV_WORKDIR}/build/*/*/Dockerfile | \
+grep -hE '(image:|FROM )' ${DEV_WORKPATH}/docker-compose* ${DEV_WORKPATH}/build/*/*/Dockerfile | \
     awk '{print $2;}' | \
     sed -e 's/$/:latest/' -e 's/\(:[^:]*\):latest$/\1/' | \
     sort | \

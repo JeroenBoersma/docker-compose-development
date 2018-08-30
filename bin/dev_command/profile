@@ -1,6 +1,6 @@
 
-echo "export PATH=${DEV_DIR}:\${PATH};";
-echo "alias cdw='cd ${DEV_WORKDIR}/workspace';";
+echo "export PATH=${DEV_PATH}:\${PATH};";
+echo "alias cdw='cd ${DEV_WORKSPACE_PATH}';";
 
 exit 0;
 

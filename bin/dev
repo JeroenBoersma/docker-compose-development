@@ -4,15 +4,16 @@ init() {
 
     DEV_SELF=$(basename $0);
 
-    DEV_DIR=$(realpath $(dirname $0));
-    DEV_WORKDIR=$(dirname ${DEV_DIR});
-    DEV_PROJECT=$(basename ${DEV_WORKDIR});
+    DEV_PATH=$(realpath $(dirname $0));
+    DEV_WORKPATH=$(dirname ${DEV_PATH});
+    DEV_PROJECT=$(basename ${DEV_WORKPATH});
     DEV_USERDIR=${PWD};
 
-    DEV_COMMANDDIR=${DEV_DIR}/dev_command;
+    DEV_COMMANDPATH=${DEV_PATH}/dev_command;
 
-    DEV_WORKSPACE="`echo ${DEV_WORKDIR}/workspace | sed -e 's/\\//\\\\\//g'`";
-    DEV_PROJECTDIR=`echo ${DEV_USERDIR} | sed -e "s/${DEV_WORKSPACE}\///"`;
+    DEV_WORKSPACE_PATH="${DEV_WORKPATH}/workspace";
+    DEV_WORKSPACE="`echo ${DEV_WORKSPACE_PATH} | sed -e 's/\\//\\\\\//g'`";
+    DEV_PROJECTPATH=`echo ${DEV_USERDIR} | sed -e "s/${DEV_WORKSPACE}\///"`;
 
     DEV_PHP='php70';
 
@@ -37,11 +38,11 @@ init() {
     DEV_COMMAND=$1;
     DEV_HOSTNAME='';
 
-    if [ "${DEV_PROJECTDIR}" == "${DEV_USERDIR}" ]; then
+    if [ "${DEV_PROJECTPATH}" == "${DEV_USERDIR}" ]; then
         # Not in WORKSPACE
-        DEV_PROJECTDIR='';
+        DEV_PROJECTPATH='';
     else
-        DEV_HOSTNAME=`echo ${DEV_PROJECTDIR} | sed -e 's/\//\./g' -e 's/^\([^\.]*\.[^\.]*\)\.\{0,1\}.*$/\\1.dev/'`;
+        DEV_HOSTNAME=`echo ${DEV_PROJECTPATH} | sed -e 's/\//\./g' -e 's/^\([^\.]*\.[^\.]*\)\.\{0,1\}.*$/\\1.dev/'`;
         if [ ".." != "`echo ${DEV_HOSTNAME} | sed -e 's/[^\.]//g'`" ]; then
             DEV_HOSTNAME='';
         fi
@@ -50,14 +51,16 @@ init() {
     # Check which php version to use
     dc php;
 
-    # Change to command directory
-    # This is so all docker-compose commands work out of the box
-    cd ${DEV_COMMANDDIR};
-
-    # Check if command exists and is executable
+    # Check if command exists
     DEV_EXISTS=false;
-    if [ -n "${DEV_COMMAND}" ] && [ -f "${DEV_COMMAND}" ]; then
+    if [ -n "${DEV_COMMAND}" ] && [ -f "${DEV_COMMANDPATH}/${DEV_COMMAND}" ]; then
         DEV_EXISTS=true;
+    fi
+
+    # Check if a custom command exists and is executable
+    DEV_CUSTOM_EXISTS=false;
+    if [ -n "${DEV_COMMAND}" ] && [ -x "${DEV_WORKSPACE_PATH}/bin/${DEV_COMMAND}" ]; then
+        DEV_CUSTOM_EXISTS=true;
     fi
 }
 
@@ -94,7 +97,7 @@ dc() {
         shift;
 
         while [ -n "$1" ]; do
-            if [ ! -e ${DEV_WORKDIR}/$1 ]; then
+            if [ ! -e ${DEV_WORKPATH}/$1 ]; then
                 return 1;
             fi
             shift;
@@ -116,16 +119,16 @@ dc() {
         if [ -n "`echo $DEV_YML | grep $1`" ]; then
             return;
         fi
-        DEV_YML=${DEV_YML}' -f '${DEV_WORKDIR}'/'$1;
+        DEV_YML=${DEV_YML}' -f '${DEV_WORKPATH}'/'$1;
     }
 
     yml_os() {
         if [[ "$(uname)" == 'Darwin' ]]; then
-            DEV_YML=${DEV_YML}' -f '${DEV_WORKDIR}'/docker-compose-osx.yml';
+            DEV_YML=${DEV_YML}' -f '${DEV_WORKPATH}'/docker-compose-osx.yml';
         elif [[ -n "`uname -r | grep Microsoft`" ]]; then
-            DEV_YML=${DEV_YML}' -f '${DEV_WORKDIR}'/docker-compose-wsl.yml';
+            DEV_YML=${DEV_YML}' -f '${DEV_WORKPATH}'/docker-compose-wsl.yml';
         else
-            DEV_YML=${DEV_YML}' -f '${DEV_WORKDIR}'/docker-compose-linux.yml';
+            DEV_YML=${DEV_YML}' -f '${DEV_WORKPATH}'/docker-compose-linux.yml';
         fi
     }
 
@@ -144,7 +147,7 @@ dc() {
     }
 
     php_versions() {
-        grep -h '^\s*- php[0-9][0-9]:fpm' ${DEV_WORKDIR}/docker-*.yml | sed -e 's/\(\s*\|:.*$\|-\)//g' | sort -ur;
+        grep -h '^\s*- php[0-9][0-9]:fpm' ${DEV_WORKPATH}/docker-*.yml | sed -e 's/\(\s*\|:.*$\|-\)//g' | sort -ur;
     }
 
     php() {
@@ -161,20 +164,20 @@ dc() {
             return 1;
         }
 
-        local project=${DEV_WORKDIR}/workspace/${DEV_PROJECTDIR};
-        if [ -n "${DEV_PROJECTDIR}" ]; then
-            while [ "${project}" != "${DEV_WORKDIR}/workspace" ]; do
+        local project=${DEV_WORKSPACE_PATH}/${DEV_PROJECTPATH};
+        if [ -n "${DEV_PROJECTPATH}" ]; then
+            while [ "${project}" != "${DEV_WORKSPACE_PATH}" ]; do
                 check ${project} && return 0;
                 project=$(dirname ${project});
             done
         fi
 
-        check $DEV_WORKDIR/workspace && return 0;
+        check ${DEV_WORKSPACE_PATH} && return 0;
         return 1;
     }
 
     env() {
-        local envfile=${DEV_WORKDIR}/$1 a='' c='';
+        local envfile=${DEV_WORKPATH}/$1 a='' c='';
         if [ ! -e ${envfile} ]; then
            return 1;
         fi
@@ -191,26 +194,43 @@ dc() {
     return $?
 }
 
-exec() {
+exec_command() {
+    # Change to command directory
+    # This is so all docker-compose commands work out of the box
+    cd ${DEV_COMMANDPATH};
+
     # Load command
     # Can exit if implemented itself
-    . ./${DEV_COMMAND} $*;
+    . ./${DEV_COMMAND} $@;
 
     # Execute command
     dc run;
     exit $?;
 }
 
+exec_custom() {
+    # Change to command directory
+    # This is so all docker-compose commands work out of the box
+    cd ${DEV_COMMANDPATH};
+
+    # Load command
+    # Can exit if implemented itself
+    . ./custom ${DEV_COMMAND} $@;
+
+    dc run;
+    exit $?;
+}
+
 usage() {
-    echo "Usage ${DEV_SELF} ["`ls`"]";
-    exit 1;
+    DEV_COMMAND=usage;
+    exec_command;
 }
 
 main() {
     init $@;
     shift;
 
-    ${DEV_EXISTS} && exec $@ || usage;
+    ${DEV_EXISTS} && exec_command $@ || ${DEV_CUSTOM_EXISTS} && exec_custom $@ || usage;
 }
 
 main $@;

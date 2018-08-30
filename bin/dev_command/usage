@@ -1,0 +1,22 @@
+
+echo "Usage ${DEV_SELF} [COMMAND]"
+echo '';
+echo 'COMMAND:'
+for command in `ls`; do
+    echo " - $command";
+done
+
+if [ ! -e ${DEV_WORKSPACE_PATH}/bin ]; then
+    exit 1;
+fi
+
+echo '';
+echo 'COMMAND: (custom)';
+
+cd ${DEV_WORKSPACE_PATH}/bin;
+for command in `ls`; do
+    echo " - $command";
+done
+
+exit 1;
+

@@ -1,10 +1,15 @@
 
 dc service ${DEV_PHP};
 dc opt "-u $(id -u):$(id -g)"
-dc opt '--no-deps';
+dc opt "--no-deps";
 
 if [ -n "${DEV_PROJECTPATH}" ]; then
     dc opt "-w /data/${DEV_PROJECTPATH}"
 fi
 
-dc cmd magerun2 "$*";
+if [ $# -lt 1 ]; then
+    usage;
+fi
+
+dc cmd "/data/bin/$*";
+

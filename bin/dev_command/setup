@@ -4,13 +4,13 @@ echo '';
 
 setup() {
 
-    cd ${DEV_DIR};
+    cd ${DEV_PATH};
 
     mysql() {
         if [ -z "${MYSQL_ROOT_PASSWORD}" ]; then
             export MYSQL_ROOT_PASSWORD="`< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32};echo;`";
-            echo 'MYSQL_ROOT_PASSWORD='${MYSQL_ROOT_PASSWORD} >> ${DEV_WORKDIR}/.env;
-            echo 'Created a random root password for MySQL stored in '${DEV_WORKDIR}'/.env, to login as root use `dev myroot`';
+            echo 'MYSQL_ROOT_PASSWORD='${MYSQL_ROOT_PASSWORD} >> ${DEV_WORKPATH}/.env;
+            echo 'Created a random root password for MySQL stored in '${DEV_WORKPATH}'/.env, to login as root use `dev myroot`';
         fi;
 
 
@@ -56,7 +56,7 @@ flush privileges;" | ./${DEV_SELF} myroot 2>/dev/null;
         read -p'? ' version;
         [ -z "${version}" ] && return 1;
 
-        touch ${DEV_WORKDIR}/workspace/.${version};
+        touch ${DEV_WORKSPACE_PATH}/.${version};
 
         return 0;
     }
@@ -74,7 +74,7 @@ flush privileges;" | ./${DEV_SELF} myroot 2>/dev/null;
             suffix=${default};
         fi
 
-        echo 'DOMAINSUFFIX='${suffix} >> ${DEV_WORKDIR}/.env;
+        echo 'DOMAINSUFFIX='${suffix} >> ${DEV_WORKPATH}/.env;
         export DOMAINSUFFIX=${suffix};
 
         return 0;

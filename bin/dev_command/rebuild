@@ -1,5 +1,5 @@
 
-cd ${DEV_DIR};
+cd ${DEV_PATH};
 
 ./${DEV_SELF} update && \
     ./${DEV_SELF} build && \

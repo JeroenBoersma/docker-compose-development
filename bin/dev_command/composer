@@ -4,8 +4,8 @@ dc opt '-T';
 dc opt '--no-deps';
 dc opt "-u $(id -u):$(id -g)"
 
-if [ -n "${DEV_PROJECTDIR}" ]; then
-    dc opt "-w /data/${DEV_PROJECTDIR}"
+if [ -n "${DEV_PROJECTPATH}" ]; then
+    dc opt "-w /data/${DEV_PROJECTPATH}"
 fi
 
 dc cmd composer "$*";

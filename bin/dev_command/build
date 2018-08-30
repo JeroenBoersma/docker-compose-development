@@ -1,5 +1,5 @@
 
-cd ${DEV_DIR};
+cd ${DEV_PATH};
 
 if [ -n "$*" ]; then
     services="$*";

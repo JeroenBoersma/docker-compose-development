@@ -6,7 +6,7 @@ dc cmd docker-php-ext-enable $*;
 
 dc run;
 
-cd ${DEV_DIR};
+cd ${DEV_PATH};
 ${DEV_SELF} stop ${DEV_PHP};
 ${DEV_SELF} start ${DEV_PHP};
 exit 0;
