@@ -1,4 +1,4 @@
-# If you ever have to use a (default) unsupported PHP version, proceed as follows.
+# If you need to use a different PHP version other than the out-of-the-box supported versions than follow instructions below.
 
 Example written for PHP5.4
 
@@ -37,9 +37,7 @@ Configuration finished, whoop
 - goto your project root `cdw; cd myawesome/project`
 - `dev changephp php54`
 
-If you have a succesful build for a new PHP version 7.3 for instance. Please create a PR on https://github.com/JeroenBoersma/docker-php
-so we have a base image where we can build uppon.
-And create a PR here to update the `docker-compose.yml`/`docs`/`nginx` 
-
-* also created this for own reference
+If you have a succesful build for a new PHP version 7.3 for instance.
+Tell us and create a PR on https://github.com/JeroenBoersma/docker-php
+And a PR here to update the `docker-compose.yml`/`docs`/`nginx` 
 
