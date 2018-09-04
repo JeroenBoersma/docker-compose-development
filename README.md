@@ -26,6 +26,7 @@ We follow a [Code of Conduct](docs/code-of-conduct.md).
     * [How to use different PHP versions](docs/how-to-use-different-php-versions.md)
 		* [Hosts and file structure](docs/hosts-and-file-structure.md)
 		* [Sharing with the world](docs/sharing-with-the-world-via-ngrok.md)
+		* [Implement a new or old PHP version](docs/installing-unsupported-php-versions.md)
     * [F.A.Q.](docs/faq.md)
     * [UFW firewall](docs/ufw-firewall.md)
 
@@ -162,7 +163,7 @@ To update your existing installation, follow these steps:
 * [Used (base) images](docs/used-base-images.md)
 * [Customize Docker Containers](docs/customize-docker-containers.md)
 * [Configure Blackfire](docs/configure-blackfire.md)
-* [How to use different PHP versions](docs/how-to-use-different-php-versions.md)
+* [Install other PHP versions](docs/install-other-php-versions.md)
 * [Hosts and file structure](docs/hosts-and-file-structure.md)
 * [F.A.Q.](docs/faq.md)
 
