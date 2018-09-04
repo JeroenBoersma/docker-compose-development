@@ -16,7 +16,7 @@ We follow a [Code of Conduct](docs/code-of-conduct.md).
 		* [By using DNSMASQ.](#by-using-dnsmaws)
 		* [Or by using the hostfile.](#or-by-using-the-hostfile)
 	* [3). Now, setup your projects!](#3-now-setup-your-projects)
-* [Update from exsisting environment.](#update)
+* [Update your existing installation](#update)
 * [But wait, there is more!](#but-wait-there-is-more)
     * [Development Commands](docs/development-commands.md)
     * [MySQL, MailHog, Redis, Cronjobs](docs/mysql-mailhog-redis-cronjobs.md)
@@ -146,14 +146,14 @@ It will try to connect to the host `172.17.0.1:9000` by default.
 Make sure to add a file mapping in your IDE:
 `./workspace/customer/project` => `/data/customer/project`
 
-# Update from exsisting environment
+# Update your existing installation
 
-If you update from a existing environment, follow these steps:
-- dev down
-- go to the dev folder
-- git pull origin master 
-- dev rebuild
-- bin/dev setup
+To update your existing installation, follow these steps:
+
+- go to the development directory
+- `git pull origin master`
+- `bin/dev rebuild`
+- `bin/dev setup`
 
 
 # But wait, there is more!
