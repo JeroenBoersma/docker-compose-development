@@ -1,0 +1,36 @@
+
+echo 'PHP configured version '${DEV_PHP};
+
+local versions="`dc php_versions`" v='' version='' dir=${DEV_WORKSPACE_PATH};
+
+if [ -z "$1" ]; then
+    exit 0;
+fi
+
+for v in ${versions}; do
+    if [ "$1" == "${v}" ]; then
+        version=${v};
+    fi
+done
+
+if [ -z "${version}" ]; then
+    echo 'Provide valid PHP version `dev changephp {VERSION}`';
+    echo ${versions};
+    exit 1;
+fi
+
+if [ "${version}" == "${DEV_PHP}" ]; then
+    exit 2;
+fi
+
+if [ -n "${DEV_PROJECTPATH}" ]; then
+    dir=${DEV_WORKSPACE_PATH}/${DEV_PROJECTPATH};
+fi
+
+echo 'Update to '${version};
+
+rm ${dir}/.php[1-9][0-9] >/dev/null 2>&1;
+touch ${dir}/.${version};
+
+exit 0;
+
