@@ -15,6 +15,10 @@ echo 'COMMAND: (custom)';
 
 cd ${DEV_WORKSPACE_PATH}/bin;
 for command in `ls`; do
+    if [ ! -x `realpath ${command}` ]; then
+        continue;
+    fi
+
     echo " - $command";
 done
 

@@ -1,4 +1,4 @@
 
 dc mode stop;
-dc cmd "$*";
+dc cmd "$@";
 

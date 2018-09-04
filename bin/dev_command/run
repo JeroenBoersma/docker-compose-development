@@ -1,11 +1,11 @@
 
 dc service $1;
+shift;
 dc opt '--no-deps';
 
 if [ -n "${DEV_PROJECTPATH}" ]; then
     dc opt "-w /data/${DEV_PROJECTPATH}"
 fi
 
-shift;
-dc cmd "$*";
+dc cmd "$@";
 

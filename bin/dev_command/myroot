@@ -3,5 +3,5 @@ dc yml build/dist/docker-compose-dbclient.yml;
 dc service dbclient;
 dc opt '--no-deps';
 
-dc cmd mysql "-h db -uroot -p${MYSQL_ROOT_PASSWORD} $*";
+dc cmd mysql "-h db -uroot -p${MYSQL_ROOT_PASSWORD} $@";
 

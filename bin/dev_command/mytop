@@ -3,5 +3,5 @@ dc yml build/dist/docker-compose-mytop.yml;
 dc service mytop;
 dc opt '--no-deps';
 
-dc cmd "-h db -u ${USER} -dinformation_schema $*";
+dc cmd "-h db -u ${USER} -dinformation_schema $@";
 

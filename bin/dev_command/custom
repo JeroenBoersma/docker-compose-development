@@ -11,5 +11,5 @@ if [ $# -lt 1 ]; then
     usage;
 fi
 
-dc cmd "/data/bin/$*";
+dc cmd "/data/bin/$@";
 

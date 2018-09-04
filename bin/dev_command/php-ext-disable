@@ -1,7 +1,7 @@
 
 cd ${DEV_PATH};
 
-for module in $*; do
+for module in "$@"; do
     ${DEV_SELF} exec ${DEV_PHP} find /usr/local/etc/php/conf.d -name "docker-php-ext-*${module}*" -print -delete;
 done
 

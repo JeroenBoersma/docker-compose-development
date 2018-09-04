@@ -1,4 +1,4 @@
 
 dc mode logs;
-dc cmd "$*";
+dc cmd "$@";
 

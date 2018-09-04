@@ -1,5 +1,5 @@
 
-dc cmd "$*";
+dc cmd "$@";
 
 dc mode stop;
 dc run;

@@ -25,6 +25,7 @@ init() {
     dc env conf/mysql; # fallback
     dc env .env;
 
+    DEV_YML='';
     dc yml 'docker-compose.yml';
     dc yml_if 'build/dist/docker-compose-blackfire.yml' 'conf/blackfire';
     dc yml_if 'docker-custom.yml' 'docker-custom.yml';
@@ -85,11 +86,11 @@ dc() {
     }
 
     opt() {
-        DEV_DOCKEROPTS=${DEV_DOCKEROPTS}' '$*;
+        DEV_DOCKEROPTS=${DEV_DOCKEROPTS}' '"$@";
     }
 
     service() {
-        DEV_SERVICE=$*;
+        DEV_SERVICE="$@";
     }
 
     yml_if() {
@@ -139,11 +140,11 @@ dc() {
     }
 
     mode() {
-        DEV_MODE=$*;
+        DEV_MODE="$@";
     }
 
     cmd() {
-        DEV_CMD="$*";
+        DEV_CMD="$@";
     }
 
     php_versions() {
@@ -190,7 +191,7 @@ dc() {
         done
     }
 
-    $*;
+    "$@";
     return $?
 }
 
@@ -201,7 +202,7 @@ exec_command() {
 
     # Load command
     # Can exit if implemented itself
-    . ./${DEV_COMMAND} $@;
+    . ./${DEV_COMMAND} "$@";
 
     # Execute command
     dc run;
@@ -215,7 +216,7 @@ exec_custom() {
 
     # Load command
     # Can exit if implemented itself
-    . ./custom ${DEV_COMMAND} $@;
+    . ./custom ${DEV_COMMAND} "$@";
 
     dc run;
     exit $?;
@@ -227,10 +228,10 @@ usage() {
 }
 
 main() {
-    init $@;
+    init "$@";
     shift;
 
-    ${DEV_EXISTS} && exec_command $@ || ${DEV_CUSTOM_EXISTS} && exec_custom $@ || usage;
+    ${DEV_EXISTS} && exec_command "$@" || ${DEV_CUSTOM_EXISTS} && exec_custom "$@" || usage;
 }
 
-main $@;
+main "$@";

@@ -7,4 +7,4 @@ if [ -n "${DEV_PROJECTPATH}" ]; then
     dc opt "-w /data/${DEV_PROJECTPATH}"
 fi
 
-dc cmd magerun "$*";
+dc cmd magerun "$@";

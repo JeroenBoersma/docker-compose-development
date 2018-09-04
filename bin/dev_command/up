@@ -10,5 +10,5 @@ if [ -z "${DOMAINSUFFIX}" ]; then
 fi
 
 dc mode 'up -d --no-recreate';
-dc cmd "$*";
+dc cmd "$@";
 

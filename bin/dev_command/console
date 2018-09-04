@@ -12,5 +12,5 @@ if [ -z "$*" ]; then
     dc cmd bash -l;
 else
     dc opt '-T';
-    dc cmd "$*";
+    dc cmd "$@";
 fi

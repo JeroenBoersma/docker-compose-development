@@ -1,5 +1,5 @@
 
 dc yml_all;
 dc mode config;
-dc cmd "$*";
+dc cmd "$@";
 

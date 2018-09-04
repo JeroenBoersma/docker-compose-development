@@ -2,7 +2,7 @@
 cd ${DEV_PATH};
 
 if [ -n "$*" ]; then
-    services="$*";
+    services="$@";
 else
     services=`./${DEV_SELF} config --services`;
 fi

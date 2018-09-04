@@ -4,5 +4,5 @@ dc opt '-T';
 dc opt '--no-deps';
 
 dc service 'dbclient';
-dc cmd mysqldump "-h db -u ${USER} $*";
+dc cmd mysqldump "-h db -u ${USER} $@";
 

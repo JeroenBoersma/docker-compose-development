@@ -9,5 +9,5 @@ dc service blackfireclient;
 dc opt '-T';
 dc opt "--no-deps";
 
-dc cmd blackfire "$*";
+dc cmd blackfire "$@";
 
