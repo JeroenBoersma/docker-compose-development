@@ -2,6 +2,9 @@
 dc yml build/dist/docker-compose-dbclient.yml;
 dc service dbclient;
 dc opt '--no-deps';
+if [ ! ${DEV_INTERACTIVE} ]; then
+    dc opt '-T';
+fi
 
 dc cmd mysql "-h db -u ${USER} $@";
 

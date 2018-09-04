@@ -2,6 +2,9 @@
 dc service ${DEV_PHP};
 dc opt "-u $(id -u):$(id -g)"
 dc opt '--no-deps';
+if [ ! ${DEV_INTERACTIVE} ]; then
+    dc opt '-T';
+fi
 
 if [ -n "${DEV_PROJECTPATH}" ]; then
     dc opt "-w /data/${DEV_PROJECTPATH}"

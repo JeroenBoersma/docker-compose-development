@@ -7,10 +7,13 @@ if [ -n "${DEV_PROJECTPATH}" ]; then
     dc opt "-w /data/${DEV_PROJECTPATH}"
 fi
 
-if [ -z "$*" ]; then
-    # Interactive mode
+dc cmd "$@";
+if [ $# -lt 1 ]; then
     dc cmd bash -l;
-else
-    dc opt '-T';
-    dc cmd "$@";
 fi
+
+if [ ! ${DEV_INTERACTIVE} ]; then
+    dc opt '-T';
+fi
+
+

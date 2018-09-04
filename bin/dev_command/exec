@@ -1,5 +1,8 @@
 
 dc mode exec;
+if [ ! ${DEV_INTERACTIVE} ]; then
+    dc opt '-T';
+fi
 
 if [ "$1" == "php" ]; then
     dc service ${DEV_PHP};

@@ -1,4 +1,7 @@
 
 dc mode logs;
+if [ ! ${DEV_INTERACTIVE} ]; then
+    dc opt '-T';
+fi
 dc cmd "$@";
 

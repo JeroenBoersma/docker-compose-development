@@ -17,6 +17,11 @@ init() {
 
     DEV_PHP='php70';
 
+    DEV_INTERACTIVE=false;
+    if [ -t "0" ] && [ -t "1" ]; then
+        DEV_INTERACTIVE=true;
+    fi
+
     DEV_SUDO='';
     if [ -z "`groups | grep docker`" ]; then
         DEV_SUDO='sudo';
