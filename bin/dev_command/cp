@@ -1,0 +1,21 @@
+
+replace_container() {
+    local a="$1";
+
+    if [ "${a/://}" == "$a" ]; then
+        echo $a;
+        return 0;
+    fi
+
+    local container=${a%:*};
+    echo "${DEV_PROJECT}_${container}_1:${a#*:}";
+    return 0;
+}
+
+from=`replace_container $1`;
+to=`replace_container $2`;
+
+cd ${DEV_USERDIR};
+docker cp "${from}" "${to}";
+exit $?;
+
