@@ -14,9 +14,9 @@ setup() {
         fi;
 
 
-        if [ -z "`docker volume ls -q -f 'name=dockerdev-mysql-volume'`" ]; then
+        if [ -z "`${DEV_SUDO} docker volume ls -q -f 'name=dockerdev-mysql-volume'`" ]; then
             echo 'Create a persistant database volume';
-            docker volume create --name dockerdev-mysql-volume;
+            ${DEV_SUDO} docker volume create --name dockerdev-mysql-volume;
         fi
 
         echo 'Starting regular database user, waiting for db to become ready';

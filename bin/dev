@@ -24,7 +24,7 @@ init() {
 
     DEV_SUDO='';
     if [ -z "`groups | grep docker`" ]; then
-        DEV_SUDO='sudo';
+        DEV_SUDO='sudo -E';
     fi
 
     dc env conf/mysql; # fallback

@@ -1,5 +1,5 @@
 
-if [ -z "`docker volume ls -q -f 'name=dockerdev-mysql-volume'`" ]; then
+if [ -z "`${DEV_SUDO} docker volume ls -q -f 'name=dockerdev-mysql-volume'`" ]; then
     echo 'No MySQL volume file found, first time here? Run "bin/dev setup" to setup the most important stuff';
     exit 1;
 fi
