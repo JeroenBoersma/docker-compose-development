@@ -1,5 +1,5 @@
 FROM nginx:alpine
-MAINTAINER Jeroen Boersma <jeroen@srcode.nl>
+LABEL maintainer="Jeroen Boersma <jeroen@srcode.nl>"
 
 COPY nginx /etc/nginx
 

@@ -1,5 +1,5 @@
 FROM srcoder/development-php:php71-fpm
-MAINTAINER Jeroen Boersma <jeroen@srcode.nl>
+LABEL maintainer="Jeroen Boersma <jeroen@srcode.nl>"
 
 ARG GID=1000
 ARG UID=1000
