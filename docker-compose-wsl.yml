@@ -13,6 +13,9 @@ services:
   php72:
     volumes:
     - /c/workspace:/data
+  php73:
+    volumes:
+    - /c/workspace:/data
   web:
     volumes:
     - /c/workspace:/data:ro

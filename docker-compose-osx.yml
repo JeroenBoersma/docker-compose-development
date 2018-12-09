@@ -13,6 +13,9 @@ services:
   php72:
     volumes:
     - web-sync:/data:rw
+  php72:
+    volumes:
+    - web-sync:/data:rw
   web:
     volumes:
     - web-sync:/data:ro

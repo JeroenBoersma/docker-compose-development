@@ -52,6 +52,14 @@ services:
       - mailcatch
       - redis
     network_mode: bridge
+  php73:
+    build:
+      context: build/dist/php73
+    links:
+      - db
+      - mailcatch
+      - redis
+    network_mode: bridge
 
   redis:
     image: redis:alpine
@@ -69,6 +77,7 @@ services:
       - php56:fpm56
       - php71:fpm71
       - php72:fpm72
+      - php73:fpm73
     network_mode: bridge
   ssl:
     build:
