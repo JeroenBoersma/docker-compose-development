@@ -1,6 +1,6 @@
 # How to use different PHP versions
 
-We run PHP 7.0 as the default PHP version, but we also support PHP 5.6.x, PHP 7.1.x and PHP 7.2.x
+We run PHP 7.1 as the default PHP version, but we also support PHP 5.6.x, 7.0.x, 7.2.x and 7.3.x
 Running different PHP version is as simple as adding a .php{version} file.
 
 To change all to default PHP 7.2, goto your workspace directory and create a file named `.php72`
