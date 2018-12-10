@@ -1,7 +1,7 @@
 
 set $mageRunCode "";
-if ( $host ~ "^([^\.]+)\.([^\.]+)\.([^\.]+).*[DOMAINSUFFIX]$"  ) {
-     set $mageRunCode "$3";
+if ($host ~ "^([^\.]+\.){2}(?!magento\.)([^\.]+).*\[DOMAINSUFFIX]$") {
+     set $mageRunCode "$2";
 }
 
 gzip_types text/css application/x-javascript image/svg+xml;

@@ -3,8 +3,8 @@ set $MAGE_ROOT $dev_root;
 set $MAGE_MODE developer;
 
 set $mageRunCode "";
-if ( $host ~ "^([^\.]+)\.([^\.]+)\.([^\.]+).*[DOMAINSUFFIX]$"  ) {
-     set $mageRunCode "$3";
+if ($host ~ "^([^\.]+\.){2}(?!magento2\.)([^\.]+).*\[DOMAINSUFFIX]$") {
+     set $mageRunCode "$2";
 }
 
 
