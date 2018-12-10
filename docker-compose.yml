@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 networks: {}
 volumes:
   dockerdev-mysql-volume:
@@ -23,6 +23,8 @@ services:
   php70:
     build:
       context: build/dist/php70
+      args: 
+        - FROM_TAG=php7-fpm
     links:
       - db
       - mailcatch
@@ -31,6 +33,8 @@ services:
   php56:
     build:
       context: build/dist/php56
+      args: 
+        - FROM_TAG=php5-fpm
     links:
       - db
       - mailcatch
@@ -39,6 +43,8 @@ services:
   php71:
     build:
       context: build/dist/php71
+      args: 
+        - FROM_TAG=php71-fpm
     links:
       - db
       - mailcatch
@@ -47,6 +53,8 @@ services:
   php72:
     build:
       context: build/dist/php72
+      args: 
+        - FROM_TAG=php72-fpm
     links:
       - db
       - mailcatch
@@ -55,6 +63,8 @@ services:
   php73:
     build:
       context: build/dist/php73
+      args: 
+        - FROM_TAG=php73-fpm
     links:
       - db
       - mailcatch
