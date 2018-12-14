@@ -19,20 +19,10 @@ services:
   mailcatch:
     image: mailhog/mailhog
     network_mode: bridge
-
-  php70:
-    build:
-      context: build/dist/php70
-      args: 
-        - FROM_TAG=php7-fpm
-    links:
-      - db
-      - mailcatch
-      - redis
-    network_mode: bridge
+    
   php56:
     build:
-      context: build/dist/php56
+      context: build/dist/php
       args: 
         - FROM_TAG=php5-fpm
     links:
@@ -40,9 +30,19 @@ services:
       - mailcatch
       - redis
     network_mode: bridge
+  php70:
+    build:
+      context: build/dist/php
+      args: 
+        - FROM_TAG=php7-fpm
+    links:
+      - db
+      - mailcatch
+      - redis
+    network_mode: bridge
   php71:
     build:
-      context: build/dist/php71
+      context: build/dist/php
       args: 
         - FROM_TAG=php71-fpm
     links:
@@ -52,7 +52,7 @@ services:
     network_mode: bridge
   php72:
     build:
-      context: build/dist/php72
+      context: build/dist/php
       args: 
         - FROM_TAG=php72-fpm
     links:
@@ -62,7 +62,7 @@ services:
     network_mode: bridge
   php73:
     build:
-      context: build/dist/php73
+      context: build/dist/php
       args: 
         - FROM_TAG=php73-fpm
     links:
