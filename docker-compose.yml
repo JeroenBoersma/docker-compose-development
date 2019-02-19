@@ -3,6 +3,8 @@ networks: {}
 volumes:
   dockerdev-mysql-volume:
     external: true
+  dockerdev-workspace-volume:
+    external: true
 
 services:
   db:
@@ -26,6 +28,8 @@ services:
       context: build/dist/php
       args: 
         - FROM_TAG=php5-fpm
+    volumes:
+      - dockerdev-workspace-volume:/data
     links:
       - db
       - mailcatch
@@ -36,6 +40,8 @@ services:
       context: build/dist/php
       args: 
         - FROM_TAG=php7-fpm
+    volumes:
+      - dockerdev-workspace-volume:/data
     links:
       - db
       - mailcatch
@@ -46,6 +52,8 @@ services:
       context: build/dist/php
       args: 
         - FROM_TAG=php71-fpm
+    volumes:
+      - dockerdev-workspace-volume:/data
     links:
       - db
       - mailcatch
@@ -56,6 +64,8 @@ services:
       context: build/dist/php
       args: 
         - FROM_TAG=php72-fpm
+    volumes:
+      - dockerdev-workspace-volume:/data
     links:
       - db
       - mailcatch
@@ -66,6 +76,8 @@ services:
       context: build/dist/php
       args: 
         - FROM_TAG=php73-fpm
+    volumes:
+      - dockerdev-workspace-volume:/data
     links:
       - db
       - mailcatch
@@ -79,6 +91,8 @@ services:
   web:
     build:
       context: build/dist/web
+    volumes:
+        - dockerdev-workspace-volume:/data:ro
     environment:
       - DOMAINSUFFIX
     links:

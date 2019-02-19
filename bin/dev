@@ -12,6 +12,11 @@ init() {
     DEV_COMMANDPATH=${DEV_PATH}/dev_command;
 
     DEV_WORKSPACE_PATH="${DEV_WORKPATH}/workspace";
+    local DOCKERDEV_WORKSPACE=`docker volume inspect -f '{{ .Options.device }}' dockerdev-workspace-volume 2>/dev/null`;
+    if [ "${DOCKERDEV_WORKSPACE}" != "" ]; then
+        DEV_WORKSPACE_PATH=${DOCKERDEV_WORKSPACE};
+    fi
+
     DEV_WORKSPACE="`echo ${DEV_WORKSPACE_PATH} | sed -e 's/\\//\\\\\//g'`";
     DEV_PROJECTPATH=`echo ${DEV_USERDIR} | sed -e "s/${DEV_WORKSPACE}\///"`;
 
@@ -35,7 +40,6 @@ init() {
     dc yml_if 'build/dist/docker-compose-blackfire.yml' 'conf/blackfire';
     dc yml_if 'docker-custom.yml' 'docker-custom.yml';
     dc yml_if 'build/dist/docker-compose-varnish.yml' 'conf/varnish.vcl' || dc yml 'build/dist/docker-compose-no-varnish.yml';
-    dc yml_os;
     dc yml_ssh;
 
     dc mode 'run --rm';
@@ -119,6 +123,7 @@ dc() {
         yml 'build/dist/docker-compose-mytop.yml';
         yml 'build/dist/docker-compose-ngrok.yml';
         yml 'build/dist/docker-compose-ctop.yml';
+        yml 'build/dist/docker-compose-node.yml';
     }
 
     yml() {
@@ -126,16 +131,6 @@ dc() {
             return;
         fi
         DEV_YML=${DEV_YML}' -f '${DEV_WORKPATH}'/'$1;
-    }
-
-    yml_os() {
-        if [[ "$(uname)" == 'Darwin' ]]; then
-            DEV_YML=${DEV_YML}' -f '${DEV_WORKPATH}'/docker-compose-osx.yml';
-        elif [[ -n "`uname -r | grep Microsoft`" ]]; then
-            DEV_YML=${DEV_YML}' -f '${DEV_WORKPATH}'/docker-compose-wsl.yml';
-        else
-            DEV_YML=${DEV_YML}' -f '${DEV_WORKPATH}'/docker-compose-linux.yml';
-        fi
     }
 
     yml_ssh() {
