@@ -1,0 +1,11 @@
+
+dc yml 'build/dist/docker-compose-node.yml';
+
+dc service node;
+if [ ! ${DEV_INTERACTIVE} ]; then
+    dc opt '-T';
+fi
+dc opt "--no-deps";
+
+dc cmd "$@";
+
