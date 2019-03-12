@@ -16,7 +16,7 @@ setup() {
 
         if [ -z "`${DEV_SUDO} docker volume ls -q -f 'name=dockerdev-mysql-volume'`" ]; then
             echo 'Create a persistant database volume';
-            ${DEV_SUDO} docker volume create --name dockerdev-mysql-volume;
+            ${DEV_SUDO} docker volume create dockerdev-mysql-volume;
         fi
 
         echo 'Starting regular database user, waiting for db to become ready';
@@ -42,6 +42,13 @@ update mysql.db set db = '${user}\_%' where user = '${user}';\
 flush privileges;" | ./${DEV_SELF} myroot 2>/dev/null;
 
         return 0;
+    }
+
+    workspace() {
+        if [ -z "`${DEV_SUDO} docker volume ls -q -f 'name=dockerdev-workspace-volume'`" ]; then
+            echo 'Create workspace volume in location '${DEV_WORKSPACE_PATH};
+            ${DEV_SUDO} docker volume create -o 'type=none' -o 'device='${DEV_WORKSPACE_PATH} -o 'o=bind' dockerdev-workspace-volume 
+        fi
     }
 
     php() {
