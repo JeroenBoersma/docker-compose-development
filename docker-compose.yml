@@ -9,7 +9,7 @@ services:
     container_name: dockerdev-db
     image: percona
     volumes:
-      - ./conf.d/mysql:/etc/mysql/conf.d:ro
+      - ./conf.d/mysql/my.cnf:/etc/my.cnf.d/development.cnf:ro
       - dockerdev-mysql-volume:/var/lib/mysql:rw
     environment:
       - MYSQL_ROOT_PASSWORD
