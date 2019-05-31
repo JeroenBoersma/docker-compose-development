@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  node:
+    build: build/dist/node
+    network_mode: bridge
+    links:
+      - db
+      - mailcatch
+      - redis
+    volumes:
+      - dockerdev-workspace-volume:/data
+
