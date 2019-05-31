@@ -10,6 +10,8 @@ RUN npm -g install\
 ARG GID=1000
 ARG UID=1000
 
+WORKDIR /data
+
 RUN groupmod -g $GID node && \
     usermod -g $GID -u $UID node
 
