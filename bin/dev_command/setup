@@ -8,7 +8,7 @@ setup() {
 
     mysql() {
         if [ -z "${MYSQL_ROOT_PASSWORD}" ]; then
-            export MYSQL_ROOT_PASSWORD="`< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32};echo;`";
+            export MYSQL_ROOT_PASSWORD="`< /dev/urandom LC_CTYPE=C tr -dc _A-Z-a-z-0-9 | head -c${1:-32};echo;`";
             echo 'MYSQL_ROOT_PASSWORD='${MYSQL_ROOT_PASSWORD} >> ${DEV_WORKPATH}/.env;
             echo 'Created a random root password for MySQL stored in '${DEV_WORKPATH}'/.env, to login as root use `dev myroot`';
         fi;
