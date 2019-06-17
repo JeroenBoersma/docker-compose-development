@@ -11,8 +11,13 @@ init() {
 
     DEV_COMMANDPATH=${DEV_PATH}/dev_command;
 
+    DEV_SUDO='';
+    if [ -z "`groups | grep docker`" ]; then
+        DEV_SUDO='sudo -E';
+    fi
+
     DEV_WORKSPACE_PATH="${DEV_WORKPATH}/workspace";
-    local DOCKERDEV_WORKSPACE=`docker volume inspect -f '{{ .Options.device }}' dockerdev-workspace-volume 2>/dev/null`;
+    local DOCKERDEV_WORKSPACE=`${DEV_SUDO} docker volume inspect -f '{{ .Options.device }}' dockerdev-workspace-volume 2>/dev/null`;
     if [ "${DOCKERDEV_WORKSPACE}" != "" ]; then
         DEV_WORKSPACE_PATH=${DOCKERDEV_WORKSPACE};
     fi
@@ -25,11 +30,6 @@ init() {
     DEV_INTERACTIVE=false;
     if [ -t "0" ] && [ -t "1" ]; then
         DEV_INTERACTIVE=true;
-    fi
-
-    DEV_SUDO='';
-    if [ -z "`groups | grep docker`" ]; then
-        DEV_SUDO='sudo -E';
     fi
 
     dc env conf/mysql; # fallback
