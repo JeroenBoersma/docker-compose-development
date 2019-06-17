@@ -1,0 +1,81 @@
+
+usage() {
+    echo "Usage:";
+    echo "- ${DEV_SELF} ${DEV_COMMAND} {workspace|mysql} localpath";
+    echo "  create a volume pointing to the localpath";
+    echo "- ${DEV_SELF} ${DEV_COMMAND} rm {workspace|mysql}";
+    echo "  remove a volume";
+    echo "- ${DEV_SELF} ${DEV_COMMAND} ls";
+    echo "  list current volume mapping"
+    exit 1;
+}
+
+current() {
+    echo 'Current volumes:';
+
+    echo -n "- mysql: ";
+    ${DEV_SUDO} docker volume inspect -f '{{ .Options.device }}' dockerdev-mysql-volume 2>/dev/null;
+    echo -n "- workspace: ";
+    ${DEV_SUDO} docker volume inspect -f '{{ .Options.device }}' dockerdev-workspace-volume 2>/dev/null;
+    exit 0;
+}
+
+create() {
+    if [ "$1" == 'mysql' ]; then
+        local VOLUME_TYPE='mysql';
+    elif [ "$1" == 'workspace' ]; then
+        local VOLUME_TYPE='workspace';
+    else
+        usage;
+    fi
+
+    local LOCAL_PATH=${2:-$1};
+    local DOCKER_VOLUME="dockerdev-${VOLUME_TYPE}-volume";
+
+    if [ "${LOCAL_PATH:0:1}" != '/' ]; then
+        LOCAL_PATH=`realpath ${DEV_USERDIR}/${LOCAL_PATH}`;
+    fi
+
+    ${DEV_SUDO} docker volume inspect ${DOCKER_VOLUME} 1>/dev/null 2>&1;
+    if [ $? == 0 ]; then
+        echo "The volume '${DOCKER_VOLUME}' is already initialized, remove it first";
+        echo '';
+        usage;
+    fi
+
+    ${DEV_SUDO} docker volume create -o 'type=none' -o 'device='${LOCAL_PATH} -o 'o=bind' ${DOCKER_VOLUME}
+    exit $?;
+}
+
+remove() {
+    if [ "$1" == 'mysql' ]; then
+        local VOLUME_TYPE='mysql';
+    elif [ "$1" == 'workspace' ]; then
+        local VOLUME_TYPE='workspace';
+    else
+        usage;
+    fi
+
+    local DOCKER_VOLUME="dockerdev-${VOLUME_TYPE}-volume";
+
+    ${DEV_SUDO} docker volume inspect ${DOCKER_VOLUME} 1>/dev/null 2>&1;
+    if [ $? -gt 0 ]; then
+        echo "The volume '${DOCKER_VOLUME}' does not exist";
+        echo '';
+        usage;
+    fi
+
+    ${DEV_SUDO} docker volume rm ${DOCKER_VOLUME}
+    exit $?;
+}
+
+if [ $# -lt 1 ]; then
+    usage;
+elif [ "$1" == "rm" ]; then
+    remove $2;
+elif [ "$1" == "ls" ]; then
+    current;
+else
+    create $@;
+fi
+
