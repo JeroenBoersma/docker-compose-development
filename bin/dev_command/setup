@@ -87,12 +87,49 @@ flush privileges;" | ./${DEV_SELF} myroot 2>/dev/null;
         return 0;
     }
 
+    feature() {
+        local name="$1" file="${DEV_WORKPATH}/conf/$2"
+        local fileoff="${file}.off" endis="$3" a="";
+
+        if [ -z "${endis}" ]; then
+            if [ -e ${file} ]; then
+                endis='n'
+            else
+                endis='y'
+            fi
+        fi
+
+        if [ "${endis}" == 'y' ]; then
+            echo "Do you want to enable ${name} support?";
+        else
+            echo "Do you want to disable ${name} support?";
+        fi
+
+        while read -p'? (N/y)' -n1 a; do
+            echo '';
+            if [ "${a}" == 'Y' ] || [ "${a}" == 'y' ]; then
+                a='y';
+                break;
+            elif [ -z "${a}" ] || [ "${a}" == 'N' ] || [ "${a}" == 'n' ]; then
+                a='n';
+                break;
+            fi
+        done
+
+        rm -f ${file} ${fileoff} 2>&1 >/dev/null;
+        if [ "${a}" == 'y' ]; then
+            touch ${file};
+        else
+            touch ${fileoff};
+        fi
+    }
 
     start() {
         ./${DEV_SELF} up;
     }
 
     shell() {
+        echo '';
         echo 'Add next lines to your shell to implement `cdw`(to workspace) and `dev` to PATH';
         echo '';
         ./${DEV_SELF} profile;
@@ -102,6 +139,10 @@ flush privileges;" | ./${DEV_SELF} myroot 2>/dev/null;
     php;
     workspace;
     mysql;
+
+    feature RabbitMQ rabbitmq;
+    feature ElasticSearch elasticsearch;
+
     start;
     shell;
 }

@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  elasticsearch:
+    image: "elasticsearch:7.1.1"
+    network_mode: bridge
+
+  php56:
+    links:
+      - elasticsearch
+  php70:
+    links:
+      - elasticsearch
+  php71:
+    links:
+      - elasticsearch
+  php72:
+    links:
+      - elasticsearch
+  php73:
+    links:
+      - elasticsearch
+
+

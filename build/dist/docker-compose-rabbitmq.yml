@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  rabbitmq:
+    image: rabbitmq
+    network_mode: bridge
+
+  php56:
+    links:
+      - rabbitmq
+  php70:
+    links:
+      - rabbitmq
+  php71:
+    links:
+      - rabbitmq
+  php72:
+    links:
+      - rabbitmq
+  php73:
+    links:
+      - rabbitmq
+
+
