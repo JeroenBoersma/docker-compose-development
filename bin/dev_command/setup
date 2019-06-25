@@ -89,7 +89,7 @@ flush privileges;" | ./${DEV_SELF} myroot 2>/dev/null;
 
     feature() {
         local name="$1" file="${DEV_WORKPATH}/conf/$2"
-        local fileoff="${file}.off" endis="$3" a="";
+        local endis="$3" a="";
 
         if [ -z "${endis}" ]; then
             if [ -e ${file} ]; then
@@ -108,19 +108,16 @@ flush privileges;" | ./${DEV_SELF} myroot 2>/dev/null;
         while read -p'? (N/y)' -n1 a; do
             echo '';
             if [ "${a}" == 'Y' ] || [ "${a}" == 'y' ]; then
-                a='y';
                 break;
             elif [ -z "${a}" ] || [ "${a}" == 'N' ] || [ "${a}" == 'n' ]; then
-                a='n';
-                break;
+                return 0;
             fi
         done
-
-        rm -f ${file} ${fileoff} 2>&1 >/dev/null;
-        if [ "${a}" == 'y' ]; then
+        
+        if [ "${endis}" == 'y' ]; then
             touch ${file};
         else
-            touch ${fileoff};
+            rm -f ${file} 2>&1 >/dev/null;
         fi
     }
 
