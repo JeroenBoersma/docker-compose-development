@@ -3,6 +3,6 @@ server {
     server_name .magento[DOMAINSUFFIX];
 
     include "content/base";
-    include "content/magento";
+    include "content/magento1";
 }
 
