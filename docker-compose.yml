@@ -83,6 +83,18 @@ services:
       - mailcatch
       - redis
     network_mode: bridge
+  php74:
+    build:
+      context: build/dist/php
+      args: 
+        - FROM_TAG=php74-fpm
+    volumes:
+      - dockerdev-workspace-volume:/data
+    links:
+      - db
+      - mailcatch
+      - redis
+    network_mode: bridge
 
   redis:
     image: redis:alpine
@@ -103,6 +115,7 @@ services:
       - php71:fpm71
       - php72:fpm72
       - php73:fpm73
+      - php74:fpm74
     network_mode: bridge
   ssl:
     build:

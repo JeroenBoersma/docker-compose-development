@@ -20,5 +20,8 @@ services:
   php73:
     links:
       - rabbitmq
+  php74:
+    links:
+      - rabbitmq
 
 

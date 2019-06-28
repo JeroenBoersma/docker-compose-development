@@ -20,5 +20,8 @@ services:
   php73:
     links:
       - elasticsearch
+  php74:
+    links:
+      - elasticsearch
 
 
