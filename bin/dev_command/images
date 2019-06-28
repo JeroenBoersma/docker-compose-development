@@ -1,7 +1,16 @@
 
-grep -hE '(image:|FROM )' ${DEV_WORKPATH}/docker-compose* ${DEV_WORKPATH}/build/*/*/Dockerfile | \
-    awk '{print $2;}' | \
-    sed -e 's/$/:latest/' -e 's/\(:[^:]*\):latest$/\1/' | \
+dc mode config;
+
+{ dc run; cat ${DEV_WORKPATH}/build/*/*/Dockerfile; } | \
+    grep -hE '(image:|FROM |FROM_TAG:)' | \
+    grep -v FROM_IMAGE | \
+    sed \
+        -e 's#FROM_TAG: #srcoder/development-php:#' \
+        -e 's#image:##' \
+        -e 's#FROM ##' \
+        -e 's/$/:latest/' \
+        -e 's/\(:[^:]*\):latest$/\1/' | \
+    awk '{print $1}' | \
     sort | \
     uniq;
 exit;
