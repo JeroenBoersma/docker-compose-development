@@ -4,5 +4,7 @@ services:
   dbclient:
     image: percona
     links:
-        - db
-    network_mode: bridge
+      - db
+    networks:
+      - databases
+

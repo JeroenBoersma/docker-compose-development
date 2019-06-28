@@ -4,5 +4,6 @@ services:
   mytop:
     image: srcoder/mytop
     links:
-    - db
-    network_mode: bridge
+      - db
+    networks:
+      - databases

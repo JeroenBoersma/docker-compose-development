@@ -6,3 +6,4 @@ services:
     env_file:
       - ./conf/blackfire
     network_mode: host
+

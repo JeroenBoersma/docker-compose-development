@@ -3,19 +3,24 @@ version: '3'
 services:
   blackfire:
     env_file:
-        - ./conf/blackfire
+      - ./conf/blackfire
     image: blackfire/blackfire
-    network_mode: bridge
+    networks:
+      - backend
 
   php70:
-      links:
-          - blackfire
+    links:
+      - blackfire
   php56:
-      links:
-          - blackfire
+    links:
+      - blackfire
   php71:
-      links:
-          - blackfire
+    links:
+      - blackfire
   php72:
-      links:
-          - blackfire
+    links:
+      - blackfire
+  php73:
+    links:
+      - blackfire
+

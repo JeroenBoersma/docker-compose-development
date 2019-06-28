@@ -1,5 +1,10 @@
 version: '3'
-networks: {}
+
+networks:
+  frontend:
+  backend:
+  databases:
+
 volumes:
   dockerdev-mysql-volume:
     external: true
@@ -15,18 +20,20 @@ services:
       - dockerdev-mysql-volume:/var/lib/mysql:rw
     environment:
       - MYSQL_ROOT_PASSWORD
-    network_mode: bridge
+    networks: 
+      - databases
     ports:
       - 127.0.0.1:3306:3306
 
   mailcatch:
     image: mailhog/mailhog
-    network_mode: bridge
+    networks: 
+      - backend
     
   php56:
     build:
       context: build/dist/php
-      args: 
+      args:
         - FROM_TAG=php5-fpm
     volumes:
       - dockerdev-workspace-volume:/data
@@ -34,11 +41,13 @@ services:
       - db
       - mailcatch
       - redis
-    network_mode: bridge
+    networks:
+      - backend
+      - databases
   php70:
     build:
       context: build/dist/php
-      args: 
+      args:
         - FROM_TAG=php7-fpm
     volumes:
       - dockerdev-workspace-volume:/data
@@ -46,11 +55,13 @@ services:
       - db
       - mailcatch
       - redis
-    network_mode: bridge
+    networks:
+      - backend
+      - databases
   php71:
     build:
       context: build/dist/php
-      args: 
+      args:
         - FROM_TAG=php71-fpm
     volumes:
       - dockerdev-workspace-volume:/data
@@ -58,11 +69,13 @@ services:
       - db
       - mailcatch
       - redis
-    network_mode: bridge
+    networks:
+      - backend
+      - databases
   php72:
     build:
       context: build/dist/php
-      args: 
+      args:
         - FROM_TAG=php72-fpm
     volumes:
       - dockerdev-workspace-volume:/data
@@ -70,11 +83,13 @@ services:
       - db
       - mailcatch
       - redis
-    network_mode: bridge
+    networks:
+      - backend
+      - databases
   php73:
     build:
       context: build/dist/php
-      args: 
+      args:
         - FROM_TAG=php73-fpm
     volumes:
       - dockerdev-workspace-volume:/data
@@ -82,17 +97,20 @@ services:
       - db
       - mailcatch
       - redis
-    network_mode: bridge
+    networks:
+      - backend
+      - databases
 
   redis:
     image: redis:alpine
-    network_mode: bridge
+    networks:
+      - databases
 
   web:
     build:
       context: build/dist/web
     volumes:
-        - dockerdev-workspace-volume:/data:ro
+      - dockerdev-workspace-volume:/data:ro
     environment:
       - DOMAINSUFFIX
     links:
@@ -103,12 +121,15 @@ services:
       - php71:fpm71
       - php72:fpm72
       - php73:fpm73
-    network_mode: bridge
+    networks:
+      - frontend
+      - backend
   ssl:
     build:
       context: build/dist/ssl
     ports:
-        - "80:80"
-        - "443:443"
-    network_mode: bridge
+      - "80:80"
+      - "443:443"
+    networks:
+      - frontend
 

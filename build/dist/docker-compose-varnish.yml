@@ -3,7 +3,8 @@ version: '3'
 services:
   varnish:
     image: million12/varnish
-    network_mode: bridge
+    networks:
+      - frontend
     links:
       - "web:web"
       - "web:backend"

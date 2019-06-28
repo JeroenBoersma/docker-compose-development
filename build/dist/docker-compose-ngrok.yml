@@ -4,6 +4,7 @@ services:
   ngrok:
     image: fnichol/ngrok
     links:
-    - web
-    network_mode: bridge
+      - web
+    networks:
+      - frontend
 
