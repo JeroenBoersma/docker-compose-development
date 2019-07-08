@@ -1,0 +1,4 @@
+#!/bin/sh
+echo BLACKFIRE_QUERY=${BLACKFIRE_QUERY}
+exit
+

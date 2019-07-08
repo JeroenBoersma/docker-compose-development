@@ -5,11 +5,23 @@ if [ $? -ne 0 ]; then
     exit 1;
 fi
 
-dc service blackfireclient;
-if [ ! ${DEV_INTERACTIVE} ]; then
-    dc opt '-T';
-fi
-dc opt "--no-deps";
+if [ "$1" != "run" ]; then
+    dc service blackfireclient;
+    dc cmd blackfire "$@";
+    if [ ! ${DEV_INTERACTIVE} ]; then
+        dc opt '-T';
+    fi
+    dc opt "--no-deps";
+else
+    dc service blackfire;
+    dc cmd blackfire run /usr/local/bin/dev;
+    bf_q=$(dc run 2>&1 | grep BLACKFIRE_QUERY);
 
-dc cmd blackfire "$@";
+    bf_r=$(echo $bf_q | sed -e 's#^.*request-id-\([^&]*\)&.*$#\1#');
+    echo 'Profile will be uploaded to: http://blackfire.io/profiles/'${bf_r}'/graph';
+
+    dc opt "-e ${bf_q}";
+    shift;
+    . console;
+fi
 

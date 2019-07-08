@@ -4,7 +4,7 @@ services:
   blackfire:
     env_file:
       - ./conf/blackfire
-    image: blackfire/blackfire
+    build: build/dist/blackfire
     network_mode: bridge
 
   php70:
