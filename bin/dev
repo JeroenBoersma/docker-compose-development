@@ -38,10 +38,10 @@ init() {
     DEV_YML='';
     dc yml 'docker-compose.yml';
     dc yml_if 'build/dist/docker-compose-blackfire.yml' 'conf/blackfire';
-    dc yml_if 'docker-custom.yml' 'docker-custom.yml';
     dc yml_if 'build/dist/docker-compose-varnish.yml' 'conf/varnish.vcl' || dc yml 'build/dist/docker-compose-no-varnish.yml';
     dc yml_if 'build/dist/docker-compose-elasticsearch.yml' 'conf/elasticsearch';
     dc yml_if 'build/dist/docker-compose-rabbitmq.yml' 'conf/rabbitmq';
+    dc yml_if 'docker-custom.yml' 'docker-custom.yml';
     dc yml_ssh;
 
     dc mode 'run --rm';
