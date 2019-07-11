@@ -4,6 +4,8 @@ services:
   elasticsearch:
     image: "elasticsearch:7.1.1"
     network_mode: bridge
+    environment:
+        - "discovery.type=single-node"
 
   php56:
     links:
