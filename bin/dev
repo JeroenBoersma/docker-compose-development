@@ -54,7 +54,7 @@ init() {
         # Not in WORKSPACE
         DEV_PROJECTPATH='';
     else
-        DEV_HOSTNAME=`echo ${DEV_PROJECTPATH} | sed -e 's/\//\./g' -e 's/^\([^\.]*\.[^\.]*\)\.\{0,1\}.*$/\\1.dev/'`;
+        DEV_HOSTNAME=`echo ${DEV_PROJECTPATH} | sed -e 's/\//\./g' -e 's/^\([^\.]*\.[^\.]*\)\.\{0,1\}.*$/\\1'${DOMAINSUFFIX}'/'`;
         if [ ".." != "`echo ${DEV_HOSTNAME} | sed -e 's/[^\.]//g'`" ]; then
             DEV_HOSTNAME='';
         fi
