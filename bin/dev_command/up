@@ -1,20 +1,21 @@
 
 if [ -z "`${DEV_SUDO} docker volume ls -q -f 'name=dockerdev-mysql-volume'`" ]; then
     echo 'No MySQL volume found, first time here? Run `bin/dev setup` to setup the important stuff';
-    exit 1;
+    return 1;
 fi
 if [ -z "`${DEV_SUDO} docker volume ls -q -f 'name=dockerdev-workspace-volume'`" ]; then
     echo 'No Workspace volume found, first time here? Run `bin/dev setup` to setup the important stuff';
     echo 'If you see this message after upgrading, we have implemented a way to choose the location';
     echo 'for workspace instead of the default inside this repository, just run `bin/dev setup` and you will be ready to go';
-    exit 1;
+    return 1;
 fi
-
 
 if [ -z "${DOMAINSUFFIX}" ]; then
     dc yml build/dist/docker-compose-suffix.yml;
 fi
 
-dc mode 'up -d --no-recreate';
-dc cmd "$@";
+dc opt '-d --no-recreate';
+dc mode 'up';
+dc run "$@";
+return $?;
 

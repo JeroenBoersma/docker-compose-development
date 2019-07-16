@@ -1,4 +1,4 @@
 
 echo ${DEV_WORKSPACE_PATH};   
-exit 0;
+return 0;
 

@@ -1,5 +1,7 @@
 
 dc yml_all;
 dc mode ps;
-dc cmd "$@";
+
+dc run "$@";
+return $?;
 

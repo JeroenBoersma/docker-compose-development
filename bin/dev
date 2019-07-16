@@ -47,7 +47,7 @@ init() {
     dc mode 'run --rm';
 
     DEV_DOCKEROPTS='';
-    DEV_COMMAND=$1;
+    DEV_COMMAND='';
     DEV_HOSTNAME='';
 
     if [ "${DEV_PROJECTPATH}" == "${DEV_USERDIR}" ]; then
@@ -62,18 +62,6 @@ init() {
 
     # Check which php version to use
     dc php;
-
-    # Check if command exists
-    DEV_EXISTS=false;
-    if [ -n "${DEV_COMMAND}" ] && [ -f "${DEV_COMMANDPATH}/${DEV_COMMAND}" ]; then
-        DEV_EXISTS=true;
-    fi
-
-    # Check if a custom command exists and is executable
-    DEV_CUSTOM_EXISTS=false;
-    if [ -n "${DEV_COMMAND}" ] && [ -x "${DEV_WORKSPACE_PATH}/bin/${DEV_COMMAND}" ]; then
-        DEV_CUSTOM_EXISTS=true;
-    fi
 }
 
 dc() {
@@ -91,8 +79,8 @@ dc() {
     }
 
     run() {
-        cmd=`show`;
-        ${cmd};
+        cmd="`show`";
+        ${cmd} "$@";
         return $?
     }
 
@@ -100,8 +88,29 @@ dc() {
         DEV_DOCKEROPTS=${DEV_DOCKEROPTS}' '"$@";
     }
 
+    interactive() {
+        [ ! ${DEV_INTERACTIVE} ] && opt '-T';
+    }
+
+    nodeps() {
+        opt '--no-deps';
+    }
+
+    user() {
+        opt "-u `id -u`:`id -g`";
+    }
+
+    projectpath() {
+        [ -n "${DEV_PROJECTPATH}" ] \
+           && opt "-w /data/${DEV_PROJECTPATH}"    
+    }
+
     service() {
-        DEV_SERVICE="$@";
+        if [ "$1" == "php" ]; then
+            DEV_SERVICE=${DEV_PHP};
+        else
+            DEV_SERVICE="$@";
+        fi
     }
 
     yml_if() {
@@ -181,9 +190,10 @@ dc() {
 
     env() {
         local envfile=${DEV_WORKPATH}/$1 a='' c='';
-        if [ ! -e ${envfile} ]; then
+        if [ ! -r ${envfile} ]; then
            return 1;
         fi
+
         for a in `cat ${envfile}`; do
             if [ "${a:0:1}" == "#" ]; then
                 continue;
@@ -194,46 +204,54 @@ dc() {
     }
 
     "$@";
-    return $?
+    return $?;
 }
 
 exec_command() {
+    # Check if command exists
+    DEV_COMMAND=$1;
+    shift;
+
+    if [ -z "${DEV_COMMAND}" ] || [ ! -r "${DEV_COMMANDPATH}/${DEV_COMMAND}" ]; then
+        return 1;
+    fi
+
     # Change to command directory
     # This is so all docker-compose commands work out of the box
     cd ${DEV_COMMANDPATH};
 
-    # Load command
-    # Can exit if implemented itself
+    # execute command
     . ./${DEV_COMMAND} "$@";
-
-    # Execute command
-    dc run;
-    exit $?;
+    return $?;
 }
 
 exec_custom() {
-    # Change to command directory
-    # This is so all docker-compose commands work out of the box
-    cd ${DEV_COMMANDPATH};
+    # Check if a custom command exists and is executable
+    DEV_COMMAND=$1;
+    shift;
 
-    # Load command
-    # Can exit if implemented itself
-    . ./custom ${DEV_COMMAND} "$@";
+    if [ -z "${DEV_COMMAND}" ] || [ ! -x "${DEV_WORKSPACE_PATH}/bin/${DEV_COMMAND}" ]; then
+        return 1;
+    fi
 
-    dc run;
-    exit $?;
+    exec_command custom ${DEV_COMMAND} "$@";
+    return $?;
 }
 
 usage() {
-    DEV_COMMAND=usage;
-    exec_command;
+    exec_command usage;
+    return $?;
 }
 
 main() {
-    init "$@";
-    shift;
+    [ $# -lt 1 ] && (usage; return $?);
 
-    ${DEV_EXISTS} && exec_command "$@" || ${DEV_CUSTOM_EXISTS} && exec_custom "$@" || usage;
+    exec_command "$@" || exec_custom "$@";
+    return $?;
 }
 
+init;
+
 main "$@";
+exit $?;
+

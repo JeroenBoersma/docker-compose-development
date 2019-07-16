@@ -2,16 +2,17 @@
 dc yml_if 'build/dist/docker-compose-blackfireclient.yml' 'conf/blackfire';
 if [ $? -ne 0 ]; then
     echo 'Blackfire not initialized';
-    exit 1;
+    return 1;
 fi
 
 if [ "$1" != "run" ]; then
     dc service blackfireclient;
-    dc cmd blackfire "$@";
-    if [ ! ${DEV_INTERACTIVE} ]; then
-        dc opt '-T';
-    fi
+    dc cmd blackfire;
+
+    dc interactive;
     dc opt "--no-deps";
+    dc run "$@";
+    return $?;
 else
     dc service blackfire;
     dc cmd blackfire run /usr/local/bin/dev;
@@ -22,6 +23,8 @@ else
 
     dc opt "-e ${bf_q}";
     shift;
-    . console;
+
+    . ./console "$@";
+    return $?;
 fi
 

@@ -1,10 +1,12 @@
 
 dc yml build/dist/docker-compose-mytop.yml;
 dc service mytop;
-dc opt '--no-deps';
-if [ ! ${DEV_INTERACTIVE} ]; then
-    dc opt '-T';
-fi
 
-dc cmd "-h db -u ${USER} -dinformation_schema $@";
+dc nodeps;
+dc interactive;
+
+dc cmd "-h db -u ${USER} -dinformation_schema";
+
+dc run "$@";
+return $?;
 

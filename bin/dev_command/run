@@ -1,14 +1,11 @@
 
 dc service $1;
 shift;
-dc opt '--no-deps';
-if [ ! ${DEV_INTERACTIVE} ]; then
-    dc opt '-T';
-fi
 
-if [ -n "${DEV_PROJECTPATH}" ]; then
-    dc opt "-w /data/${DEV_PROJECTPATH}"
-fi
+dc nodeps;
+dc interactive;
+dc projectpath;
 
-dc cmd "$@";
+dc run "$@";
+return $?;
 

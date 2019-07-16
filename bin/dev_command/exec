@@ -1,16 +1,9 @@
 
 dc mode exec;
-if [ ! ${DEV_INTERACTIVE} ]; then
-    dc opt '-T';
-fi
+dc interactive;
 
-if [ "$1" == "php" ]; then
-    dc service ${DEV_PHP};
-else
-    dc service $1;
-fi
-
+dc service $1;
 shift;
 
-dc cmd "$@";
+dc run "$@";
 

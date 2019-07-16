@@ -1,4 +1,6 @@
 
 dc mode stop;
-dc cmd "$@";
+
+dc run "$@";
+return $?;
 

@@ -1,4 +1,5 @@
 
+dc yml_all;
 dc mode config;
 
 { dc run; cat ${DEV_WORKPATH}/build/*/*/Dockerfile; } | \
@@ -13,5 +14,6 @@ dc mode config;
     awk '{print $1}' | \
     sort | \
     uniq;
-exit;
+
+return 0;
 

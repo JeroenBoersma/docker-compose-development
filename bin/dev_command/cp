@@ -16,6 +16,7 @@ from=`replace_container $1`;
 to=`replace_container $2`;
 
 cd ${DEV_USERDIR};
+
 docker cp "${from}" "${to}";
-exit $?;
+return $?;
 

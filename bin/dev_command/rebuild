@@ -6,6 +6,6 @@ cd ${DEV_PATH};
     ./${DEV_SELF} down && \
     ./${DEV_SELF} up && \
     ./${DEV_SELF} ps && \
-    exit 0 || \
-    exit 1;
+    return 0 || \
+    return 1;
 

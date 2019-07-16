@@ -1,29 +1,25 @@
 
-cd ${DEV_PATH};
-
+services=$(. ./config --services);
 if [ -n "$*" ]; then
     services="$@";
-else
-    services=`./${DEV_SELF} config --services`;
 fi
 
 user_id=`id -u`;
 group_id=`id -g`;
 
+args='';
 if [ -n "${user_id}" ]; then
-    userarg='--build-arg=UID='${user_id};
+    args=${args}' --build-arg=UID='${user_id};
 fi
 if [ -n "${group_id}" ]; then
-    grouparg='--build-arg=GID='${group_id};
+    args=${args}' --build-arg=GID='${group_id};
 fi
 
-dc yml_all;
 dc mode build;
-dc cmd "${userarg} ${grouparg}"
+dc cmd "${args}";
 
 for a in ${services}; do
-    cmd="`dc show` $a";
-    ${cmd};
+    dc run "${a}";
 done
-exit;
+return 0;
 

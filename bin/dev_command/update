@@ -1,6 +1,6 @@
 
 # Collect images to update
-images=`. images`;
+images=`. ./images`;
 
 dp() {
     echo `dc getsudo`'docker pull '$1;
@@ -10,5 +10,5 @@ dp() {
 for image in ${images}; do
     `dp $image`;
 done
-exit 0;
+return 0;
 

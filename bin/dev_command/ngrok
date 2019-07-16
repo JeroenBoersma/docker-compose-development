@@ -4,14 +4,19 @@ if [ -n "$1" ]; then
 fi
 
 if [ -z "${DEV_HOSTNAME}" ]; then
-    exit 1;
+    return 1;
 fi
 
-WEB_IP=`$0 exec web ip addr | grep 'state UP' -A2 | tail -n1 | awk '{print $2}' | cut -f1 -d'/'`;
+WEB_IP=`. ./exec ssl ip addr | grep 'state UP' -A2 | tail -n1 | awk '{print $2}' | cut -f1 -d'/'`;
 
 dc yml build/dist/docker-compose-ngrok.yml;
-dc opt '--no-deps';
+dc nodeps;
 
-dc service '--entrypoint=/bin/ngrok ngrok';
+dc opt '--entrypoint=/bin/ngrok';
+dc service ngrok;
+
 dc cmd 'http --host-header='${DEV_HOSTNAME}' '${WEB_IP}':80';
+
+dc run "$@";
+return $?;
 

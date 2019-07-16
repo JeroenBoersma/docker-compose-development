@@ -1,16 +1,10 @@
 
-dc mode exec;
-dc service ${DEV_PHP};
-
-dc cmd docker-php-ext-enable "$@";
-dc run;
+. ./exec ${DEV_PHP} docker-php-ext-enable "$@";
 
 for module in "$@"; do
     echo /usr/local/etc/php/conf.d/docker-php-ext-${module}.ini;
 done;
 
-cd ${DEV_PATH};
-${DEV_SELF} stop ${DEV_PHP};
-${DEV_SELF} start ${DEV_PHP};
-exit 0;
+. ./restart ${DEV_PHP};
+return 0;
 

@@ -1,16 +1,12 @@
 
 dc yml 'build/dist/docker-compose-node.yml';
-
 dc service node;
-dc opt "--no-deps";
-dc opt "-u $(id -u):$(id -g)"
-if [ ! ${DEV_INTERACTIVE} ]; then
-    dc opt '-T';
-fi
 
-if [ -n "${DEV_PROJECTPATH}" ]; then
-    dc opt "-w /data/${DEV_PROJECTPATH}"
-fi
+dc nodeps;
+dc interactive;
+dc projectpath;
+dc user;
 
-dc cmd "$@";
+dc run "$@";
+return $?;
 

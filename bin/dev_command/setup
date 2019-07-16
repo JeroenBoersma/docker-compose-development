@@ -1,10 +1,10 @@
 
+cd $DEV_PATH;
+
 echo 'Development setup';
 echo '';
 
 setup() {
-
-    cd ${DEV_PATH};
 
     mysql() {
         if [ -z "${MYSQL_ROOT_PASSWORD}" ]; then
@@ -13,16 +13,15 @@ setup() {
             echo 'Created a random root password for MySQL stored in '${DEV_WORKPATH}'/.env, to login as root use `dev myroot`';
         fi;
 
-
         if [ -z "`${DEV_SUDO} docker volume ls -q -f 'name=dockerdev-mysql-volume'`" ]; then
             echo 'Create a persistant database volume';
             ${DEV_SUDO} docker volume create dockerdev-mysql-volume;
         fi
 
         echo 'Starting regular database user, waiting for db to become ready';
-        ./${DEV_SELF} up db;
+        ${DEV_SELF} up db;
         while true; do
-            ./${DEV_SELF} logs db 2>&1 | grep 'port: 3306  Percona' > /dev/null && break;
+            $DEV_SELF logs db 2>&1 | grep 'port: 3306  Percona' > /dev/null && break;
             echo -n '.';
             sleep 1;
         done
@@ -122,14 +121,14 @@ flush privileges;" | ./${DEV_SELF} myroot 2>/dev/null;
     }
 
     start() {
-        ./${DEV_SELF} up;
+        ${DEV_SELF} up;
     }
 
     shell() {
         echo '';
         echo 'Add next lines to your shell to implement `cdw`(to workspace) and `dev` to PATH';
         echo '';
-        ./${DEV_SELF} profile;
+        ${DEV_SELF} profile;
     }
 
     suffix;
@@ -143,7 +142,7 @@ flush privileges;" | ./${DEV_SELF} myroot 2>/dev/null;
     start;
     shell;
 }
-setup;
 
-exit 0;
+setup;
+return 0;
 

@@ -1,10 +1,12 @@
 
 dc yml build/dist/docker-compose-dbclient.yml;
-dc service dbclient;
-dc opt '--no-deps';
-if [ ! ${DEV_INTERACTIVE} ]; then
-    dc opt '-T';
-fi
 
-dc cmd mysql "-h db -uroot -p${MYSQL_ROOT_PASSWORD} $@";
+dc service dbclient;
+
+dc nodeps;
+dc interactive;
+
+dc cmd mysql "-hdb -uroot -p${MYSQL_ROOT_PASSWORD}";
+dc run "$@";
+return $?;
 

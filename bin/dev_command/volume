@@ -7,7 +7,7 @@ usage() {
     echo "  remove a volume";
     echo "- ${DEV_SELF} ${DEV_COMMAND} ls";
     echo "  list current volume mapping"
-    exit 1;
+    return 1;
 }
 
 current() {
@@ -17,7 +17,7 @@ current() {
     ${DEV_SUDO} docker volume inspect -f '{{ .Options.device }}' dockerdev-mysql-volume 2>/dev/null;
     echo -n "- workspace: ";
     ${DEV_SUDO} docker volume inspect -f '{{ .Options.device }}' dockerdev-workspace-volume 2>/dev/null;
-    exit 0;
+    return 0;
 }
 
 create() {
@@ -27,6 +27,7 @@ create() {
         local VOLUME_TYPE='workspace';
     else
         usage;
+        return $?;
     fi
 
     local LOCAL_PATH=${2:-$1};
@@ -40,11 +41,13 @@ create() {
     if [ $? == 0 ]; then
         echo "The volume '${DOCKER_VOLUME}' is already initialized, remove it first";
         echo '';
+
         usage;
+        return $?;
     fi
 
     ${DEV_SUDO} docker volume create -o 'type=none' -o 'device='${LOCAL_PATH} -o 'o=bind' ${DOCKER_VOLUME}
-    exit $?;
+    return $?;
 }
 
 remove() {
@@ -54,6 +57,7 @@ remove() {
         local VOLUME_TYPE='workspace';
     else
         usage;
+        return $?;
     fi
 
     local DOCKER_VOLUME="dockerdev-${VOLUME_TYPE}-volume";
@@ -63,10 +67,11 @@ remove() {
         echo "The volume '${DOCKER_VOLUME}' does not exist";
         echo '';
         usage;
+        return $?;
     fi
 
     ${DEV_SUDO} docker volume rm ${DOCKER_VOLUME}
-    exit $?;
+    return $?;
 }
 
 if [ $# -lt 1 ]; then
@@ -76,6 +81,8 @@ elif [ "$1" == "rm" ]; then
 elif [ "$1" == "ls" ]; then
     current;
 else
-    create $@;
+    create "$@";
 fi
+
+return $?;
 

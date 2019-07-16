@@ -1,18 +1,7 @@
 
-dc service ${DEV_PHP};
-dc opt "-u $(id -u):$(id -g)"
-dc opt "--no-deps";
-if [ ! ${DEV_INTERACTIVE} ]; then
-    dc opt '-T';
-fi
+cmd=/data/bin/$1;
+shift;
 
-if [ -n "${DEV_PROJECTPATH}" ]; then
-    dc opt "-w /data/${DEV_PROJECTPATH}"
-fi
-
-if [ $# -lt 1 ]; then
-    usage;
-fi
-
-dc cmd "/data/bin/$@";
+. console ${cmd} "$@";
+return $?;
 
