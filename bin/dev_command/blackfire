@@ -15,8 +15,7 @@ if [ "$1" != "run" ]; then
     return $?;
 else
     dc service blackfire;
-    dc cmd blackfire run /usr/local/bin/dev;
-    bf_q=$(dc run 2>&1 | grep BLACKFIRE_QUERY);
+    bf_q=$(dc run blackfire run /usr/local/bin/dev 2>&1 | grep BLACKFIRE_QUERY);
 
     bf_r=$(echo $bf_q | sed -e 's#^.*request-id-\([^&]*\)&.*$#\1#');
     echo 'Profile will be uploaded to: http://blackfire.io/profiles/'${bf_r}'/graph';
