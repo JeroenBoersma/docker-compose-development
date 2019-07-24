@@ -156,6 +156,8 @@ location /media/import/ {
     deny all;
 }
 
+rewrite /pub/health_check.php /health_check.php;
+
 # PHP entry point for main application
 location ~ ^/(index|get|static|errors/report|errors/404|errors/503|health_check)\.php$ {
     try_files .~srcfile @php;
