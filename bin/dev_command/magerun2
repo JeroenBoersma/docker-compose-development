@@ -1,4 +1,4 @@
 
-. ./console magerun "$@";
+. ./console magerun2 "$@";
 return $?;
 
