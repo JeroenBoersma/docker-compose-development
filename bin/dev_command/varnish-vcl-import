@@ -1,13 +1,11 @@
 local outfile=${DEV_WORKPATH}/conf/varnish.vcl;
 local infile=${DEV_USERDIR}/$1;
 
-cd ${DEV_PATH};
-
 if [ -n "$1" ]; then
-    cat ${infile} | sed '/.probe = {/,/}/d' > ${outfile};
-
     cd ${DEV_PATH};
     ./${DEV_SELF} down;
+
+    cat ${infile} | sed '/.probe = {/,/}/d' > ${outfile};
     ./${DEV_SELF} up;
     return 0;
 else

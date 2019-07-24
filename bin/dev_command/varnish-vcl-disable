@@ -1,0 +1,9 @@
+local outfile=${DEV_WORKPATH}/conf/varnish.vcl;
+
+cd ${DEV_PATH};
+./${DEV_SELF} down;
+
+rm ${outfile};
+./${DEV_SELF} up;
+return 0;
+
