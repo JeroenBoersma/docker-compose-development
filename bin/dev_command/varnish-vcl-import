@@ -4,7 +4,7 @@ local infile=${DEV_USERDIR}/$1;
 cd ${DEV_PATH};
 
 if [ -n "$1" ]; then
-    cat ${infile} > ${outfile};
+    cat ${infile} | sed '/.probe = {/,/}/d' > ${outfile};
 
     cd ${DEV_PATH};
     ./${DEV_SELF} down;
