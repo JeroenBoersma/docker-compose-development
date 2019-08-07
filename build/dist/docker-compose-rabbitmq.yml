@@ -2,7 +2,7 @@ version: '3'
 
 services:
   rabbitmq:
-    image: rabbitmq
+    image: rabbitmq:management
     network_mode: bridge
 
   php56:
