@@ -138,6 +138,7 @@ flush privileges;" | ./${DEV_SELF} myroot 2>/dev/null;
 
     feature RabbitMQ rabbitmq;
     feature ElasticSearch elasticsearch;
+    feature MongoDB mongo;
 
     start;
     shell;
