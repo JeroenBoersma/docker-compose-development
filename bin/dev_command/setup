@@ -19,9 +19,9 @@ setup() {
         fi
 
         echo 'Starting regular database user, waiting for db to become ready';
-        ${DEV_SELF} up db;
+        ./${DEV_SELF} up db;
         while true; do
-            $DEV_SELF logs db 2>&1 | grep 'port: 3306  Percona' > /dev/null && break;
+            ./$DEV_SELF logs db 2>&1 | grep 'port: 3306  Percona' > /dev/null && break;
             echo -n '.';
             sleep 1;
         done
@@ -121,14 +121,14 @@ flush privileges;" | ./${DEV_SELF} myroot 2>/dev/null;
     }
 
     start() {
-        ${DEV_SELF} up;
+        ./${DEV_SELF} up;
     }
 
     shell() {
         echo '';
         echo 'Add next lines to your shell to implement `cdw`(to workspace) and `dev` to PATH';
         echo '';
-        ${DEV_SELF} profile;
+        ./${DEV_SELF} profile;
     }
 
     suffix;
