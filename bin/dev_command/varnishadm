@@ -1,0 +1,4 @@
+
+. ./exec varnish varnishadm "$@";
+return $?;
+
