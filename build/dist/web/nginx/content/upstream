@@ -4,13 +4,14 @@ set $backend_pass ${backend_pass}${php};
 set $backend_pass ${backend_pass}_backend;
 
 location @php {
-    try_files $uri =404;
+    root $dev_pub;
 
     include fastcgi_params;
     fastcgi_split_path_info ^(.+\.php)(/.*)$;
 
     fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
     fastcgi_param DOCUMENT_ROOT $realpath_root;
+    fastcgi_index index.php;
 
     # Mage storecode
     fastcgi_param MAGE_RUN_CODE $mageRunCode;

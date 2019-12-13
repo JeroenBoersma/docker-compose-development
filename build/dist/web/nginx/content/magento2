@@ -47,7 +47,9 @@ error_page 404 403 = /errors/404.php;
 # PHP entry point for setup application
 location ~* ^/setup($|/) {
     root $MAGE_ROOT;
+
     location ~ ^/setup/index.php {
+        set $dev_pub $MAGE_ROOT;
         try_files .~srcfile @php;
     }
 
@@ -65,6 +67,7 @@ location ~* ^/update($|/) {
     root $MAGE_ROOT;
 
     location ~ ^/update/index.php {
+        set $dev_pub $MAGE_ROOT;
         try_files .~srcfile @php;
     }
 

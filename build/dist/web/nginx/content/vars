@@ -30,3 +30,5 @@ if ( -e $dev_root/magento ) {
     set $htdocs "magento";
 }
 
+set $dev_pub $dev_root/$htdocs;
+
