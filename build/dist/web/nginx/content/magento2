@@ -19,6 +19,7 @@ if ($host ~ "^([^\.]+\.){2}(?!magento2\.)([^\.]+).*\[DOMAINSUFFIX]$") {
 #    listen 80;
 #    server_name mage.dev;
 #    set $MAGE_ROOT /var/www/magento2;
+#    set $MAGE_DEBUG_SHOW_ARGS 1;
 #    include /vagrant/magento2/nginx.conf.sample;
 # }
 #
@@ -185,6 +186,6 @@ gzip_types
 gzip_vary on;
 
 # Banned locations (only reached if the earlier PHP entry point regexes don't match)
-location ~* (\.php$|\.htaccess$|\.git) {
+location ~* (\.php$|\.phtml$|\.htaccess$|\.git) {
     deny all;
 }
