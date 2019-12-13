@@ -160,7 +160,7 @@ dc() {
     }
 
     php_versions() {
-        grep -h '^\s*- php[0-9][0-9]:fpm' ${DEV_WORKPATH}/docker-*.yml | sed -e 's/\(\s*\|:.*$\|-\)//g' | sort -ur;
+        grep -h '^\s*- php[0-9][0-9]:fpm' ${DEV_WORKPATH}/docker-*.yml | sed -e 's/ *- //;s/:.*//' | sort -ur;
     }
 
     php() {
