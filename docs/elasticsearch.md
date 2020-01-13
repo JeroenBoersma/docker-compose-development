@@ -12,7 +12,7 @@ authentication.
 
 To make sure the ElasticSearch environment is running as expected, run this command in your terminal:
 ```bash
-curl -X GET "localhost:9200/_cluster/health?pretty"
+curl -X GET "elasticsearch:9200/_cluster/health?pretty"
 ```
 
 ## Smile ElasticSuite
