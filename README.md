@@ -17,6 +17,7 @@ We follow a [Code of Conduct](docs/code-of-conduct.md).
 * [Update your existing installation](#update)
 * [But wait, there is more!](#but-wait-there-is-more)
     * [Development Commands](docs/development-commands.md)
+    * [ElasticSearch](docs/elasticsearch.md)
     * [MySQL, MailHog, Redis, Cronjobs](docs/mysql-mailhog-redis-cronjobs.md)
     * [Used (base) images](docs/used-base-images.md)
     * [Customize Docker Containers](docs/customize-docker-containers.md)
