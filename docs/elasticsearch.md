@@ -12,7 +12,7 @@ authentication.
 
 To make sure the ElasticSearch environment is running as expected, run this command in your terminal:
 ```bash
-curl -X GET "elasticsearch:9200/_cluster/health?pretty"
+dev console curl -X GET "elasticsearch:9200/_cluster/health?pretty"
 ```
 
 ## Smile ElasticSuite
@@ -21,7 +21,7 @@ When you're working with Magento 2 and you use [Smile ElasticSuite](https://gith
 install two additional plugins for ElasticSearch that aren't installed by default. To do that make sure you follow the
 next steps:
 
-Create a new file in `~/development/workspace/build/dist/elasticsearch/Dockerfile`
+Create a new file in `~/development/build/dist/elasticsearch/Dockerfile`
 Copy this content to the file:
 ```bash
 FROM elasticsearch:6.5.4
