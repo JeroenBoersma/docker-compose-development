@@ -19,5 +19,8 @@ location @php {
 
     fastcgi_pass $backend_pass;
 
+    fastcgi_buffer_size 32k;
+    fastcgi_buffers 4 64k;
+
     allow all;
 }
