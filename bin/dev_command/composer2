@@ -1,0 +1,4 @@
+
+. ./console composer2 "$@";
+return $?;
+
