@@ -50,6 +50,7 @@ init() {
     DEV_DOCKEROPTS='';
     DEV_COMMAND='';
     DEV_HOSTNAME='';
+    DEV_TRAPON='';
 
     if [ "${DEV_PROJECTPATH}" == "${DEV_USERDIR}" ]; then
         # Not in WORKSPACE
@@ -80,9 +81,30 @@ dc() {
     }
 
     run() {
+        local _child='';
         cmd="`show`";
-        ${cmd} "$@";
-        return $?
+
+        _trap() {
+            kill -s INT ${_child} 2>/dev/null;
+        }
+
+        if [ -z "${DEV_TRAPON}" ]; then
+            ${cmd} "$@";
+            return $?;
+        fi
+
+        trap '_trap' SIGINT;
+        ${cmd} "$@" &
+        _child=$!;
+        wait ${_child};
+        return $?;
+   }
+
+    trap_on() {
+        DEV_TRAPON=1;
+    }
+    trap_off() {
+        DEV_TRAPON="";
     }
 
     opt() {

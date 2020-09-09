@@ -1,0 +1,5 @@
+
+dc trap_on;
+main "$@";
+return $?;
+
