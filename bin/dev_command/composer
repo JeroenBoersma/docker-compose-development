@@ -1,4 +1,8 @@
 
+if [ -n "${COMPOSER_MEMORY_LIMIT}" ]; then
+    dc opt '-e COMPOSER_MEMORY_LIMIT';
+fi
+
 . ./console composer "$@";
 return $?;
 
