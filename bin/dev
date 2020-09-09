@@ -214,7 +214,7 @@ exec_command() {
     shift;
 
     if [ -z "${DEV_COMMAND}" ] || [ ! -r "${DEV_COMMANDPATH}/${DEV_COMMAND}" ]; then
-        return 1;
+        return 99;
     fi
 
     # Change to command directory
@@ -247,7 +247,8 @@ usage() {
 main() {
     [ $# -lt 1 ] && (usage; return $?);
 
-    exec_command "$@" || exec_custom "$@";
+    exec_command "$@" && return 0;
+    [ $? -eq 99 ] && exec_custom "$@";
     return $?;
 }
 
