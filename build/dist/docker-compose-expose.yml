@@ -1,0 +1,9 @@
+version: "3"
+
+services:
+  expose:
+    image: beyondcodegmbh/expose-server
+    network_mode: host
+    volumes:
+      - dockerdev-workspace-volume:/root
+

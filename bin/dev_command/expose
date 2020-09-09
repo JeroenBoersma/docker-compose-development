@@ -1,0 +1,15 @@
+
+dc yml build/dist/docker-compose-expose.yml;
+dc service expose;
+
+dc nodeps;
+dc interactive;
+
+dc cmd "php expose";
+if [ $# -lt 1 ]; then
+    dc cmd "php expose share https://${DEV_HOSTNAME}/'";
+fi
+
+dc run "$@";
+return $?;
+
