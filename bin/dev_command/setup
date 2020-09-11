@@ -137,7 +137,8 @@ flush privileges;" | ./${DEV_SELF} myroot 2>/dev/null;
     mysql;
 
     feature RabbitMQ rabbitmq;
-    feature ElasticSearch elasticsearch;
+    feature "ElasticSearch 6.5.4" elasticsearch;
+    feature "ElasticSearch 7.9.1" elasticsearch7;
     feature MongoDB mongo;
 
     start;

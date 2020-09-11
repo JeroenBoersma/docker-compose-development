@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  elasticsearch:
+    image: "elasticsearch:7.9.1"
+    network_mode: bridge
+    environment:
+        - "discovery.type=single-node"
+
+  php56:
+    links:
+      - elasticsearch
+  php70:
+    links:
+      - elasticsearch
+  php71:
+    links:
+      - elasticsearch
+  php72:
+    links:
+      - elasticsearch
+  php73:
+    links:
+      - elasticsearch
+  php74:
+    links:
+      - elasticsearch
+
+
