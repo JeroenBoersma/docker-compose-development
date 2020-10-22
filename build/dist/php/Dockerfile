@@ -9,3 +9,9 @@ ARG UID=1000
 
 RUN groupmod -g $GID app && \
     usermod -g $GID -u $UID app
+
+# Installing NodeJS from external resource
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - && \
+    apt-get install -y nodejs
+#Installing Grunt
+RUN npm install -g grunt-cli
