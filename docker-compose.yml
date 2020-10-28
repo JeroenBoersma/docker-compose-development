@@ -22,11 +22,11 @@ services:
   mailcatch:
     image: mailhog/mailhog
     network_mode: bridge
-    
+
   php56:
     build:
       context: build/dist/php
-      args: 
+      args:
         - FROM_TAG=php5-fpm
     volumes:
       - dockerdev-workspace-volume:/data
@@ -38,7 +38,7 @@ services:
   php70:
     build:
       context: build/dist/php
-      args: 
+      args:
         - FROM_TAG=php7-fpm
     volumes:
       - dockerdev-workspace-volume:/data
@@ -50,7 +50,7 @@ services:
   php71:
     build:
       context: build/dist/php
-      args: 
+      args:
         - FROM_TAG=php71-fpm
     volumes:
       - dockerdev-workspace-volume:/data
@@ -62,7 +62,7 @@ services:
   php72:
     build:
       context: build/dist/php
-      args: 
+      args:
         - FROM_TAG=php72-fpm
     volumes:
       - dockerdev-workspace-volume:/data
@@ -74,7 +74,7 @@ services:
   php73:
     build:
       context: build/dist/php
-      args: 
+      args:
         - FROM_TAG=php73-fpm
     volumes:
       - dockerdev-workspace-volume:/data
@@ -86,8 +86,20 @@ services:
   php74:
     build:
       context: build/dist/php
-      args: 
+      args:
         - FROM_TAG=php74-fpm
+    volumes:
+      - dockerdev-workspace-volume:/data
+    links:
+      - db
+      - mailcatch
+      - redis
+    network_mode: bridge
+  php80:
+    build:
+      context: build/dist/php
+      args:
+        - FROM_TAG=php80-fpm
     volumes:
       - dockerdev-workspace-volume:/data
     links:
@@ -116,6 +128,7 @@ services:
       - php72:fpm72
       - php73:fpm73
       - php74:fpm74
+      - php80:fpm80
     network_mode: bridge
   ssl:
     build:
