@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  elasticsearch:
+  elasticsearch7:
     image: "elasticsearch:7.9.1"
     network_mode: bridge
     environment:
@@ -9,21 +9,21 @@ services:
 
   php56:
     links:
-      - elasticsearch
+      - elasticsearch7
   php70:
     links:
-      - elasticsearch
+      - elasticsearch7
   php71:
     links:
-      - elasticsearch
+      - elasticsearch7
   php72:
     links:
-      - elasticsearch
+      - elasticsearch7
   php73:
     links:
-      - elasticsearch
+      - elasticsearch7
   php74:
     links:
-      - elasticsearch
+      - elasticsearch7
 
 
