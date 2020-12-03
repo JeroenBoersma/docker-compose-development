@@ -2,7 +2,7 @@ version: '3'
 
 services:
   elasticsearch6:
-    image: "elasticsearch:6.5.4"
+    build: build/dist/elasticsearch
     network_mode: bridge
     environment:
         - "discovery.type=single-node"
