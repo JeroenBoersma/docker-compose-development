@@ -46,7 +46,7 @@ flush privileges;" | ./${DEV_SELF} myroot 2>/dev/null;
     workspace() {
         if [ -z "`${DEV_SUDO} docker volume ls -q -f 'name=dockerdev-workspace-volume'`" ]; then
             echo 'Create workspace volume in location '${DEV_WORKSPACE_PATH};
-            ${DEV_SUDO} docker volume create -o 'type=none' -o 'device='${DEV_WORKSPACE_PATH} -o 'o=bind' dockerdev-workspace-volume 
+            ${DEV_SUDO} docker volume create -o 'type=none' -o 'device='${DEV_WORKSPACE_PATH} -o 'o=bind' dockerdev-workspace-volume
         fi
     }
 
@@ -63,6 +63,8 @@ flush privileges;" | ./${DEV_SELF} myroot 2>/dev/null;
         [ -z "${version}" ] && return 1;
 
         touch ${DEV_WORKSPACE_PATH}/.${version};
+
+        echo 'COMPOSER_MEMORY_LIMIT=-1' >> ${DEV_WORKPATH}/.env;
 
         return 0;
     }
@@ -112,7 +114,7 @@ flush privileges;" | ./${DEV_SELF} myroot 2>/dev/null;
                 return 0;
             fi
         done
-        
+
         if [ "${endis}" == 'y' ]; then
             touch ${file};
         else
