@@ -115,8 +115,6 @@ services:
   web:
     build:
       context: build/dist/web
-      args:
-        - IMAGE_TAG=1.19.6-alpine
     volumes:
         - dockerdev-workspace-volume:/data:ro
     environment:
@@ -135,8 +133,6 @@ services:
   ssl:
     build:
       context: build/dist/ssl
-      args:
-        - IMAGE_TAG=1.19.6-alpine
     ports:
         - "80:80"
         - "443:443"
