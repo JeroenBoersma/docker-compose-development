@@ -148,8 +148,6 @@ services:
   ftp:
     build:
       context: build/dist/ftp
-    environment:
-      - DOMAINSUFFIX
     volumes:
       - dockerdev-workspace-volume:/data
     network_mode: bridge
