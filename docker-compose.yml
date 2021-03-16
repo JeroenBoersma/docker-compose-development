@@ -32,7 +32,6 @@ services:
       - dockerdev-workspace-volume:/data
     links:
       - db
-      - ftp
       - mailcatch
       - redis
     network_mode: bridge
@@ -45,7 +44,6 @@ services:
       - dockerdev-workspace-volume:/data
     links:
       - db
-      - ftp
       - mailcatch
       - redis
     network_mode: bridge
@@ -58,7 +56,6 @@ services:
       - dockerdev-workspace-volume:/data
     links:
       - db
-      - ftp
       - mailcatch
       - redis
     network_mode: bridge
@@ -71,7 +68,6 @@ services:
       - dockerdev-workspace-volume:/data
     links:
       - db
-      - ftp
       - mailcatch
       - redis
     network_mode: bridge
@@ -84,7 +80,6 @@ services:
       - dockerdev-workspace-volume:/data
     links:
       - db
-      - ftp
       - mailcatch
       - redis
     network_mode: bridge
@@ -97,7 +92,6 @@ services:
       - dockerdev-workspace-volume:/data
     links:
       - db
-      - ftp
       - mailcatch
       - redis
     network_mode: bridge
@@ -110,7 +104,6 @@ services:
       - dockerdev-workspace-volume:/data
     links:
       - db
-      - ftp
       - mailcatch
       - redis
     network_mode: bridge
@@ -144,13 +137,3 @@ services:
         - "80:80"
         - "443:443"
     network_mode: bridge
-
-  ftp:
-    build:
-      context: build/dist/ftp
-    volumes:
-      - dockerdev-workspace-volume:/data
-    network_mode: bridge
-    ports:
-      - "21:21"
-      - "21000-21010:21000-21010"
