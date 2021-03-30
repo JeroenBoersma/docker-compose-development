@@ -112,6 +112,16 @@ services:
     image: redis:alpine
     network_mode: bridge
 
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - MYSQL_ROOT_PASSWORD
+    ports:
+      - 8080:80
+    network_mode: bridge
+    links:
+      - db
+    
   web:
     build:
       context: build/dist/web
