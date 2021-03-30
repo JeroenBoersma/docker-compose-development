@@ -41,6 +41,7 @@ init() {
     dc yml_if 'build/dist/docker-compose-varnish.yml' 'conf/varnish.vcl' || dc yml 'build/dist/docker-compose-no-varnish.yml';
     dc yml_if 'build/dist/docker-compose-elasticsearch.yml' 'conf/elasticsearch';
     dc yml_if 'build/dist/docker-compose-elasticsearch7.yml' 'conf/elasticsearch7';
+    dc yml_if 'build/dist/docker-compose-elasticsearchhq.yml' 'conf/elasticsearchhq';
     dc yml_if 'build/dist/docker-compose-rabbitmq.yml' 'conf/rabbitmq';
     dc yml_if 'build/dist/docker-compose-mongo.yml' 'conf/mongo';
     dc yml_if 'build/dist/docker-compose-ftp.yml' 'conf/ftp';
