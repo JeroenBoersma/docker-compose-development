@@ -2,7 +2,10 @@ version: '3'
 
 services:
   elasticsearch7:
-    build: build/dist/elasticsearch7
+    build:
+      context: build/dist/elasticsearch
+      args:
+        - FROM_TAG=7.4.2
     network_mode: bridge
     environment:
         - "discovery.type=single-node"
