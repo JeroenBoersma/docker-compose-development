@@ -78,6 +78,7 @@ services:
         - FROM_TAG=php73-fpm
     volumes:
       - dockerdev-workspace-volume:/data
+      - ./conf.d/php/php73.ini:/usr/local/etc/php/php.ini:ro
     links:
       - db
       - mailcatch
