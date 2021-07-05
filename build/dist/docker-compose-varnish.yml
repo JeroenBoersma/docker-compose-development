@@ -2,7 +2,7 @@ version: '3'
 
 services:
   varnish:
-    image: million12/varnish
+    image: varnish
     network_mode: bridge
     links:
       - "web:web"
