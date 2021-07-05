@@ -17,11 +17,23 @@ services:
     links:
       - blackfire
   php72:
+    environment:
+      - "BLACKFIRE_AGENT_SOCKET=tcp://blackfire:8307"
     links:
       - blackfire
   php73:
+    environment:
+      - "BLACKFIRE_AGENT_SOCKET=tcp://blackfire:8307"
     links:
       - blackfire
   php74:
+    environment:
+      - "BLACKFIRE_AGENT_SOCKET=tcp://blackfire:8307"
     links:
       - blackfire
+  php80:
+    environment:
+      - "BLACKFIRE_AGENT_SOCKET=tcp://blackfire:8307"
+    links:
+      - blackfire
+
