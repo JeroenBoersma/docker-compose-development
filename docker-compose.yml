@@ -92,8 +92,8 @@ services:
       context: build/dist/php
       args:
         - FROM_TAG=php74-fpm
-          #    environment:
-          #      - "BLACKFIRE_AGENT_SOCKET=unix:///dev/null"
+    environment:
+      - "BLACKFIRE_AGENT_SOCKET=unix:///dev/null"
     volumes:
       - dockerdev-workspace-volume:/data
     links:
