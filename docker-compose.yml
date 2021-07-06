@@ -82,6 +82,7 @@ services:
       - "BLACKFIRE_AGENT_SOCKET=unix:///dev/null"
     volumes:
       - dockerdev-workspace-volume:/data
+      - ./conf.d/php/php73.ini:/usr/local/etc/php/php.ini:ro
     links:
       - db
       - mailcatch
@@ -120,6 +121,16 @@ services:
     image: redis:alpine
     network_mode: bridge
 
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - MYSQL_ROOT_PASSWORD
+    ports:
+      - 8080:80
+    network_mode: bridge
+    links:
+      - db
+    
   web:
     build:
       context: build/dist/web
