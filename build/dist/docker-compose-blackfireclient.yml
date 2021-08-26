@@ -2,7 +2,9 @@ version: '3'
 
 services:
   blackfireclient:
-    image: blackfire/blackfire
+    image: blackfire/blackfire:2
     env_file:
       - ./conf/blackfire
+    environment:
+      - BLACKFIRE_DISABLE_LEGACY_PORT=1
     network_mode: host

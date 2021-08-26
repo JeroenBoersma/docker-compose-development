@@ -64,6 +64,8 @@ services:
       context: build/dist/php
       args:
         - FROM_TAG=php72-fpm
+    environment:
+      - "BLACKFIRE_AGENT_SOCKET=unix:///dev/null"
     volumes:
       - dockerdev-workspace-volume:/data
     links:
@@ -76,6 +78,8 @@ services:
       context: build/dist/php
       args:
         - FROM_TAG=php73-fpm
+    environment:
+      - "BLACKFIRE_AGENT_SOCKET=unix:///dev/null"
     volumes:
       - dockerdev-workspace-volume:/data
       - ./conf.d/php/php73.ini:/usr/local/etc/php/php.ini:ro
@@ -89,6 +93,8 @@ services:
       context: build/dist/php
       args:
         - FROM_TAG=php74-fpm
+    environment:
+      - "BLACKFIRE_AGENT_SOCKET=unix:///dev/null"
     volumes:
       - dockerdev-workspace-volume:/data
     links:
@@ -101,6 +107,8 @@ services:
       context: build/dist/php
       args:
         - FROM_TAG=php80-fpm
+    environment:
+      - "BLACKFIRE_AGENT_SOCKET=unix:///dev/null"
     volumes:
       - dockerdev-workspace-volume:/data
     links:
