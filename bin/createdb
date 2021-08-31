@@ -1,0 +1,4 @@
+#!/bin/bash
+echo "CREATE DATABASE $1 CHARACTER SET ${2:-"utf8"} COLLATE ${3:-"utf8_general_ci"};" \
+  |  `dirname $0`/dev myroot
+#exit $?

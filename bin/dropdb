@@ -1,0 +1,4 @@
+#!/bin/bash
+echo "DROP DATABASE $1;" \
+  |  `dirname $0`/dev myroot
+#exit $?
