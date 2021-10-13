@@ -35,6 +35,8 @@ Before continuing you must have the following installed and working correctly:
  - [Docker][1]
  - [Docker-compose][2] (**1.12.0** or above)
 
+If you are on Linux, you **must** follow these steps first; [Docker Linux Post install](https://docs.docker.com/engine/install/linux-postinstall/)
+
 **OSX users** should also install:
 
  - [Docker Sync][3] and its dependencies
