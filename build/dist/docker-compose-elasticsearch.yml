@@ -1,38 +1,9 @@
-version: '3'
-
 services:
   elasticsearch6:
     build:
       context: build/dist/elasticsearch
       args:
         - FROM_TAG=6.5.4
-    network_mode: bridge
     environment:
-        - "discovery.type=single-node"
-
-  php56:
-    links:
-      - elasticsearch6
-      - elasticsearch6:elasticsearch
-  php70:
-    links:
-      - elasticsearch6
-      - elasticsearch6:elasticsearch
-  php71:
-    links:
-      - elasticsearch6
-      - elasticsearch6:elasticsearch
-  php72:
-    links:
-      - elasticsearch6
-      - elasticsearch6:elasticsearch
-  php73:
-    links:
-      - elasticsearch6
-      - elasticsearch6:elasticsearch
-  php74:
-    links:
-      - elasticsearch6
-      - elasticsearch6:elasticsearch
-
+      - "discovery.type=single-node"
 

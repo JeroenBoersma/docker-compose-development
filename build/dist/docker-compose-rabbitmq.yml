@@ -1,29 +1,6 @@
-version: '3'
-
 services:
   rabbitmq:
     image: rabbitmq:management
-    network_mode: bridge
     ports:
         - 127.0.0.1:15672:15672
-
-  php56:
-    links:
-      - rabbitmq
-  php70:
-    links:
-      - rabbitmq
-  php71:
-    links:
-      - rabbitmq
-  php72:
-    links:
-      - rabbitmq
-  php73:
-    links:
-      - rabbitmq
-  php74:
-    links:
-      - rabbitmq
-
 

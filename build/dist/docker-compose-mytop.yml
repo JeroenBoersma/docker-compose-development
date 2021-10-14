@@ -1,8 +1,4 @@
-version: '3'
-
 services:
   mytop:
     image: srcoder/mytop
-    links:
-    - db
-    network_mode: bridge
+

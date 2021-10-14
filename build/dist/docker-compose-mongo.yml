@@ -1,18 +1,12 @@
-version: '3'
-
 services:
   mongo:
     image: mongo
-    network_mode: bridge
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
 
   mongo-express:
     image: mongo-express
-    network_mode: bridge
-    links:
-      - mongo
     ports:
         - 127.0.0.1:8081:8081
 
@@ -20,23 +14,4 @@ services:
       ME_CONFIG_MONGODB_SERVER: mongo
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
-
-  php56:
-    links:
-      - mongo
-  php70:
-    links:
-      - mongo
-  php71:
-    links:
-      - mongo
-  php72:
-    links:
-      - mongo
-  php73:
-    links:
-      - mongo
-  php74:
-    links:
-      - mongo
 

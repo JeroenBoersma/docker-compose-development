@@ -16,7 +16,6 @@ Example written for PHP5.4
     links:
       - db
       - mailcatch
-    network_mode: bridge
 ```
 - copy `build/dist/web` to `build/custom/web`
 - change `docker-custom.yml` to build your custom web service

@@ -1,5 +1,3 @@
-version: '3'
-networks: {}
 volumes:
   dockerdev-mysql-volume:
     external: true
@@ -15,13 +13,11 @@ services:
       - dockerdev-mysql-volume:/var/lib/mysql:rw
     environment:
       - MYSQL_ROOT_PASSWORD
-    network_mode: bridge
     ports:
       - 127.0.0.1:3306:3306
 
   mailcatch:
     image: mailhog/mailhog
-    network_mode: bridge
 
   php56:
     build:
@@ -30,11 +26,6 @@ services:
         - FROM_TAG=php5-fpm
     volumes:
       - dockerdev-workspace-volume:/data
-    links:
-      - db
-      - mailcatch
-      - redis
-    network_mode: bridge
   php70:
     build:
       context: build/dist/php
@@ -42,11 +33,6 @@ services:
         - FROM_TAG=php7-fpm
     volumes:
       - dockerdev-workspace-volume:/data
-    links:
-      - db
-      - mailcatch
-      - redis
-    network_mode: bridge
   php71:
     build:
       context: build/dist/php
@@ -54,11 +40,6 @@ services:
         - FROM_TAG=php71-fpm
     volumes:
       - dockerdev-workspace-volume:/data
-    links:
-      - db
-      - mailcatch
-      - redis
-    network_mode: bridge
   php72:
     build:
       context: build/dist/php
@@ -68,11 +49,6 @@ services:
       - "BLACKFIRE_AGENT_SOCKET=unix:///dev/null"
     volumes:
       - dockerdev-workspace-volume:/data
-    links:
-      - db
-      - mailcatch
-      - redis
-    network_mode: bridge
   php73:
     build:
       context: build/dist/php
@@ -82,11 +58,6 @@ services:
       - "BLACKFIRE_AGENT_SOCKET=unix:///dev/null"
     volumes:
       - dockerdev-workspace-volume:/data
-    links:
-      - db
-      - mailcatch
-      - redis
-    network_mode: bridge
   php74:
     build:
       context: build/dist/php
@@ -96,11 +67,6 @@ services:
       - "BLACKFIRE_AGENT_SOCKET=unix:///dev/null"
     volumes:
       - dockerdev-workspace-volume:/data
-    links:
-      - db
-      - mailcatch
-      - redis
-    network_mode: bridge
   php80:
     build:
       context: build/dist/php
@@ -110,11 +76,6 @@ services:
       - "BLACKFIRE_AGENT_SOCKET=unix:///dev/null"
     volumes:
       - dockerdev-workspace-volume:/data
-    links:
-      - db
-      - mailcatch
-      - redis
-    network_mode: bridge
 
   php81:
     build:
@@ -133,7 +94,6 @@ services:
 
   redis:
     image: redis:alpine
-    network_mode: bridge
 
   web:
     build:
@@ -142,22 +102,11 @@ services:
         - dockerdev-workspace-volume:/data:ro
     environment:
       - DOMAINSUFFIX
-    links:
-      - mailcatch
-      - php71:fpm
-      - php70:fpm70
-      - php56:fpm56
-      - php71:fpm71
-      - php72:fpm72
-      - php73:fpm73
-      - php74:fpm74
-      - php80:fpm80
-      - php81:fpm81
-    network_mode: bridge
   ssl:
+    depends_on:
+      - web
     build:
       context: build/dist/ssl
     ports:
         - "80:80"
         - "443:443"
-    network_mode: bridge

@@ -72,7 +72,7 @@ init() {
 dc() {
 
     show() {
-        echo `getsudo`docker-compose ${DEV_YML} ${DEV_MODE} \
+        echo `getsudo`docker compose ${DEV_YML} ${DEV_MODE} \
             ${DEV_DOCKEROPTS} \
             ${DEV_SERVICE} \
             "${DEV_CMD}";
@@ -168,7 +168,7 @@ dc() {
         if [ -n "`echo $DEV_YML | grep $1`" ]; then
             return;
         fi
-        DEV_YML=${DEV_YML}' -f '${DEV_WORKPATH}'/'$1;
+        DEV_YML=${DEV_YML}' --file '${DEV_WORKPATH}'/'$1;
     }
 
     yml_ssh() {
@@ -186,7 +186,7 @@ dc() {
     }
 
     php_versions() {
-        grep -h '^\s*- php[0-9][0-9]:fpm' ${DEV_WORKPATH}/docker-*.yml | sed -e 's/ *- //;s/:.*//' | sort -ur;
+        grep -h '^\s*php[0-9][0-9]:' ${DEV_WORKPATH}/docker-*.yml | sed -e 's/ *//;s/:.*//' | sort -ur;
     }
 
     php() {
