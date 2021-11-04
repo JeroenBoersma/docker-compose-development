@@ -2,7 +2,7 @@ version: '3'
 
 services:
   ngrok:
-    image: fnichol/ngrok
+    image: ngrok/ngrok
     links:
     - web
     network_mode: bridge
