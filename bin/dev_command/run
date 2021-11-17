@@ -1,4 +1,6 @@
 
+dc yml_local;
+
 dc service $1;
 shift;
 

@@ -1,4 +1,6 @@
 
+dc yml_local;
+
 services=$(. ./config --services);
 if [ -n "$*" ]; then
     services="$@";
