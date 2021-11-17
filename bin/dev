@@ -65,6 +65,9 @@ init() {
         fi
     fi
 
+    # load local yml file
+    dc yml_local;
+
     # Check which php version to use
     dc php;
 }
@@ -169,6 +172,12 @@ dc() {
             return;
         fi
         DEV_YML=${DEV_YML}' --file '${DEV_WORKPATH}'/'$1;
+    }
+
+    yml_local() {
+      if [ -r ${DEV_USERDIR}/docker-compose-dev.yml ]; then
+          DEV_YML=${DEV_YML}' --file '${DEV_USERDIR}/docker-compose-dev.yml;
+      fi
     }
 
     yml_ssh() {
