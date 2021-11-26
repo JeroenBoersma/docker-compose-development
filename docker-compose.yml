@@ -76,6 +76,15 @@ services:
       - "BLACKFIRE_AGENT_SOCKET=unix:///dev/null"
     volumes:
       - dockerdev-workspace-volume:/data
+  php81:
+    build:
+      context: build/dist/php
+      args:
+        - FROM_TAG=php81-fpm
+    environment:
+      - "BLACKFIRE_AGENT_SOCKET=unix:///dev/null"
+    volumes:
+      - dockerdev-workspace-volume:/data
 
   php81:
     build:
