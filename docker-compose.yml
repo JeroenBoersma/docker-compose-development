@@ -99,7 +99,6 @@ services:
       - db
       - mailcatch
       - redis
-    network_mode: bridge
 
   redis:
     image: redis:alpine
