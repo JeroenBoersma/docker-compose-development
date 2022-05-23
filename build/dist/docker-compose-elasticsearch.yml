@@ -34,5 +34,13 @@ services:
     links:
       - elasticsearch6
       - elasticsearch6:elasticsearch
+  php80:
+    links:
+      - elasticsearch6
+      - elasticsearch6:elasticsearch
+  php81:
+    links:
+      - elasticsearch6
+      - elasticsearch6:elasticsearch
 
 

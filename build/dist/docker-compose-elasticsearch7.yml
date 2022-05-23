@@ -28,5 +28,11 @@ services:
   php74:
     links:
       - elasticsearch7
+  php80:
+    links:
+      - elasticsearch7
+  php81:
+    links:
+      - elasticsearch7
 
 

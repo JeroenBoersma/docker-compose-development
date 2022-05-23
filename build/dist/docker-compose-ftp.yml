@@ -35,3 +35,7 @@ services:
   php80:
     links:
       - ftp
+
+  php81:
+    links:
+      - ftp

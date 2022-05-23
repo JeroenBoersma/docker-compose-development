@@ -39,4 +39,10 @@ services:
   php74:
     links:
       - mongo
+  php80:
+    links:
+      - mongo
+  php81:
+    links:
+      - mongo
 
