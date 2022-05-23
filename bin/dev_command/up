@@ -14,6 +14,7 @@ if [ -z "${DOMAINSUFFIX}" ]; then
     dc yml build/dist/docker-compose-suffix.yml;
 fi
 
+dc yml_local;
 dc opt '-d --no-recreate';
 dc mode 'up';
 dc run "$@";

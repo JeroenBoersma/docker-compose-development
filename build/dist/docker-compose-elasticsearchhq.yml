@@ -1,14 +1,8 @@
-version: '3'
-
 services:
   elasticsearchhq:
     image: elastichq/elasticsearch-hq
-    network_mode: bridge
     environment:
-        - "discovery.type=single-node"
-    links:
-      - elasticsearch7
-#      - elasticsearch
+      - "discovery.type=single-node"
     ports:
       - "127.0.0.1:5000:5000"
 

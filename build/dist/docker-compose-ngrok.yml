@@ -1,9 +1,4 @@
-version: '3'
-
 services:
   ngrok:
     image: ngrok/ngrok
-    links:
-    - web
-    network_mode: bridge
 

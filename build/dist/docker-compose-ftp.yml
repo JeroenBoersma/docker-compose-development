@@ -1,37 +1,7 @@
-version: '3'
-
 services:
   ftp:
     build:
       context: build/dist/ftp
     volumes:
       - dockerdev-workspace-volume:/data
-    network_mode: bridge
 
-  php70:
-    links:
-      - ftp
-
-  php56:
-    links:
-      - ftp
-
-  php71:
-    links:
-      - ftp
-
-  php72:
-    links:
-      - ftp
-
-  php73:
-    links:
-      - ftp
-
-  php74:
-    links:
-      - ftp
-
-  php80:
-    links:
-      - ftp

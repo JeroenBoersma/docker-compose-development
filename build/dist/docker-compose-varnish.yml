@@ -1,17 +1,13 @@
-version: '3'
-
 services:
   varnish:
     image: varnish
-    network_mode: bridge
-    links:
-      - "web:web"
-      - "web:backend"
     environment:
       - CACHE_SIZE
     volumes:
       - ./conf/varnish.vcl:/etc/varnish/default.vcl
   ssl:
+    depends_on:
+      - varnish
     links:
       - "varnish:backend"
 

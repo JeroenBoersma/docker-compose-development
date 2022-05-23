@@ -1,6 +1,7 @@
 
+dc yml_local;
 dc yml_all;
-dc mode 'down -v';
+dc mode 'down';
 
 dc run "$@";
 return $?;
