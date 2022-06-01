@@ -27,9 +27,9 @@ init() {
 
     DEV_PHP='php71';
 
-    DEV_INTERACTIVE=false;
+    DEV_INTERACTIVE=0;
     if [ -t "0" ] && [ -t "1" ]; then
-        DEV_INTERACTIVE=true;
+        DEV_INTERACTIVE=1;
     fi
 
     dc env conf/mysql; # fallback
@@ -115,7 +115,7 @@ dc() {
     }
 
     interactive() {
-        [ ! ${DEV_INTERACTIVE} ] && opt '-T';
+        [ ${DEV_INTERACTIVE} -eq 0 ] && opt '-T';
     }
 
     nodeps() {
