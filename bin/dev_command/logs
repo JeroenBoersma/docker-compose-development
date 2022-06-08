@@ -1,6 +1,6 @@
 
 dc mode logs;
-dc interactive;
+#dc interactive;
 
 dc run "$@";
 return $?;
