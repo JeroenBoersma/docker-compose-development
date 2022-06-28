@@ -1,0 +1,8 @@
+services:
+  elasticvue:
+    image: cars10/elasticvue
+    environment:
+      - "discovery.type=single-node"
+    ports:
+      - "127.0.0.1:8080:8080"
+

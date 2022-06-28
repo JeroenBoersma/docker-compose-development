@@ -1,0 +1,9 @@
+services:
+  elasticsearch6:
+    ports:
+      - "127.0.0.1:9206:9200"
+    environment:
+      - "discovery.type=single-node"
+      - "http.cors.enabled=true"
+      - "http.cors.allow-origin=http://localhost:8080"
+

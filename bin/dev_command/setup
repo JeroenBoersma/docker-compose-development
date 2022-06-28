@@ -142,6 +142,7 @@ flush privileges;" | ./${DEV_SELF} myroot 2>/dev/null;
     feature "ElasticSearch 6.5.4" elasticsearch;
     feature "ElasticSearch 7.9.1" elasticsearch7;
     feature "ElasticSearch HQ" elasticsearchhq;
+    feature "ElasticSearch VUE" elasticvue;
     feature MongoDB mongo;
     feature FTP ftp;
 
