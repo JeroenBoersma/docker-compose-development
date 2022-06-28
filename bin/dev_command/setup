@@ -101,9 +101,9 @@ flush privileges;" | ./${DEV_SELF} myroot 2>/dev/null;
         fi
 
         if [ "${endis}" == 'y' ]; then
-            echo "Do you want to enable ${name} support?";
+            echo "The service '${name}' is currently DISABLED, type Y to ENABLE the service '${name}'? (press enter to skip)";
         else
-            echo "Do you want to disable ${name} support?";
+            echo "The service '${name}' is currently ENABLED, typing Y will DISABLE the service '${name}'? (press enter to leave unchanged)";
         fi
 
         while read -p'? (N/y)' -n1 a; do
