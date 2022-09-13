@@ -19,4 +19,7 @@ services:
   php81:
     environment:
       - "BLACKFIRE_AGENT_SOCKET=tcp://blackfire:8307"
+  php82:
+    environment:
+      - "BLACKFIRE_AGENT_SOCKET=tcp://blackfire:8307"
 

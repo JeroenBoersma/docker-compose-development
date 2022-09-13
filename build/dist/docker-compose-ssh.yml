@@ -39,4 +39,9 @@ services:
       SSH_AUTH_SOCK: "/ssh-socket"
     volumes:
       - ${SSH_AUTH_SOCK}:/ssh-socket:ro
+  php82:
+    environment:
+      SSH_AUTH_SOCK: "/ssh-socket"
+    volumes:
+      - ${SSH_AUTH_SOCK}:/ssh-socket:ro
 
