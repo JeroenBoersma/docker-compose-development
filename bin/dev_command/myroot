@@ -6,6 +6,7 @@ dc service dbclient;
 dc nodeps;
 dc interactive;
 
+dc opt '-T';
 dc cmd mysql "-hdb -uroot -p${MYSQL_ROOT_PASSWORD}";
 dc run "$@";
 return $?;
