@@ -6,6 +6,7 @@ dc service dbclient;
 dc nodeps;
 dc interactive;
 
+dc opt '-T';
 dc cmd mysql "-h db -u ${USER}";
 
 dc run "$@";
