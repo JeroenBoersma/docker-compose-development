@@ -2,6 +2,7 @@
 cmd=/data/bin/$1;
 shift;
 
+dc opt "-e DEV_HOSTNAME=${DEV_HOSTNAME}"
 . console ${cmd} "$@";
 return $?;
 
