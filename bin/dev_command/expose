@@ -6,7 +6,7 @@ dc nodeps;
 dc interactive;
 
 if [ $# -lt 1 ]; then
-    dc cmd "share 'https://${DEV_HOSTNAME}/'";
+    dc cmd "share https://${DEV_HOSTNAME}";
 fi
 
 
