@@ -1,0 +1,11 @@
+cd ${DEV_WORKSPACE_PATH}/${DEV_PROJECTPATH};
+url=$(${DEV_SELF} web-url "$@");
+
+if [ -z "${url}" ]; then
+    exit 1;
+fi
+
+echo "Open ${url}";
+open "${url}";
+exit 0;
+

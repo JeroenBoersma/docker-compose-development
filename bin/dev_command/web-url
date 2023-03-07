@@ -1,0 +1,13 @@
+
+if [ -z "${DEV_HOSTNAME}" ]; then
+    exit 1;
+fi
+
+proto=https
+if [ "$1" == '-n' ] || [ "$1" == '--non-secure' ]; then
+    proto=http;
+fi
+
+echo ${proto}://${DEV_HOSTNAME}/;
+exit 0;
+
