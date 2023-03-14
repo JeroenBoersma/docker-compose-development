@@ -130,6 +130,21 @@ services:
       - mailcatch
       - redis
     network_mode: bridge
+    
+  php82:
+    build:
+      context: build/dist/php
+      args:
+        - FROM_TAG=php82-fpm
+    environment:
+      - "BLACKFIRE_AGENT_SOCKET=unix:///dev/null"
+    volumes:
+      - dockerdev-workspace-volume:/data
+    links:
+      - db
+      - mailcatch
+      - redis
+    network_mode: bridge
 
   redis:
     image: redis:alpine
@@ -153,6 +168,7 @@ services:
       - php74:fpm74
       - php80:fpm80
       - php81:fpm81
+      - php82:fpm82
     network_mode: bridge
   ssl:
     build:
