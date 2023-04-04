@@ -42,6 +42,7 @@ init() {
     dc yml_if 'build/dist/docker-compose-elasticsearch.yml' 'conf/elasticsearch';
     dc yml_if 'build/dist/docker-compose-elasticsearch7.yml' 'conf/elasticsearch7';
     dc yml_if 'build/dist/docker-compose-elasticsearchhq.yml' 'conf/elasticsearchhq';
+    dc yml_if 'build/dist/docker-compose-db8.yml' 'conf/mysql8';
     dc yml_if 'build/dist/docker-compose-elasticvue.yml' 'conf/elasticvue';
     dc yml_if 'build/dist/docker-compose-elasticvue-cors.yml' 'conf/elasticvue' 'conf/elasticsearch';
     dc yml_if 'build/dist/docker-compose-elasticvue-cors7.yml' 'conf/elasticvue' 'conf/elasticsearch7';
