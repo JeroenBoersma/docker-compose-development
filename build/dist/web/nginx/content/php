@@ -24,6 +24,9 @@ if ( -f $dev_base_root/.php80 ) {
 if ( -f $dev_base_root/.php81 ) {
   set $php '81';
 }
+if ( -f $dev_base_root/.php82 ) {
+  set $php '82';
+}
 
 if ( -f $dev_customer_root/.php56 ) {
   set $php '56';
@@ -49,6 +52,9 @@ if ( -f $dev_customer_root/.php80 ) {
 if ( -f $dev_customer_root/.php81 ) {
   set $php '81';
 }
+if ( -f $dev_customer_root/.php82 ) {
+  set $php '82';
+}
 
 if ( -f $dev_root/.php56 ) {
   set $php '56';
@@ -73,5 +79,9 @@ if ( -f $dev_root/.php80 ) {
 }
 if ( -f $dev_root/.php81 ) {
   set $php '81';
+}
+
+if ( -f $dev_root/.php82 ) {
+  set $php '82';
 }
 
