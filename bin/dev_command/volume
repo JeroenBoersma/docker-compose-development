@@ -1,9 +1,9 @@
 
 usage() {
     echo "Usage:";
-    echo "- ${DEV_SELF} ${DEV_COMMAND} {workspace|mysql} localpath";
+    echo "- ${DEV_SELF} ${DEV_COMMAND} {workspace|mysql|mysql8} localpath";
     echo "  create a volume pointing to the localpath";
-    echo "- ${DEV_SELF} ${DEV_COMMAND} rm {workspace|mysql}";
+    echo "- ${DEV_SELF} ${DEV_COMMAND} rm {workspace|mysql|mysql8}";
     echo "  remove a volume";
     echo "- ${DEV_SELF} ${DEV_COMMAND} ls";
     echo "  list current volume mapping"
@@ -15,6 +15,8 @@ current() {
 
     echo -n "- mysql: ";
     ${DEV_SUDO} docker volume inspect -f '{{ .Options.device }}' dockerdev-mysql-volume 2>/dev/null;
+    echo -n "- mysql8: ";
+    ${DEV_SUDO} docker volume inspect -f '{{ .Options.device }}' dockerdev-mysql8-volume 2>/dev/null;
     echo -n "- workspace: ";
     ${DEV_SUDO} docker volume inspect -f '{{ .Options.device }}' dockerdev-workspace-volume 2>/dev/null;
     return 0;
@@ -23,6 +25,8 @@ current() {
 create() {
     if [ "$1" == 'mysql' ]; then
         local VOLUME_TYPE='mysql';
+    elif [ "$1" == 'mysql8' ]; then
+        local VOLUME_TYPE='mysql8';
     elif [ "$1" == 'workspace' ]; then
         local VOLUME_TYPE='workspace';
     else
@@ -53,6 +57,8 @@ create() {
 remove() {
     if [ "$1" == 'mysql' ]; then
         local VOLUME_TYPE='mysql';
+    elif [ "$1" == 'mysql8' ]; then
+        local VOLUME_TYPE='mysql8';
     elif [ "$1" == 'workspace' ]; then
         local VOLUME_TYPE='workspace';
     else

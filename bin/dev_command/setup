@@ -7,12 +7,35 @@ echo '';
 setup() {
 
     mysql() {
-        if [ -z "`${DEV_SUDO} docker volume ls -q -f 'name=dockerdev-mysql-volume'`" ]; then
-            echo 'Create a persistant database volume';
-            ${DEV_SUDO} docker volume create dockerdev-mysql-volume;
+        local mysql_version="$1"
+        local file="${DEV_WORKPATH}/conf/mysql$mysql_version"
+        local endis='';
+        local volume_name="dockerdev-mysql${mysql_version}-volume"
+        local service_name="db${mysql_version}"
+
+        if [ -z "${mysql_version}" ]; then
+            endis='n'
+            mysql_version='5.7'
         fi
 
-        ./${DEV_SELF} setup-mysql db;
+        if [ -z "${endis}" ]; then
+            if [ -e ${file} ]; then
+                endis='n'
+            else
+                endis='y'
+            fi
+        fi
+
+        if [ "${endis}" == 'y' ]; then
+            return 0;
+        fi
+
+        if [ -z "`${DEV_SUDO} docker volume ls -q -f 'name=${volume_name}'`" ]; then
+            echo "Create a persistant database volume for MySQL version ${mysql_version}";
+            ${DEV_SUDO} docker volume create ${volume_name};
+        fi
+
+        ./${DEV_SELF} setup-mysql ${service_name};
         return $?;
     }
 
@@ -112,7 +135,7 @@ setup() {
     mysql;
 
     feature RabbitMQ rabbitmq;
-    feature "Percona 8" mysql8;
+    feature "Percona 8" mysql8; mysql 8;
     feature "ElasticSearch 6.5.4" elasticsearch;
     feature "ElasticSearch 7.9.1" elasticsearch7;
     feature "ElasticSearch HQ" elasticsearchhq;

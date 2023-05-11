@@ -5,6 +5,7 @@ services:
   db8:
     image: percona:8
     volumes:
+      - ./conf.d/mysql8/my.cnf:/etc/my.cnf.d/development.cnf:ro
       - dockerdev-mysql8-volume:/var/lib/mysql:rw
     environment:
       - MYSQL_ROOT_PASSWORD
