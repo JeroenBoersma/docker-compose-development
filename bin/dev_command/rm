@@ -1,0 +1,10 @@
+
+dc yml_local;
+dc yml_all;
+dc mode rm;
+
+dc opt -s -f;
+
+dc run "$@";
+return $?;
+

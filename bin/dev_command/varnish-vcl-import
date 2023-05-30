@@ -3,10 +3,10 @@ local infile=${DEV_USERDIR}/$1;
 
 if [ -n "$1" ]; then
     cd ${DEV_PATH};
-    ./${DEV_SELF} down;
+    ./${DEV_SELF} rm web ssl;
 
     cat ${infile} | sed '/.probe = {/,/}/d' > ${outfile};
-    ./${DEV_SELF} up;
+    ./${DEV_SELF} up web varnish ssl;
     return 0;
 else
     echo "usage: ${DEV_SELF} ${DEV_COMMAND} path/to/file.vcl";

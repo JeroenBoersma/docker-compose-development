@@ -1,7 +1,7 @@
 local outfile=${DEV_WORKPATH}/conf/varnish.vcl;
 
 cd ${DEV_PATH};
-./${DEV_SELF} down;
+./${DEV_SELF} rm varnish web ssl;
 
 mv ${outfile} ${outfile}.off;
 ./${DEV_SELF} up;
