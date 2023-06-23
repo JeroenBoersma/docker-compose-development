@@ -117,6 +117,8 @@ setup() {
     feature "ElasticSearch 7.9.1" elasticsearch7;
     feature "ElasticSearch HQ" elasticsearchhq;
     feature "ElasticSearch VUE" elasticvue;
+    feature "Opensearch" opensearch;
+    feature "Opensearch dashboard" opensearch-dashboard;
     feature MongoDB mongo;
     feature FTP ftp;
 

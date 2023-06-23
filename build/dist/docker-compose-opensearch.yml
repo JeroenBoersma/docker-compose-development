@@ -1,0 +1,7 @@
+services:
+  opensearch:
+    image: opensearchproject/opensearch
+    environment:
+      - "discovery.type=single-node"
+
+
