@@ -3,5 +3,6 @@ services:
     image: opensearchproject/opensearch
     environment:
       - "discovery.type=single-node"
+      - "plugins.security.disabled=true"
 
 
