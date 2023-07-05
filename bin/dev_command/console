@@ -5,6 +5,7 @@ dc nodeps;
 dc interactive;
 dc projectpath;
 dc user;
+dc ignore_orphans;
 
 if [ $# -lt 1 ]; then
     dc cmd bash -l;

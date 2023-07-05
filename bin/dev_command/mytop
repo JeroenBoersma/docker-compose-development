@@ -4,6 +4,7 @@ dc service mytop;
 
 dc nodeps;
 dc interactive;
+dc ignore_orphans;
 
 dc cmd "-h db -u ${USER} -dinformation_schema";
 

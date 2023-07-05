@@ -4,6 +4,7 @@ dc service 'dbclient';
 
 dc nodeps;
 dc interactive;
+dc ignore_orphans;
 
 dc cmd mysqldump "-h db -u ${USER}";
 

@@ -2,6 +2,7 @@
 dc yml_local;
 dc mode exec;
 dc interactive;
+dc ignore_orphans;
 
 dc service $1;
 shift;

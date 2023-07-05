@@ -5,6 +5,7 @@ dc service dbclient;
 
 dc nodeps;
 dc interactive;
+dc ignore_orphans;
 
 dc cmd mysql "-h db -u ${USER}";
 

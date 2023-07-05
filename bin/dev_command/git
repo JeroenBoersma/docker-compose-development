@@ -3,6 +3,7 @@ dc service ${DEV_PHP};
 
 dc nodeps;
 dc interactive;
+dc ignore_orphans;
 dc projectpath;
 dc user;
 

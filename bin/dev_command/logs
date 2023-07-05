@@ -1,6 +1,7 @@
 
 dc mode logs;
 #dc interactive;
+dc ignore_orphans;
 
 dc run "$@";
 return $?;

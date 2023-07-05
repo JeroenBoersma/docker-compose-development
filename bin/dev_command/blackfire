@@ -10,6 +10,7 @@ if [ "$1" != "run" ]; then
     dc cmd blackfire;
 
     dc interactive;
+    dc ignore_orphans;
     dc opt "--no-deps";
     dc run "$@";
     return $?;

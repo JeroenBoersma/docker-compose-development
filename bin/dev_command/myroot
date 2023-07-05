@@ -5,6 +5,7 @@ dc service dbclient;
 
 dc nodeps;
 dc interactive;
+dc ignore_orphans;
 
 dc cmd mysql "-hdb -uroot -p${MYSQL_ROOT_PASSWORD}";
 dc run "$@";

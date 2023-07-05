@@ -4,6 +4,7 @@ dc service expose;
 
 dc nodeps;
 dc interactive;
+dc ignore_orphans;
 
 if [ $# -lt 1 ]; then
     dc cmd "share https://${DEV_HOSTNAME}";
