@@ -1,6 +1,6 @@
 
-dc yml_local;
 dc yml_all;
+dc yml_local;
 dc mode config;
 
 dc run "$@";
