@@ -1,0 +1,5 @@
+services:
+  bun:
+    build: build/dist/bun
+    volumes:
+      - dockerdev-workspace-volume:/data

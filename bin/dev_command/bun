@@ -1,0 +1,11 @@
+
+dc yml 'build/dist/docker-compose-bun.yml';
+dc service bun;
+
+dc nodeps;
+dc interactive;
+dc projectpath;
+dc user;
+
+dc run "$@";
+return $?;

@@ -187,6 +187,7 @@ dc() {
         yml 'build/dist/docker-compose-ngrok.yml';
         yml 'build/dist/docker-compose-ctop.yml';
         yml 'build/dist/docker-compose-node.yml';
+        yml 'build/dist/docker-compose-bun.yml';
         yml 'build/dist/docker-compose-expose.yml';
     }
 
