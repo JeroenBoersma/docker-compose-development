@@ -26,6 +26,8 @@ services:
         - FROM_TAG=php5-fpm
     volumes:
       - dockerdev-workspace-volume:/data
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
   php70:
     build:
       context: build/dist/php
@@ -33,6 +35,8 @@ services:
         - FROM_TAG=php7-fpm
     volumes:
       - dockerdev-workspace-volume:/data
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
   php71:
     build:
       context: build/dist/php
@@ -40,6 +44,8 @@ services:
         - FROM_TAG=php71-fpm
     volumes:
       - dockerdev-workspace-volume:/data
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
   php72:
     build:
       context: build/dist/php
@@ -49,6 +55,8 @@ services:
       - "BLACKFIRE_AGENT_SOCKET=unix:///dev/null"
     volumes:
       - dockerdev-workspace-volume:/data
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
   php73:
     build:
       context: build/dist/php
@@ -58,6 +66,8 @@ services:
       - "BLACKFIRE_AGENT_SOCKET=unix:///dev/null"
     volumes:
       - dockerdev-workspace-volume:/data
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
   php74:
     build:
       context: build/dist/php
@@ -67,6 +77,8 @@ services:
       - "BLACKFIRE_AGENT_SOCKET=unix:///dev/null"
     volumes:
       - dockerdev-workspace-volume:/data
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
   php80:
     build:
       context: build/dist/php
@@ -76,6 +88,8 @@ services:
       - "BLACKFIRE_AGENT_SOCKET=unix:///dev/null"
     volumes:
       - dockerdev-workspace-volume:/data
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
   php81:
     build:
       context: build/dist/php
@@ -85,6 +99,8 @@ services:
       - "BLACKFIRE_AGENT_SOCKET=unix:///dev/null"
     volumes:
       - dockerdev-workspace-volume:/data
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
   php82:
     build:
       context: build/dist/php
@@ -94,6 +110,8 @@ services:
       - "BLACKFIRE_AGENT_SOCKET=unix:///dev/null"
     volumes:
       - dockerdev-workspace-volume:/data
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
   php83:
     build:
       context: build/dist/php
@@ -103,6 +121,8 @@ services:
       - "BLACKFIRE_AGENT_SOCKET=unix:///dev/null"
     volumes:
       - dockerdev-workspace-volume:/data
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
   redis:
     image: redis:alpine
