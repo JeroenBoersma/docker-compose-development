@@ -61,6 +61,16 @@ setup() {
         return 0;
     }
 
+    ngrok() {
+        if [ -z "`${DEV_SUDO} docker volume ls -q -f 'name=dockerdev-ngrok-volume'`" ]; then
+            echo 'Create ngrok volume in location '${DEV_WORKSPACE_PATH}/ngrok.yml;
+            mkdir ${DEV_WORKSPACE_PATH}/.ngrok -p
+            ! test -f "${DEV_WORKSPACE_PATH}/.ngrok/ngrok.yml" && echo 'version: 2' > ${DEV_WORKSPACE_PATH}/.ngrok/ngrok.yml
+            ${DEV_SUDO} docker volume create -o 'type=none' -o 'device='${DEV_WORKSPACE_PATH}/.ngrok -o 'o=bind' dockerdev-ngrok-volume
+        fi
+
+    }
+
     feature() {
         local name="$1" file="${DEV_WORKPATH}/conf/$2"
         local endis="$3" a="";
@@ -109,6 +119,7 @@ setup() {
     suffix;
     php;
     workspace;
+    ngrok;
     mysql;
 
     feature RabbitMQ rabbitmq;
