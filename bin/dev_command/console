@@ -1,4 +1,5 @@
 
+dc yml_local;
 dc service php;
 
 dc nodeps;
