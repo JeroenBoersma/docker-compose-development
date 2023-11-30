@@ -1,6 +1,8 @@
 server {
     listen 80;
     server_name *.magento2[DOMAINSUFFIX];
+    server_name *.magento2.internal;
+    server_name *.magento2.docker;
 
     include "content/base";
     include "content/magento2";

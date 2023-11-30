@@ -1,6 +1,8 @@
 server {
     listen 80;
     server_name *.akeneo[DOMAINSUFFIX];
+    server_name *.akeneo.internal;
+    server_name *.akeneo.docker;
 
     include "content/base";
     include "content/symfony";

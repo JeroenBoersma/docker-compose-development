@@ -1,6 +1,8 @@
 server {
     listen 80;
     server_name *.symfony[DOMAINSUFFIX];
+    server_name *.symfony.internal;
+    server_name *.symfony.docker;
 
     include "content/base";
     include "content/symfony";

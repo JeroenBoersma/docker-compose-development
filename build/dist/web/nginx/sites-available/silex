@@ -1,6 +1,8 @@
 server {
     listen 80;
     server_name *.silex[DOMAINSUFFIX];
+    server_name *.silex.internal;
+    server_name *.silex.docker;
 
     include "content/base";
     include "content/silex";

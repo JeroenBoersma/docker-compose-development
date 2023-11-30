@@ -6,6 +6,14 @@ if ( $host ~ "^([^\.]+)\.([^\.]+).*[DOMAINSUFFIX]$"  ) {
      set $customer "$1";
      set $project "$2";
 }
+if ( $host ~ "^([^\.]+)\.([^\.]+).*\.internal$"  ) {
+     set $customer "$1";
+     set $project "$2";
+}
+if ( $host ~ "^([^\.]+)\.([^\.]+).*\.docker$"  ) {
+     set $customer "$1";
+     set $project "$2";
+}
 
 set $dev_base_root /data;
 set $dev_customer_root $dev_base_root/$customer;

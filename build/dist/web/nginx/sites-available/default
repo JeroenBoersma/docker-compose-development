@@ -1,6 +1,8 @@
 server {
     listen 80 default_server;
     server_name [DOMAINSUFFIX];
+    server_name .internal;
+    server_name .docker;
 
     include "content/base";
     include "content/default";

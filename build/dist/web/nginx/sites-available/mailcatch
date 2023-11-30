@@ -10,6 +10,8 @@ upstream mailcatch {
 server {
     listen 80;
     server_name mail[DOMAINSUFFIX];
+    server_name mail.internal;
+    server_name mail.docker;
 
     location / {
         proxy_pass http://mailcatch;
