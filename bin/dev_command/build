@@ -1,4 +1,5 @@
 
+dc yml_all;
 dc yml_local;
 
 services=$(. ./config --services);
