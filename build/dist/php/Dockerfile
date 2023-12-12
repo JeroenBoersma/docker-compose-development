@@ -9,3 +9,6 @@ ARG UID=1000
 
 RUN groupmod -g $GID app && \
     usermod -g $GID -u $UID app
+
+USER app:app
+
