@@ -38,7 +38,7 @@ init() {
     DEV_YML='';
     dc yml 'docker-compose.yml';
     dc yml_if 'build/dist/docker-compose-blackfire.yml' 'conf/blackfire';
-    dc yml_if 'build/dist/docker-compose-varnish.yml' 'conf/varnish.vcl' || dc yml 'build/dist/docker-compose-no-varnish.yml';
+    dc yml_if 'build/dist/docker-compose-varnish.yml' 'conf/varnish.vcl';
     dc yml_if 'build/dist/docker-compose-elasticsearch.yml' 'conf/elasticsearch';
     dc yml_if 'build/dist/docker-compose-elasticsearch7.yml' 'conf/elasticsearch7';
     dc yml_if 'build/dist/docker-compose-elasticsearchhq.yml' 'conf/elasticsearchhq';

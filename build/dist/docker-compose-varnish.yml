@@ -8,6 +8,6 @@ services:
   ssl:
     depends_on:
       - varnish
-    links:
-      - "varnish:backend"
+    volumes:
+      - ./build/dist/varnish/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
 
