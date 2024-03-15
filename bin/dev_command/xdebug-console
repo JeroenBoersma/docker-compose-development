@@ -1,0 +1,7 @@
+
+dc opt -e XDEBUG_MODE=debug
+dc opt -e XDEBUG_SESSION=1
+dc opt -e PHP_IDE_CONFIG="serverName=${1}"
+shift;
+
+. ./console "$@"

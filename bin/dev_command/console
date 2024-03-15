@@ -1,4 +1,3 @@
-local xdebugOutfile=${DEV_WORKPATH}/conf/xdebug;
 
 dc yml_local;
 dc service php;
@@ -11,12 +10,6 @@ dc ignore_orphans;
 
 if [ $# -lt 1 ]; then
     dc cmd bash -l;
-fi
-
-if test -f "${xdebugOutfile}"; then
-    dc opt -e XDEBUG_MODE=debug
-    dc opt -e XDEBUG_SESSION=1
-    dc opt -e PHP_IDE_CONFIG="serverName=`cat $xdebugOutfile`"
 fi
 
 dc run "$@";
