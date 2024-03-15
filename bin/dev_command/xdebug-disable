@@ -1,5 +1,0 @@
-local outfile=${DEV_WORKPATH}/conf/xdebug;
-
-cd ${DEV_PATH};
-rm ${outfile};
-return 0;
