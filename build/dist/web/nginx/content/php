@@ -1,20 +1,20 @@
 set $php '';
 
-if ( -f $dev_base_root/.php56 ) {
-  set $php '56';
-}
-if ( -f $dev_base_root/.php70 ) {
-  set $php '70';
-}
-if ( -f $dev_base_root/.php71 ) {
-  set $php '71';
-}
-if ( -f $dev_base_root/.php72 ) {
-  set $php '72';
-}
-if ( -f $dev_base_root/.php73 ) {
-  set $php '73';
-}
+#if ( -f $dev_base_root/.php56 ) {
+#  set $php '56';
+#}
+#if ( -f $dev_base_root/.php70 ) {
+#  set $php '70';
+#}
+#if ( -f $dev_base_root/.php71 ) {
+#  set $php '71';
+#}
+#if ( -f $dev_base_root/.php72 ) {
+#  set $php '72';
+#}
+#if ( -f $dev_base_root/.php73 ) {
+#  set $php '73';
+#}
 if ( -f $dev_base_root/.php74 ) {
   set $php '74';
 }
@@ -30,22 +30,25 @@ if ( -f $dev_base_root/.php82 ) {
 if ( -f $dev_base_root/.php83 ) {
   set $php '83';
 }
+if ( -f $dev_base_root/.php84 ) {
+  set $php '84';
+}
 
-if ( -f $dev_customer_root/.php56 ) {
-  set $php '56';
-}
-if ( -f $dev_customer_root/.php70 ) {
-  set $php '70';
-}
-if ( -f $dev_customer_root/.php71 ) {
-  set $php '71';
-}
-if ( -f $dev_customer_root/.php72 ) {
-  set $php '72';
-}
-if ( -f $dev_customer_root/.php73 ) {
-  set $php '73';
-}
+#if ( -f $dev_customer_root/.php56 ) {
+#  set $php '56';
+#}
+#if ( -f $dev_customer_root/.php70 ) {
+#  set $php '70';
+#}
+#if ( -f $dev_customer_root/.php71 ) {
+#  set $php '71';
+#}
+#if ( -f $dev_customer_root/.php72 ) {
+#  set $php '72';
+#}
+#if ( -f $dev_customer_root/.php73 ) {
+#  set $php '73';
+#}
 if ( -f $dev_customer_root/.php74 ) {
   set $php '74';
 }
@@ -61,22 +64,25 @@ if ( -f $dev_customer_root/.php82 ) {
 if ( -f $dev_customer_root/.php83 ) {
   set $php '83';
 }
+if ( -f $dev_customer_root/.php84 ) {
+  set $php '84';
+}
 
-if ( -f $dev_root/.php56 ) {
-  set $php '56';
-}
-if ( -f $dev_root/.php70 ) {
-  set $php '70';
-}
-if ( -f $dev_root/.php71 ) {
-  set $php '71';
-}
-if ( -f $dev_root/.php72 ) {
-  set $php '72';
-}
-if ( -f $dev_root/.php73 ) {
-  set $php '73';
-}
+#if ( -f $dev_root/.php56 ) {
+#  set $php '56';
+#}
+#if ( -f $dev_root/.php70 ) {
+#  set $php '70';
+#}
+#if ( -f $dev_root/.php71 ) {
+#  set $php '71';
+#}
+#if ( -f $dev_root/.php72 ) {
+#  set $php '72';
+#}
+#if ( -f $dev_root/.php73 ) {
+#  set $php '73';
+#}
 if ( -f $dev_root/.php74 ) {
   set $php '74';
 }
@@ -91,5 +97,8 @@ if ( -f $dev_root/.php82 ) {
 }
 if ( -f $dev_root/.php83 ) {
   set $php '83';
+}
+if ( -f $dev_root/.php84 ) {
+  set $php '84';
 }
 

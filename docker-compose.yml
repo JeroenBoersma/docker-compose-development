@@ -19,45 +19,45 @@ services:
   mailcatch:
     image: mailhog/mailhog
 
-  php56:
-    build:
-      context: build/dist/php
-      args:
-        - FROM_TAG=php5-fpm
-    volumes:
-      - dockerdev-workspace-volume:/data
-  php70:
-    build:
-      context: build/dist/php
-      args:
-        - FROM_TAG=php7-fpm
-    volumes:
-      - dockerdev-workspace-volume:/data
-  php71:
-    build:
-      context: build/dist/php
-      args:
-        - FROM_TAG=php71-fpm
-    volumes:
-      - dockerdev-workspace-volume:/data
-  php72:
-    build:
-      context: build/dist/php
-      args:
-        - FROM_TAG=php72-fpm
-    environment:
-      - "BLACKFIRE_AGENT_SOCKET=unix:///dev/null"
-    volumes:
-      - dockerdev-workspace-volume:/data
-  php73:
-    build:
-      context: build/dist/php
-      args:
-        - FROM_TAG=php73-fpm
-    environment:
-      - "BLACKFIRE_AGENT_SOCKET=unix:///dev/null"
-    volumes:
-      - dockerdev-workspace-volume:/data
+#  php56:
+#    build:
+#      context: build/dist/php
+#      args:
+#        - FROM_TAG=php5-fpm
+#    volumes:
+#      - dockerdev-workspace-volume:/data
+#  php70:
+#    build:
+#      context: build/dist/php
+#      args:
+#        - FROM_TAG=php7-fpm
+#    volumes:
+#      - dockerdev-workspace-volume:/data
+#  php71:
+#    build:
+#      context: build/dist/php
+#      args:
+#        - FROM_TAG=php71-fpm
+#    volumes:
+#      - dockerdev-workspace-volume:/data
+#  php72:
+#    build:
+#      context: build/dist/php
+#      args:
+#        - FROM_TAG=php72-fpm
+#    environment:
+#      - "BLACKFIRE_AGENT_SOCKET=unix:///dev/null"
+#    volumes:
+#      - dockerdev-workspace-volume:/data
+#  php73:
+#    build:
+#      context: build/dist/php
+#      args:
+#        - FROM_TAG=php73-fpm
+#    environment:
+#      - "BLACKFIRE_AGENT_SOCKET=unix:///dev/null"
+#    volumes:
+#      - dockerdev-workspace-volume:/data
   php74:
     build:
       context: build/dist/php
@@ -99,6 +99,15 @@ services:
       context: build/dist/php
       args:
         - FROM_TAG=php83-fpm
+    environment:
+      - "BLACKFIRE_AGENT_SOCKET=unix:///dev/null"
+    volumes:
+      - dockerdev-workspace-volume:/data
+  php84:
+    build:
+      context: build/dist/php
+      args:
+        - FROM_TAG=php84-fpm
     environment:
       - "BLACKFIRE_AGENT_SOCKET=unix:///dev/null"
     volumes:
