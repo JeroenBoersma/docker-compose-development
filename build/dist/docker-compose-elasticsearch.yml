@@ -1,3 +1,7 @@
+volumes:
+  dockerdev-elasticsearch7-volume:
+    external: true
+
 services:
   elasticsearch6:
     build:
@@ -6,4 +10,3 @@ services:
         - FROM_TAG=6.5.4
     environment:
       - "discovery.type=single-node"
-

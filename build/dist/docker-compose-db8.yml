@@ -1,5 +1,6 @@
 volumes:
   dockerdev-mysql8-volume:
+    external: true
 
 services:
   db8:
