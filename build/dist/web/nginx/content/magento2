@@ -102,6 +102,8 @@ location /static/ {
     # Uncomment the following line in production mode
     # expires max;
 
+    add_header Access-Control-Allow-Origin "*";
+
     # Remove signature of the static files that is used to overcome the browser cache
     location ~ ^/static/version {
         rewrite ^/static/(version\d*/)?(.*)$ /static/$2 last;
@@ -174,7 +176,7 @@ location /media/import/ {
 rewrite /pub/health_check.php /health_check.php;
 
 # PHP entry point for main application
-location ~ ^/(index|get|static|errors/report|errors/404|errors/503|health_check)\.php$ {
+location ~ ^/(index|get|static|errors/report|errors/404|errors/503|health_check|search)\.php$ {
     try_files .~srcfile @php;
 }
 
