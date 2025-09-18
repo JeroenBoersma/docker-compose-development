@@ -10,5 +10,11 @@ ARG UID=1000
 RUN groupmod -g $GID app && \
     usermod -g $GID -u $UID app
 
+RUN apt-get update && \
+    apt-get upgrade --yes && \
+    apt-get install --yes rsync
+
+RUN composer self-update
+
 USER app:app
 
