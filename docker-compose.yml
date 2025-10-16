@@ -90,6 +90,10 @@ services:
       context: build/dist/php
       args:
         - FROM_TAG=php82-fpm
+        - INSTALL_MSMTP=1
+        - MAIL_HOST=mailcatch
+        - MAIL_PORT=1025
+        - MAIL_FROM=app@fpm.dev
     environment:
       - "BLACKFIRE_AGENT_SOCKET=unix:///dev/null"
     volumes:
