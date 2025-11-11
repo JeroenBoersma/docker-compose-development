@@ -112,6 +112,15 @@ services:
       - "BLACKFIRE_AGENT_SOCKET=unix:///dev/null"
     volumes:
       - dockerdev-workspace-volume:/data
+  php85:
+    build:
+      context: build/dist/php
+      args:
+        - FROM_TAG=php85-fpm
+    environment:
+      - "BLACKFIRE_AGENT_SOCKET=unix:///dev/null"
+    volumes:
+      - dockerdev-workspace-volume:/data
 
   redis:
     image: redis:alpine
