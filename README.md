@@ -82,5 +82,62 @@ dev volume mysql mysql
 dev setup # this will add your user and correct settings (press enter to everything)
 ```
 
+## Documentation
+
+Comprehensive documentation is available in the `docs/` directory.
+
+### Getting Started
+- [Development Commands](docs/development-commands.md) - All available `dev` commands
+- [Hosts and File Structure](docs/hosts-and-file-structure.md) - Project structure and hostname conventions
+- [How to Use Different PHP Versions](docs/how-to-use-different-php-versions.md) - PHP version switching
+- [F.A.Q.](docs/faq.md) - Frequently asked questions
+
+### Core Services
+- [MySQL, MailHog, Redis, and Cronjobs](docs/mysql-mailhog-redis-cronjobs.md) - Core service configuration
+- [MySQL 8](docs/mysql8.md) - MySQL 8 setup and usage
+- [Elasticsearch](docs/elasticsearch.md) - Elasticsearch 6.5.4 and 7.9.1 setup
+- [OpenSearch](docs/opensearch.md) - OpenSearch setup and configuration
+- [OpenSearch Dashboard](docs/opensearch-dashboard.md) - OpenSearch Dashboard UI
+- [MongoDB](docs/mongodb.md) - MongoDB and mongo-express setup
+- [RabbitMQ](docs/rabbitmq.md) - RabbitMQ message broker setup
+
+### Development Tools
+- [Node.js, NPM, and Yarn](docs/node-npm-yarn.md) - Frontend tooling and package managers
+- [XDebug](docs/xdebug.md) - PHP debugging with XDebug
+- [Varnish](docs/varnish.md) - HTTP caching with Varnish
+- [FTP Server](docs/ftp.md) - FTP access to workspace
+- [Git and SSH Integration](docs/git-ssh-integration.md) - Git commands and SSH key forwarding
+
+### Configuration
+- [Environment Configuration](docs/environment-configuration.md) - .env file and configuration markers
+- [Docker Volumes](docs/docker-volumes.md) - Volume management and persistence
+- [PHP Extensions](docs/php-extensions.md) - Managing PHP extensions
+- [Custom Docker Compose Files](docs/custom-compose-files.md) - Customization with docker-custom.yml
+- [Customize Docker Containers](docs/customize-docker-containers.md) - Container customization basics
+
+### Monitoring & Tools
+- [Monitoring Tools](docs/monitoring-tools.md) - Container and database monitoring
+- [Search UI Tools](docs/search-ui-tools.md) - ElasticVue and Elasticsearch HQ
+- [Port Reference](docs/port-reference.md) - Complete port assignments
+
+### Performance & Optimization
+- [Performance Tuning](docs/performance-tuning.md) - Optimization techniques
+- [Backup and Restore](docs/backup-restore.md) - Backup strategies and restore procedures
+
+### Profiling & Debugging
+- [Configure Blackfire](docs/configure-blackfire.md) - Blackfire profiler setup
+
+### Sharing & Networking
+- [Sharing with the World via ngrok](docs/sharing-with-the-world-via-ngrok.md) - ngrok tunneling
+- [BeyondCode Expose](docs/expose.md) - Expose server for sharing
+- [UFW Firewall](docs/ufw-firewall.md) - Firewall configuration
+
+### Advanced Topics
+- [Advanced Docker Configuration](docs/advanced-docker-configuration.md) - UID/GID, build arguments, networks
+- [Install Other PHP Versions](docs/install-other-php-versions.md) - Installing older PHP versions
+- [Used Base Images](docs/used-base-images.md) - Docker image references
+
+### Contributing
+- [Code of Conduct](docs/code-of-conduct.md) - Contributor guidelines
 
 
