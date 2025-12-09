@@ -1,4 +1,9 @@
+volumes:
+  dockerdev-ngrok-volume:
+    external: true
+
 services:
   ngrok:
     image: ngrok/ngrok
-
+    volumes:
+      - dockerdev-ngrok-volume:/var/lib/ngrok
