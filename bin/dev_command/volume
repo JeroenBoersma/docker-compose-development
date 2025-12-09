@@ -1,9 +1,9 @@
 
 usage() {
     echo "Usage:";
-    echo "- ${DEV_SELF} ${DEV_COMMAND} {workspace|mysql} localpath";
+    echo "- ${DEV_SELF} ${DEV_COMMAND} {workspace|mysql|mysql8|elasticsearch6|elasticsearch7} localpath";
     echo "  create a volume pointing to the localpath";
-    echo "- ${DEV_SELF} ${DEV_COMMAND} rm {workspace|mysql}";
+    echo "- ${DEV_SELF} ${DEV_COMMAND} rm {workspace|mysql|mysql8|elasticsearch6|elasticsearch7}";
     echo "  remove a volume";
     echo "- ${DEV_SELF} ${DEV_COMMAND} ls";
     echo "  list current volume mapping"
@@ -23,8 +23,14 @@ current() {
 create() {
     if [ "$1" == 'mysql' ]; then
         local VOLUME_TYPE='mysql';
+    elif [ "$1" == 'mysql8' ]; then
+        local VOLUME_TYPE='mysql8';
     elif [ "$1" == 'workspace' ]; then
         local VOLUME_TYPE='workspace';
+    elif [ "$1" == 'elasticsearch6' ]; then
+        local VOLUME_TYPE='elasticsearch6';
+    elif [ "$1" == 'elasticsearch7' ]; then
+        local VOLUME_TYPE='elasticsearch7';
     else
         usage;
         return $?;
@@ -53,8 +59,14 @@ create() {
 remove() {
     if [ "$1" == 'mysql' ]; then
         local VOLUME_TYPE='mysql';
+    elif [ "$1" == 'mysql8' ]; then
+        local VOLUME_TYPE='mysql8';
     elif [ "$1" == 'workspace' ]; then
         local VOLUME_TYPE='workspace';
+    elif [ "$1" == 'elasticsearch6' ]; then
+        local VOLUME_TYPE='elasticsearch6';
+    elif [ "$1" == 'elasticsearch7' ]; then
+        local VOLUME_TYPE='elasticsearch7';
     else
         usage;
         return $?;

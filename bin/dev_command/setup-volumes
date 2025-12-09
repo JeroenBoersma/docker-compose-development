@@ -1,0 +1,17 @@
+cd $DEV_PATH
+
+volumes-setup() {
+  mkdir -p $DEV_WORKSPACE_PATH/.storage/$1;
+  ./${DEV_SELF} volume $1 $DEV_WORKSPACE_PATH/.storage/$1 > /dev/null;
+
+  return 0;
+}
+
+volumes-setup mysql;
+volumes-setup mysql8;
+volumes-setup elasticsearch6;
+volumes-setup elasticsearch7;
+
+echo "Created default volumes in $DEV_WORKSPACE_PATH/.storage";
+
+return $?;
